@@ -252,8 +252,7 @@ function closeHamburger() {
 
 // String conversions
 function normalizeName(input) {
-    return input.toLowerCase()
-        .replace(/\s+/g, "_")
+    return input.replace(/\s+/g, "_")
 }
 
 function prettyName(input) {
