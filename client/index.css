@@ -1,0 +1,185 @@
+:root {
+    --primary: #e52521;
+    --secondary: #2c2c2c;
+    --accent1:	#F8E643;
+    --accent2:	#0F0F13;
+    --neutral-light: #F2F2F2;
+    --success: #47D17A;
+    --locked: #4e4e4e;
+}
+
+::selection {
+    background-color: black;
+    color: white;
+}
+
+/* @font-face {
+    font-family: 'Fredoka One';
+    src: url("/.resource/fredokaone.ttf");
+} */
+
+body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px;
+    background-color: var(--accent2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'Fredoka One';
+}
+
+img {
+    filter: drop-shadow(0px 0px 6px black)
+}
+
+div.container {
+    display: grid;
+    gap: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+div#moon-tracker {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+div#moon-tracker div {
+    flex-direction: column;
+    border-color: transparent;
+}
+
+div#ability-tracker {
+    grid-row: 2;
+    grid-column: 1;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    align-content: start;
+}
+
+div#ability-tracker img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+div#capture-tracker {
+    grid-row: 2;
+    grid-column: 2;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    align-content: start;
+}
+
+div.container > div {
+    background: #f3f3f3;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    min-width: 60px;
+    min-height: 60px;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+div#capture-tracker img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+div#moon-tracker > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    padding: 6px 4px;
+}
+
+div#moon-tracker > div img {
+    max-width: 64%;
+    max-height: 64%;
+    width: auto;
+    height: auto;
+    display: block;
+    
+}
+
+div#moon-tracker > div p {
+    margin: 0;
+    text-align: center;
+    line-height: 1.1;
+    font-size: clamp(13px, 4vw, 30px);
+    color: #111;
+    word-break: break-word;
+}
+
+div#moon-tracker > div p span {
+    outline: none;
+    border: none;
+}
+
+.editing {
+  border: 1px solid #888;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: #fff;
+}
+
+div#capture-overflow img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+div.locked {
+    background-color: var(--locked) !important;   
+    filter: grayscale();
+}
+
+div#capture-overflow-hamburger {
+    grid-column: 5;
+    grid-row: 5;
+    border-radius: 50%;
+    background-color: var(--locked);
+    border-color: transparent;
+    z-index: 200;
+}
+
+div#capture-overflow-hamburger img {
+    height: 70%;
+    filter: invert();
+}
+
+div#capture-overflow {
+    position: fixed;
+    background: var(--secondary) /*repeating-linear-gradient(15deg, #771818, #8f9130 100px, #771818 200px) */ !important;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    align-content: start;
+    z-index: -100;
+    opacity: 0;
+    bottom: 10px;
+    right: 10px;
+    transition: opacity 0.2s;
+    border-radius: 12px;
+    box-shadow: black -6px 6px 12px;
+}
