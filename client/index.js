@@ -286,6 +286,7 @@ function fullMoons(target) {
 
     if (Number(amount.textContent) >= Number(total.textContent)) {
         target.style.color = "green";
+        target.style.backgroundPositionY = "100%";
     } else {
         target.style.color = "black";
     }

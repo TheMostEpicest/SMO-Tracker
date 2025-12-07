@@ -116,7 +116,7 @@ div#moon-tracker > div {
     aspect-ratio: 1 / 1;
     padding: 6px 4px;
     background: linear-gradient(180deg, #ffffff 0%, #ffffff 50%, #e1e1e1 50%, #81da81 50%, #b9dfbc 100%);
-    background-size: 100% 200%;
+    background-size: 100% 202%;
     background-position-y: 0%;
     transition: background-position-y 0.2s;
 }
