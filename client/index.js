@@ -1,3 +1,8 @@
+if (localStorage.getItem("SHA") !== window.__COMMIT_SHA__) {
+    clearCache();
+}
+localStorage.setItem("SHA", window.__COMMIT_SHA__);
+
 const moons = [
     "cascade",
     "sand",

@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import path from "path";
 
-const sha = process.env.PUBLIC_COMMIT_SHA || "dev";
+const sha = process.env.VERCEL_GIT_COMMIT_SHA || "dev";
 
 const htmlPath = path.resolve(__dirname, "..", "..", "client", "index.html")
 
