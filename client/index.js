@@ -306,11 +306,6 @@ function scrollMoonCount(event) {
     }
 
     localStorage.setItem("moons", JSON.stringify([...moons]));
-    
-
-    if (!isNaN(Number(total.textContent))) {
-        fullMoons(target);
-    }
 }
 
 function updateMoonProgress(target) {
