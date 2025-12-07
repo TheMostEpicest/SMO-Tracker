@@ -108,8 +108,10 @@ const divOverflow = document.getElementById("capture-overflow");
 const hamburger = document.getElementById("capture-overflow-hamburger");
 const settingsMenu = document.getElementById("settings-menu");
 const resetMenu = document.getElementById("reset-menu");
+const helpMenu = document.getElementById("help-menu");
 const settingsButton = document.getElementById("settings-button");
 const resetButton = document.getElementById("reset-button");
+const helpButton = document.getElementById("help-button");
 const showTextToggle = document.getElementById("setting-menu-showText-toggle");
 
 const moonRequirements = [
@@ -213,6 +215,7 @@ hamburger.onclick = clickOnHamburger;
 window.onresize = resizer;
 settingsButton.onclick = openSettings;
 resetButton.onclick = confirmReset;
+helpButton.onclick = openHelp;
 showTextToggle.onchange = toggleImageText;
 
 // Event handlers
@@ -220,6 +223,7 @@ function toggleUnlock(event) {
     let target = event.target.tagName == "IMG" || event.target.tagName == "P" ? event.target.parentElement : event.target;
     if (target.classList.contains("locked")) {
         target.classList.remove("locked");
+
     } else {
         target.classList.add("locked");
     }
@@ -351,7 +355,6 @@ function checkMoonReqs() {
     let state = checkMoonRecursive(moonRequirements);
 
     let div = document.getElementById("moon-tracker-moon");
-    console.log(state)
 
     if (state && div.style.backgroundPositionY != "100%") {
         div.style.backgroundPositionY = "100%";
@@ -418,6 +421,19 @@ function confirmReset() {
 
 function resetProgress() {
     console.log("Clearing progress...")
+}
+
+function openHelp() {
+    helpMenu.style.opacity = 1;
+    helpMenu.style.zIndex = 300;
+
+    closeHamburger();
+
+    document.getElementById("help-close").onclick = (e) => {
+        helpMenu.style.opacity = 0;
+        setTimeout(() => {helpMenu.style.zIndex = -1}, 200);
+        document.getElementById("help-close").onclick = null;
+    }
 }
 
 function toggleImageText() {
