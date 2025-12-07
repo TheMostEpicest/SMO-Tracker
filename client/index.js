@@ -206,6 +206,7 @@ newDiv.id = `moon-tracker-moon`;
 newDiv.innerHTML = showText ? '<p>Moon Requirements</p>' : '<img src="./resource/moons/mushroom.png" alt="Moon Requirements" title="Moon Requirements">';
 divMoon.appendChild(newDiv);
 setTimeout(wrapText, 1, newDiv);
+checkMoonReqs();
 
 if (showText) {
     showTextToggle.checked = true;
@@ -250,6 +251,7 @@ function setCapture(capture, state) {
     } else {
         captures.delete(capture);
     }
+    console.log(captures)
 
     localStorage.setItem("captures", JSON.stringify([...captures]));
 }
@@ -492,8 +494,6 @@ function confirmReset() {
 }
 
 function resetProgress() {
-    console.log("Reseting progress...");
-    
     let moons = new Map(JSON.parse(localStorage.getItem("moons") ?? "[]"));
     let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals") ?? "[]"));
     let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
@@ -515,9 +515,12 @@ function resetProgress() {
 
     abilities.forEach((ability) => {
         document.getElementById(`ability-tracker-${ability}`).classList.add("locked");
-    })
+    });
+
+    checkMoonReqs();
 
     localStorage.setItem("moons", "[]");
+    localStorage.setItem("moonTotals", "[]");
     localStorage.setItem("captures", "[]");
     localStorage.setItem("abilities", "[]");
 }
@@ -603,7 +606,7 @@ function toggleImageText() {
 
 // String conversions
 function normalizeName(input) {
-    return input.replace(/\s+/g, "_")
+    return input.replace(/\s+/g, "_").replace(/\-/, "_");
 }
 
 function prettyName(input) {
