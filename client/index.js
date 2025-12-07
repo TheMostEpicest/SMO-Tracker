@@ -332,7 +332,7 @@ function checkMoonReqs() {
         div.style.backgroundPositionY = "100%";
         div.style.color = "green";
     } else if (!state && div.style.backgroundPositionY != "0%") {
-        div.style.backgroundPositionY != "0%";
+        div.style.backgroundPositionY = "0%";
         div.style.color = "black";
     }
 }
