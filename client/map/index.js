@@ -9,10 +9,12 @@ const params = new URLSearchParams(location.search);
 const roomId = params.get("roomId");
 
 if (!roomId) {
-    let res = fetch("/api/create", { method: "POST" });
+    (async () => {
+        let res = await fetch("/api/create", { method: "POST" });
 
-    if (res.ok) {
-        let data = res.json();
-        if (data.roomId) location.href = `../map?roomId=${data.roomId}`;
-    }
+        if (res.ok) {
+            let data = await res.json();
+            if (data.roomId) location.href = `.?roomId=${encodeURIComponent(data.roomId)}`;
+        }
+    })();
 }
