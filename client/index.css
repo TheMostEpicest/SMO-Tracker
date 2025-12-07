@@ -65,6 +65,11 @@ div#moon-tracker div {
     border-color: transparent;
 }
 
+div#moon-tracker div#moon-tracker-moon {
+    grid-row: 2;
+    grid-column: 6;
+}
+
 div#ability-tracker {
     grid-row: 2;
     grid-column: 1;

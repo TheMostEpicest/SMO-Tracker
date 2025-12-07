@@ -30,6 +30,7 @@ const abilities = [
     "Down Throw",
     "Up Throw",
     "Spin Throw",
+    "Cap Bounce",
     "Ledge Grab"
 ];
 
@@ -69,7 +70,7 @@ const primaryCaptures = [
     
 ];
 
-const captures = [
+const captures = [ // How many moons each capture unlocks from memory (probably wildly wrong)
     "Big Chain Chomp", //2
     "Chain Chomp",
     "T-Rex", //3
@@ -112,6 +113,38 @@ const divCapture = document.getElementById("capture-tracker");
 const divOverflow = document.getElementById("capture-overflow");
 const hamburger = document.getElementById("capture-overflow-hamburger")
 
+const moonRequirements = [
+    "AND",
+    "cBowser",
+    [
+        "OR",
+        [
+            "AND",
+            "aGround Pound",
+            "aWall Jump",
+            "aCap Throw",
+            "aCap Bounce"
+        ],
+        [
+            "AND",
+            "aCap Throw",
+            [
+                "OR",
+                "cParabones",
+                [  
+                    "AND",
+                    "aTriple Jump",
+                    "aCap Bounce",
+                    "aDive"
+                ]
+            ],
+            "cSpark Pylon",
+            "cBanzai Bill",
+            "cGolden Chain Chomp"
+        ]
+    ]
+    
+]
 
 // Setup
 moons.forEach((kingdom) => {
@@ -167,6 +200,7 @@ function toggleUnlock(event) {
     } else {
         target.classList.add("locked");
     }
+    if (moonRequirements.flat(10).map((value) => normalizeName(value.substring(1))).includes(target.id.split("-")[2])) checkMoonReqs();
 }
 
 function scrollMoonCount(event) {
@@ -263,6 +297,38 @@ function resizer(event) {
     divOverflow.style.borderBottomRightRadius = (8 + hamburger.clientWidth / 2) + "px"; // 8 = padding
 }
 
+function checkMoonReqs() {
+    let state = checkMoonRecursive(moonRequirements);
+
+    let div = document.getElementById("moon-tracker-moon");
+    console.log(state)
+
+    if (state && div.classList.contains("locked")) {
+        div.classList.remove("locked");
+    } else if (!state && !div.classList.contains("locked")) {
+        div.classList.add("locked");
+    }
+}
+
+function checkMoonRecursive(array) {
+    function predicate (value) {
+        if (typeof value == "object") {
+            return checkMoonRecursive(value);
+        } else if (typeof value == "string") {
+            if (value.charAt(0) == "c") {
+                return !document.getElementById(`capture-tracker-${normalizeName(value.substring(1))}`).classList.contains("locked");
+            } else if (value.charAt(0) == "a") {
+                return !document.getElementById(`ability-tracker-${normalizeName(value.substring(1))}`).classList.contains("locked");
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    return array[0] == "AND" ? array.slice(1).every(predicate) : array.slice(1).some(predicate);
+}
 
 // String conversions
 function normalizeName(input) {
