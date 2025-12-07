@@ -143,13 +143,6 @@ div#moon-tracker > div p span {
     border: none;
 }
 
-.editing {
-  border: 1px solid #888;
-  padding: 2px 4px;
-  border-radius: 3px;
-  background: #fff;
-}
-
 div#capture-overflow img {
     max-width: 100%;
     max-height: 100%;
@@ -187,4 +180,21 @@ div#capture-overflow {
     transition: opacity 0.2s;
     border-radius: 12px;
     box-shadow: black -6px 6px 12px;
+}
+
+div#capture-overflow div#button-menu {
+    grid-column: 5;
+    grid-row: 5;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    background: none;
+    gap: 5px;
+}
+
+div#capture-overflow div#button-menu div {
+    background-color: var(--locked);
+    border-radius: 50%;
+    font-size: 5px;
+    aspect-ratio: 1 / 1;
 }
