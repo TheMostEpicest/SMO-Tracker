@@ -115,6 +115,7 @@ const hamburger = document.getElementById("capture-overflow-hamburger")
 
 const moonRequirements = [
     "AND",
+    "aJump",
     "cBowser",
     [
         "OR",
