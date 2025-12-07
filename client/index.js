@@ -7,6 +7,7 @@ const moons = [
     "metro",
     "snow",
     "seaside",
+    "luncheon",
     "ruined",
     "bowser",
 ];
@@ -21,6 +22,7 @@ const abilities = [
     "Sideflip",
     "Crouch",
     "Roll",
+    "Roll Boost",
     "Dive",
     "Climb",
     "Ground Pound",
@@ -43,12 +45,15 @@ const primaryCaptures = [
     "Bullet Bill",
     "Knucklotec's Fist",
     "Uproot",
-    "Manhole",
-    "Puzzle Part (Metro Kingdom)",
     "Sherm",
+    "Manhole",
+    "Ty-Foo",
+    "Shiverian",
     "Gushen",
-    "Lava Bubble",
+    "Hammer Bro",
+    "Meat",
     "Volbonan",
+    "Lava Bubble",
     "Pokio",
 
     // Unlocks a lot of moons
@@ -60,44 +65,45 @@ const primaryCaptures = [
 
     // Extra space
     "Frog",
-    "Paragoomba",
-    "Chain Chomp",
-    "Cheep Cheep"
+    
+    
 ];
 
 const captures = [
     "Big Chain Chomp", //2
+    "Chain Chomp",
     "T-Rex", //3
-    "Moe-Eye", //0
-    "Tropical Wiggler", //2
     "Glydon", // not many
+    "Moe-Eye", //0
     "Zipper", //5
+    "Tropical Wiggler", //2
 
-    "Hammer Bro", //2
+    "Coin Coffer", //1    
     "Poison Piranha Plant", //0
     "Fire Bro",
     "Fire Piranha Plant", //0
-    "Shiverian", //6
+    "Cheep Cheep",
     "Snow Cheep Cheep",
 
     "Cactus", //1
     "Tree", //1
     "Boulder", //1
     "Letter", //1
-    "Meat", //3
     "Bowser Statue", //1
+    "Jizo", //4
 
     "Pole", //0
     "Taxi", //2
     "RC Car", //3
-    "Ty-Foo",  //2
-    "Jizo", //4
+    
+    "Paragoomba",
     "Chargin' Chuck", //0
 
+    "Puzzle Part (Metro Kingdom)",
     "Puzzle Part (Lake Kingdom)", //1
     "Picture Match Part (Goomba)", //2
     "Picture Match Part (Mario)", //2
-    "Coin Coffer", //1    
+    
 ];
 
 const divMoon = document.getElementById("moon-tracker");

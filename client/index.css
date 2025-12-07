@@ -15,7 +15,7 @@
 
 /* @font-face {
     font-family: 'Fredoka One';
-    src: url("/.resource/fredokaone.ttf");
+    src: url("./resource/fredokaone.TTF");
 } */
 
 body {
@@ -54,7 +54,7 @@ div.container {
 div#moon-tracker {
     grid-column: 1 / -1;
     grid-row: 1;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 1fr);
     align-items: stretch;
     justify-items: stretch;
