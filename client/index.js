@@ -224,6 +224,13 @@ function scrollMoonCount(event) {
 
     span.textContent = amount;
 
+    let total = document.getElementById(target.id + "-total");
+
+    if (!isNaN(Number(total.textContent))) {
+        target.style.backgroundPositionY = Math.min(Math.max(0, amount / Number(total.textContent) * 100), 100) + "%";
+        fullMoons(target);
+    }
+
 }
 
 function setMoonTotal(event) {
@@ -244,26 +251,43 @@ function setMoonTotal(event) {
 
     span.addEventListener("blur", () => {
         span.contentEditable = "false";
-        validateTotalMoons(span);
+        validateTotalMoons(target);
     });
     span.addEventListener('keydown', (e) => {
         if (e.key == 'Enter') {
             e.preventDefault();
             span.contentEditable = "false";
-            validateTotalMoons(span);
+            validateTotalMoons(target);
         }
     });
 }
 
-function validateTotalMoons(el) {
-    let newValue = el.textContent.trim();
+function validateTotalMoons(target) {
+    let span = document.getElementById(target.id + "-total");
+
+    let newValue = span.textContent.trim();
 
     let num = Number(newValue)
 
     if (isNaN(num) || num >= 100 || num <= 0) {
-        el.textContent = "??";
+        span.textContent = "??";
     } else {
-        el.textContent = String(num);
+        span.textContent = String(num);
+
+        let amount = document.getElementById(target.id + "-amount");
+        target.style.backgroundPositionY = Math.min(Math.max(0, Number(amount.textContent) / num * 100), 100) + "%";
+        fullMoons(target);
+    }
+}
+
+function fullMoons(target) {
+    let total = document.getElementById(target.id + "-total");
+    let amount = document.getElementById(target.id + "-amount");
+
+    if (Number(amount.textContent) >= Number(total.textContent)) {
+        target.style.color = "green";
+    } else {
+        target.style.color = "black";
     }
 }
 
@@ -304,10 +328,12 @@ function checkMoonReqs() {
     let div = document.getElementById("moon-tracker-moon");
     console.log(state)
 
-    if (state && div.classList.contains("locked")) {
-        div.classList.remove("locked");
-    } else if (!state && !div.classList.contains("locked")) {
-        div.classList.add("locked");
+    if (state && div.style.backgroundPositionY != "100%") {
+        div.style.backgroundPositionY = "100%";
+        div.style.color = "green";
+    } else if (!state && div.style.backgroundPositionY != "0%") {
+        div.style.backgroundPositionY != "0%";
+        div.style.color = "black";
     }
 }
 

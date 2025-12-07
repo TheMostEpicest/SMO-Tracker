@@ -13,10 +13,10 @@
     color: white;
 }
 
-/* @font-face {
+@font-face {
     font-family: 'Fredoka One';
     src: url("./resource/fredokaone.TTF");
-} */
+}
 
 body {
     width: 100vmin;
@@ -60,14 +60,10 @@ div#moon-tracker {
     justify-items: stretch;
 }
 
-div#moon-tracker div {
-    flex-direction: column;
-    border-color: transparent;
-}
-
 div#moon-tracker div#moon-tracker-moon {
     grid-row: 2;
     grid-column: 6;
+    transition: background-position-y 0.5s;
 }
 
 div#ability-tracker {
@@ -102,7 +98,7 @@ div.container > div {
     min-height: 60px;
     aspect-ratio: 1 / 1;
     box-sizing: border-box;
-    border: 2px solid transparent;
+    /* border: 2px solid transparent; */
 }
 
 div#capture-tracker img {
@@ -119,6 +115,10 @@ div#moon-tracker > div {
     justify-content: center;
     aspect-ratio: 1 / 1;
     padding: 6px 4px;
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 50%, #e1e1e1 50%, #81da81 50%, #b9dfbc 100%);
+    background-size: 100% 200%;
+    background-position-y: 0%;
+    transition: background-position-y 0.2s;
 }
 
 div#moon-tracker > div img {
@@ -135,7 +135,6 @@ div#moon-tracker > div p {
     text-align: center;
     line-height: 1.1;
     font-size: clamp(13px, 4vw, 30px);
-    color: #111;
     word-break: break-word;
 }
 
