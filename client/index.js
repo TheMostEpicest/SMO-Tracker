@@ -62,24 +62,26 @@ const primaryCaptures = [
     "Lakitu",
     "Yoshi",
     "Goomba",
+    "Paragoomba",
     "Binoculars",
-
-    // Extra space
-    "Frog",
-    
-    
 ];
 
 const captures = [ // How many moons each capture unlocks from memory (probably wildly wrong)
-    "Big Chain Chomp", //2
+    "Frog",
     "Chain Chomp",
+    "Big Chain Chomp", //2
     "T-Rex", //3
     "Glydon", // not many
     "Moe-Eye", //0
+
     "Zipper", //5
     "Tropical Wiggler", //2
-
-    "Coin Coffer", //1    
+    "Pole", //0
+    "Taxi", //2
+    "RC Car", //3
+    "Chargin' Chuck", //0
+    
+    "Coin Coffer", //1
     "Poison Piranha Plant", //0
     "Fire Bro",
     "Fire Piranha Plant", //0
@@ -93,25 +95,21 @@ const captures = [ // How many moons each capture unlocks from memory (probably 
     "Bowser Statue", //1
     "Jizo", //4
 
-    "Pole", //0
-    "Taxi", //2
-    "RC Car", //3
-    
-    "Paragoomba",
-    "Chargin' Chuck", //0
-
     "Puzzle Part (Metro Kingdom)",
     "Puzzle Part (Lake Kingdom)", //1
     "Picture Match Part (Goomba)", //2
     "Picture Match Part (Mario)", //2
-    
 ];
 
 const divMoon = document.getElementById("moon-tracker");
 const divAbility = document.getElementById("ability-tracker");
 const divCapture = document.getElementById("capture-tracker");
 const divOverflow = document.getElementById("capture-overflow");
-const hamburger = document.getElementById("capture-overflow-hamburger")
+const hamburger = document.getElementById("capture-overflow-hamburger");
+const settingsMenu = document.getElementById("settings-menu");
+const resetMenu = document.getElementById("reset-menu");
+const settingsButton = document.getElementById("settings-button");
+const resetButton = document.getElementById("reset-button");
 
 const moonRequirements = [
     "AND",
@@ -192,6 +190,8 @@ divOverflow.style.borderBottomRightRadius = (8 + hamburger.clientWidth / 2) + "p
 
 hamburger.onclick = clickOnHamburger;
 window.onresize = resizer;
+settingsButton.onclick = openSettings;
+resetButton.onclick = confirmReset;
 
 // Event handlers
 function toggleUnlock(event) {
@@ -355,6 +355,41 @@ function checkMoonRecursive(array) {
     }
 
     return array[0] == "AND" ? array.slice(1).every(predicate) : array.slice(1).some(predicate);
+}
+
+function openSettings() {
+    settingsMenu.style.opacity = 1;
+    settingsMenu.style.zIndex = 300;
+
+    document.getElementById("settings-close").onclick = (e) => {
+        settingsMenu.style.opacity = 0;
+        setTimeout(() => {settingsMenu.style.zIndex = -1}, 200);
+        document.getElementById("settings-close").onclick = null;
+        resetProgress();
+    }
+}
+
+function confirmReset() {
+    resetMenu.style.opacity = 1;
+    resetMenu.style.zIndex = 300;
+
+    document.getElementById("reset-yes").onclick = (e) => {
+        resetMenu.style.opacity = 0;
+        setTimeout(() => {resetMenu.style.zIndex = -1}, 200);
+        document.getElementById("reset-yes").onclick = null;
+        document.getElementById("reset-no").onclick = null;
+        resetProgress();
+    }
+    document.getElementById("reset-no").onclick = (e) => {
+        resetMenu.style.opacity = 0;
+        setTimeout(() => {resetMenu.style.zIndex = -1}, 200);
+        document.getElementById("reset-no").onclick = null;
+        document.getElementById("reset-yes").onclick = null;
+    }
+}
+
+function resetProgress() {
+    console.log("Clearing progress...")
 }
 
 // String conversions
