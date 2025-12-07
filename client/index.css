@@ -195,6 +195,7 @@ div#capture-overflow div#button-menu {
     grid-template-rows: repeat(2, 1fr);
     background: none;
     gap: 5px;
+    cursor: pointer;
 }
 
 div#capture-overflow div#button-menu div {

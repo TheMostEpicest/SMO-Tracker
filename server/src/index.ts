@@ -1,27 +1,13 @@
-import express from 'express';
-import path from 'path';
+import { readFileSync, writeFileSync } from "fs";
+import path from "path";
 
-declare global {
-    var __dirname: string;
-}
+const sha = process.env.VERCEL_GIT_COMMIT_SHA || "dev";
 
-const app = express();
-const PORT = 8000;
+const htmlPath = path.resolve(__dirname, "..", "..", "client", "index.html")
 
-// Resolve the path to the client directory (one level up from server/)
-const clientDir = path.join(__dirname, '../../client');
+const html = readFileSync(htmlPath, "utf8");
+const updated = html.replace("__COMMIT_SHA_PLACEHOLDER__", sha);
 
-// Serve static files (CSS, JS, JSON, etc.) from the client directory
-app.use(express.static(clientDir));
+writeFileSync(htmlPath, updated);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(clientDir, 'obs/index.html'));
-});
-
-app.get('/resource/:file', (req, res) => {
-    res.sendFile(path.join(clientDir, 'obs/resource', req.params.file));
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+console.log("Injected commit SHA", sha, "into", htmlPath);

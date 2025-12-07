@@ -2,18 +2,19 @@
   "name": "smo-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "out/index.js",
+  "main": "server/out/index.js",
   "scripts": {
-    "build": "tsc && node out/inject-commit.js"
+    "build": "tsc -p server/tsconfig.json && node ."
   },
   "author": "TheMostEpicest",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.2.1",
+    "@vercel/node": "^5.5.15",
+    "ably": "^2.15.0",
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.1",
     "typescript": "^5.9.3"
   }
 }
