@@ -94,6 +94,28 @@ const captures = [
     "Picture Match Part (Mario)",
 ];
 
+const abilities = [
+    "Jump",
+    "Double Jump",
+    "Triple Jump",
+    "Wall Jump",
+    "Long Jump",
+    "Backflip",
+    "Sideflip",
+    "Crouch",
+    "Roll",
+    "Roll Boost",
+    "Dive",
+    "Climb",
+    "Ground Pound",
+    "Cap Throw",
+    "Down Throw",
+    "Up Throw",
+    "Spin Throw",
+    "Cap Bounce",
+    "Ledge Grab"
+];
+
 const kingdomList = document.getElementById("kingdom-list");
 const sidebar = document.getElementById("sidebar");
 const sidebarContent = document.getElementById("sidebar-content");
@@ -121,11 +143,12 @@ sidebarDragbar.onmousedown = sidebarDrag;
 kingdoms.forEach((kingdom) => {
     let newDiv = document.createElement("div");
     newDiv.id = `kingdom-list-${kingdom}`;
-    newDiv.innerHTML = `<img src="/resource/kingdoms/${kingdom}.png" alt="${kingdom}" title="${kingdom}" draggable="false">`;
+    newDiv.innerHTML = `<img src="/resource/kingdoms/${kingdom}.png" alt="${prettyName(kingdom)}" title="${prettyName(kingdom)}" draggable="false">`;
     newDiv.onclick = updateCurrentKingdom;
     kingdomList.appendChild(newDiv);
 });
 
+// Event handlers
 function updateCurrentKingdom(event) {
     let target = event.target.tagName == "IMG" ? event.target.parentElement : event.target;
 
@@ -168,6 +191,7 @@ function updateSidebarTab(event) {
 
 function setSidebarContentCaptures() {
     sidebarContent.innerHTML = "";
+    sidebarContent.style.gridTemplateColumns = "repeat(auto-fit, minmax(90px, 1fr))";
 
     captures.forEach((capture) => {
         let newDiv = document.createElement("div");
@@ -182,10 +206,22 @@ function setSidebarContentCaptures() {
 
 function setSidebarContentAbilities() {
     sidebarContent.innerHTML = "";
+    sidebarContent.style.gridTemplateColumns = "repeat(auto-fit, minmax(90px, 1fr))";
+
+    abilities.forEach((ability) => {
+        let newDiv = document.createElement("div");
+        newDiv.id = `ability-tracker-${normalizeName(ability)}`;
+        /* if (!savedAbilties.has(normalizeName(ability))) */ newDiv.classList.add("locked");
+        newDiv.innerHTML = showText ? `<p>${ability}</p>` : `<img src="/resource/abilities/${normalizeName(ability)}.png" alt="${ability}" title="${ability}" draggable="false">`;
+        newDiv.onclick = toggleUnlock;
+        sidebarContent.appendChild(newDiv);
+        setTimeout(wrapText, 1, newDiv);
+    });
 }
 
 function setSidebarContentSubAreas() {
     sidebarContent.innerHTML = "";
+    sidebarContent.style.gridTemplateColumns = "1fr";
 }
 
 function setSidebarContentLoadingZones() {
@@ -206,7 +242,7 @@ function sidebarDrag(event) {
 
         if (isNaN(width)) return;
 
-        sidebar.style.width = Math.max(200, Math.min(width + (prevX - curX), 700)) + "px";
+        sidebar.style.width = Math.max(200, Math.min(width + (prevX - curX), 800)) + "px";
 
         prevX = curX;
     }
@@ -231,8 +267,30 @@ function toggleUnlock(event) {
         target.classList.add("locked");
         type == "capture" ? setCapture(item, 0) : setAbility(item, 0);
     }
+}
 
-    //if (moonRequirements.flat(10).map((value) => normalizeName(value.substring(1))).includes(item)) checkMoonReqs();
+function setCapture(capture, state) {
+    let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"))
+
+    if (state) {
+        captures.add(capture);
+    } else {
+        captures.delete(capture);
+    }
+
+    localStorage.setItem("captures", JSON.stringify([...captures]));
+}
+
+function setAbility(ability, state) {
+    let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+
+    if (state) {
+        abilities.add(ability);
+    } else {
+        abilities.delete(ability);
+    }
+
+    localStorage.setItem("abilities", JSON.stringify([...abilities]));
 }
 
 

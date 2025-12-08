@@ -263,8 +263,7 @@ function setCapture(capture, state) {
     } else {
         captures.delete(capture);
     }
-    console.log(captures)
-
+    
     localStorage.setItem("captures", JSON.stringify([...captures]));
 }
 
