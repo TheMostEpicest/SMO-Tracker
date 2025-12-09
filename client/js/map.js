@@ -390,12 +390,12 @@ function toggleLinkReveal() {
     let link = document.getElementById("toast-link-text");
     let eye = document.getElementById("toast-reveal");
 
-    if (link.textContent == `https://smo-tracker.vercel.app/?roomId=************************************`) {
-        link.textContent = `https://smo-tracker.vercel.app/?roomId=${localStorage.getItem("roomId")}`;
+    if (link.textContent == `http://localhost:3000/?roomId=************************************`) {
+        link.textContent = `http://localhost:3000/?roomId=${localStorage.getItem("roomId")}`;
         eye.src = "/resource/hide.png";
         eye.title = "Hide";
     } else {
-        link.textContent = `https://smo-tracker.vercel.app/?roomId=************************************`;
+        link.textContent = `http://localhost:3000/?roomId=************************************`;
         eye.src = "/resource/reveal.png";
         eye.title = "Reveal";
     }

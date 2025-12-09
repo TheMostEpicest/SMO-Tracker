@@ -1,20 +1,17 @@
-// import { readFileSync, writeFileSync } from "fs";
-// import path from "path";
-// import dotenv from 'dotenv';
+import { readFileSync, writeFileSync } from "fs";
+import path from "path";
 
-// dotenv.config();
+const files = [
+    path.resolve(__dirname, "..", "..", "client", "index.html"),
+    path.resolve(__dirname, "..", "..", "client", "map", "index.html"),
+    path.resolve(__dirname, "..", "..", "client", "js", "index.js"),
+    path.resolve(__dirname, "..", "..", "client", "js", "map.js"),
+];
 
-// const sha = process.env.VERCEL_GIT_COMMIT_SHA || "dev";
+files.map((file) => {
+    let data = readFileSync(file, "utf8");
+    const updated = data.replace("http://localhost:3000", "https://smo-tracker.vercel.app");
+    writeFileSync(file, updated);
+});
 
-// const htmlPaths = [
-//     path.resolve(__dirname, "..", "..", "client", "index.html"),
-//     path.resolve(__dirname, "..", "..", "client", "map", "index.html")
-// ];
-
-// htmlPaths.map((htmlPath) => {
-//     let html = readFileSync(htmlPath, "utf8");
-//     const updated = html.replace("__COMMIT_SHA_PLACEHOLDER__", sha);
-//     writeFileSync(htmlPath, updated);
-// });
-
-// console.log("Injected commit SHA", sha);
+console.log("Replaced localhost:3000 with smo-tracker.vercel.app");
