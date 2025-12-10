@@ -1,4 +1,5 @@
 {
     "public": true,
-    "outputDirectory": "client"
+    "outputDirectory": "client",
+    "buildCommand": "sh vercel.sh"
 }

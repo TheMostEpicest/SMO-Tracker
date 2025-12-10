@@ -16,6 +16,7 @@
             <div id="sidebar-tab-subAreas"><p>Sub Areas</p></div>
             <div id="sidebar-tab-loadingZones"><p>Loading Zones</p></div>
             <div id="sidebar-tab-moons"><p>Moons</p></div>
+            <div id="sidebar-tab-display"><p>Display</p></div>
         </div>
         <div id="sidebar-dragbar"></div>
         <div id="sidebar-content"></div>
@@ -23,15 +24,43 @@
     <div id="moon-menu">
         <div id="moon-menu-label">
             <h1 id="moon-menu-kingdom"></h1>
-            <p id="moon-menu-total">(??)</p>
+            <p id="moon-menu-total"></p>
         </div>
         <div id="moon-menu-bar"></div>
         <div id="moon-menu-moon-container">
         </div>
     </div>
-    <div id="selection-menu"></div>
     <div id="display-menu"></div>
-    <div id="settings-menu">
+    <div class="menu" id="settings-menu">
+        <h1>Settings</h1>
+        <div class="setting-menu-line" id="setting-menu-showText">
+                <span>Show Icons</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="setting-menu-showText-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span>Show Captions</span>
+            </div>
+        <div class="menu-button-container">
+            <p class="menu-button" id="settings-close">Close</p>
+        </div>
+    </div>
+    <div class="menu" id="reset-menu">
+        <h1>Reset</h1>
+        <p>Are you sure you want to reset your progress?</p>
+        <div class="menu-button-container">
+            <p class="menu-button" id="reset-yes">Yes</p>
+            <p class="menu-button" id="reset-no">No</p>
+        </div>
+    </div>
+    <div class="menu" id="help-menu">
+        <h1>Help</h1>
+        <p>Good luck.</p>
+        <div class="menu-button-container">
+            <p class="menu-button" id="help-close">Close</p>
+        </div>
+    </div>
+    <div id="settings-button-menu">
         <div id="hamburger-button">
             <img src="/resource/hamburger.png" alt="Menu" title="Menu" draggable="false">
         </div>
@@ -55,9 +84,37 @@
             </div>
         </div>
     </div>
-    <div id="toast">
-        <h1 id="toast-title">Copy this link into an OBS browser source</h1>
-        <p id="toast-link"><span id="toast-link-text">https://smo-tracker.vercel.app/?roomId=************************************</span><img id="toast-reveal" src="/resource/reveal.png" alt="Eye" title="Reveal"><img id="toast-copy" src="/resource/link.png" alt="Link" title="Copy"></p>
+    <div id="toaster"></div>
+    <div id="selection-menu">
+        <div id="selection-menu-header">
+            <img id="selection-menu-header-icon" src="/resource/icons/moon-Cap.png">
+            <h1 id="selection-menu-header-title">Moon Name</h1>
+            <img id="selection-menu-header-collapse" src="/resource/dropdown.png">
+        </div>
+        <div id="selection-menu-content">
+            <img id="selection-menu-content-picture" src="/resource/moons/Cascade.png">
+            <p id="selection-menu-content-description">This is a power moon.</p>
+            <div id="selection-menu-content-buttons">
+                <div class="selection-menu-content-button-grid">
+                    <div><img src="/resource/icons/moon-Cascade.png"></div>
+                    <div><img src="/resource/icons/moon-Sand.png"></div>
+                    <div><img src="/resource/icons/moon-Lake.png"></div>
+                    <div><img src="/resource/icons/moon-Wooded.png"></div>
+                    <div><img src="/resource/icons/moon-Lost.png"></div>
+                    <div><img src="/resource/icons/moon-Metro.png"></div>
+                    <div><img src="/resource/icons/moon-Snow.png"></div>
+                    <div><img src="/resource/icons/moon-Seaside.png"></div>
+                    <div><img src="/resource/icons/moon-Luncheon.png"></div>
+                    <div><img src="/resource/icons/moon-Ruined.png"></div>
+                    <div><img src="/resource/icons/moon-Bowser.png"></div>
+                    <div><img src="/resource/icons/moon-Mushroom.png"></div>
+                </div>
+                <div class="selection-menu-content-button">
+                    <p>Collect</p>
+                    <!-- <img src="/resource/icons/moon-cap.png"> -->
+                </div>
+            </div>
+        </div>
     </div>
     <script src="/js/map.js"></script>
 </body>

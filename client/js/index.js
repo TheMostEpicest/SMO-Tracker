@@ -1,15 +1,15 @@
 const moons = [
-    "cascade",
-    "sand",
-    "lake",
-    "wooded",
-    "lost",
-    "metro",
-    "snow",
-    "seaside",
-    "luncheon",
-    "ruined",
-    "bowser",
+    "Cascade",
+    "Sand",
+    "Lake",
+    "Wooded",
+    "Lost",
+    "Metro",
+    "Snow",
+    "Seaside",
+    "Luncheon",
+    "Ruined",
+    "Bowser",
 ];
 
 const abilities = [
@@ -162,13 +162,13 @@ let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"
 // Setup
 moons.forEach((kingdom) => {
     let newDiv = document.createElement("div");
-    newDiv.id = `moon-tracker-${kingdom}`;
-    newDiv.innerHTML = (showText ? `<p>${prettyName(kingdom)}</p>` : `<img src="/resource/moons/${kingdom}.png" alt="${prettyName(kingdom)} Moons" title="${prettyName(kingdom)}" draggable="false">`) + `<p class="moon-counter"><span id="moon-tracker-${kingdom}-amount">${savedMoons.has(kingdom) ? savedMoons.get(kingdom) : 0}</span> / <span id="moon-tracker-${kingdom}-total" contenteditable="false">${savedMoonTotals.has(kingdom) ? savedMoonTotals.get(kingdom) : "??"}</span></p>`;
+    newDiv.id = `moon-tracker-${normalizeName(kingdom)}`;
+    newDiv.innerHTML = (showText ? `<p>${kingdom}</p>` : `<img src="/resource/moons/${normalizeName(kingdom)}.png" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`) + `<p class="moon-counter"><span id="moon-tracker-${normalizeName(kingdom)}-amount">${savedMoons.has(kingdom) ? savedMoons.get(kingdom) : 0}</span> / <span id="moon-tracker-${normalizeName(kingdom)}-total" contenteditable="false">${savedMoonTotals.has(kingdom) ? savedMoonTotals.get(kingdom) : "??"}</span></p>`;
     newDiv.onwheel = scrollMoonCount;
     newDiv.onclick = setMoonTotal;
     divMoon.appendChild(newDiv);
     setTimeout(wrapText, 1, newDiv);
-    updateMoonProgress(newDiv)
+    updateMoonProgress(newDiv);
 });
 
 abilities.forEach((ability) => {
@@ -203,7 +203,7 @@ captures.forEach((capture) => {
 
 let newDiv = document.createElement("div");
 newDiv.id = `moon-tracker-moon`;
-newDiv.innerHTML = showText ? '<p>Moon Requirements</p>' : '<img src="/resource/moons/mushroom.png" alt="Moon Requirements" title="Moon Requirements">';
+newDiv.innerHTML = showText ? '<p>Moon Requirements</p>' : '<img src="/resource/moons/Mushroom.png" alt="Moon Requirements" title="Moon Requirements">';
 divMoon.appendChild(newDiv);
 setTimeout(wrapText, 1, newDiv);
 checkMoonReqs();
@@ -494,13 +494,13 @@ function resetProgress() {
     let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
 
     moons.forEach((amount, kingdom) => {
-        document.getElementById(`moon-tracker-${kingdom}-amount`).textContent = 0;
-        updateMoonProgress(document.getElementById(`moon-tracker-${kingdom}`));
+        document.getElementById(`moon-tracker-${normalizeName(kingdom)}-amount`).textContent = 0;
+        updateMoonProgress(document.getElementById(`moon-tracker-${normalizeName(kingdom)}`));
     });
 
     moonTotals.forEach((total, kingdom) => {
-        document.getElementById(`moon-tracker-${kingdom}-total`).textContent = "??";
-        updateMoonProgress(document.getElementById(`moon-tracker-${kingdom}`));
+        document.getElementById(`moon-tracker-${normalizeName(kingdom)}-total`).textContent = "??";
+        updateMoonProgress(document.getElementById(`moon-tracker-${normalizeName(kingdom)}`));
     });
 
     captures.forEach((capture) => {
@@ -540,8 +540,8 @@ function toggleImageText() {
         localStorage.setItem("showText", 1);
 
         moons.forEach((kingdom) => {
-            let div = document.getElementById(`moon-tracker-${kingdom}`);
-            div.innerHTML = div.innerHTML.replace(/<img.*?>/, `<p>${prettyName(kingdom)}</p>`);
+            let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
+            div.innerHTML = div.innerHTML.replace(/<img.*?>/, `<p>${kingdom}</p>`);
             wrapText(div);
         });
 
@@ -571,8 +571,8 @@ function toggleImageText() {
         localStorage.setItem("showText", 0);
 
         moons.forEach((kingdom) => {
-            let div = document.getElementById(`moon-tracker-${kingdom}`);
-            div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/${kingdom}.png" alt="${prettyName(kingdom)} Moons" title="${prettyName(kingdom)}" draggable="false">`);
+            let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
+            div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/${normalizeName(kingdom)}.png" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`);
             wrapText(div);
         });
         
@@ -594,7 +594,7 @@ function toggleImageText() {
         });
 
         let div = document.getElementById(`moon-tracker-moon`);
-        div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/mushroom.png" alt="Moon Requirements" title="Moon Requirements" draggable="false">`);
+        div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/Mushroom.png" alt="Moon Requirements" title="Moon Requirements" draggable="false">`);
         wrapText(div);
     }
 }
@@ -602,10 +602,6 @@ function toggleImageText() {
 // String conversions
 function normalizeName(input) {
     return input.replace(/\s+/g, "_").replace(/\-/, "_");
-}
-
-function prettyName(input) {
-    return input.charAt(0).toUpperCase() + input.substring(1);
 }
 
 function wrapText(target) {

@@ -4,7 +4,8 @@
   "description": "",
   "main": "server/out/index.js",
   "scripts": {
-    "build": "tsc -p server/tsconfig.json && node ."
+    "build:production": "tsc -p server/tsconfig.json && node .",
+    "build:development": "echo \"Not running npm build\""
   },
   "author": "TheMostEpicest",
   "license": "ISC",

@@ -7,6 +7,10 @@
     --medium-gray: #6f7d8a;
     --success: #47D17A;
     --locked: #4e4e4e;
+    --toast-positive-background: #749974;
+    --toast-positive-border: #465a46;
+    --toast-negative-background: #bd7878;
+    --toast-negative-border: #855454;
 }
 
 @font-face {
@@ -16,8 +20,11 @@
 
 ::-webkit-scrollbar {
   display: none;
-  width: 0; /* Ensures no space is taken up by the scrollbar */
-  height: 0; /* Ensures no space is taken up by the scrollbar */
+}
+
+::selection {
+    background-color: black;
+    color: white;
 }
 
 body {
@@ -30,4 +37,91 @@ body {
 img {
     user-select: none;
     filter: drop-shadow(0px 0px 6px black)
+}
+
+div.menu {
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary);
+    border: 2px solid #4e4e4e;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    padding-bottom: calc(40px + clamp(8px, 2vmin, 20px));
+}
+
+div.menu h1 {
+    margin: 0px;
+    padding: 0px 0px 10px 00px;
+    font-size: clamp(13px, 8vmin, 30px);
+    letter-spacing: 1px;
+}
+
+div.menu p {
+    margin: 10px 20px;
+    padding: 0px 20px;
+    font-size: clamp(8px, 2vmin, 20px);
+}
+
+div.menu div.menu-button-container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+div.menu div.menu-button-container p.menu-button {
+    display: inline-block;
+    margin: 0px;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div#settings-menu div.setting-menu-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+label.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    display: inline-block;
+}
+
+label.toggle-switch input {
+    display: none;
+}
+
+label.toggle-switch span.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--locked);
+    border-radius: 24px;
+    transition: 0.3s;
+}
+
+label.toggle-switch span.slider::before {
+    content: "";
+  position: absolute;
+  height: 18px; width: 18px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+label.toggle-switch input:checked + span.slider:before {
+  transform: translateX(26px);
 }
