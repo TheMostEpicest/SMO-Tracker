@@ -154,10 +154,10 @@ if (isNaN(showText)) {
     showText = 0;
 }
 let moonEditor;
-let savedMoons = new Map(JSON.parse(localStorage.getItem("moons") ?? "[]"));
-let savedMoonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals") ?? "[]"));
-let savedCaptures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
-let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+let savedMoons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
+let savedMoonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
+let savedCaptures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
+let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
 
 // Setup
 moons.forEach((kingdom) => {
@@ -221,10 +221,10 @@ helpButton.onclick = openHelp;
 showTextToggle.onchange = toggleImageText;
 
 function setAll() {
-    let savedMoons = new Map(JSON.parse(localStorage.getItem("moons") ?? "[]"));
-    let savedMoonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals") ?? "[]"));
-    let savedCaptures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
-    let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+    let savedMoons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
+    let savedMoonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
+    let savedCaptures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
+    let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
 
     moons.forEach((kingdom) => {
         let el = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
@@ -278,7 +278,7 @@ const ablyReady = initAbly().then(() => {
         let target = document.getElementById(`moon-tracker-${data.kingdom}`);
         let span = document.getElementById(`moon-tracker-${data.kingdom}-total`);
 
-        let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals") ?? "[]"));
+        let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
 
         if (data.value == 0) {
             span.textContent = "??";
@@ -303,7 +303,7 @@ const ablyReady = initAbly().then(() => {
 
         updateMoonProgress(target);
 
-        let moons = new Map(JSON.parse(localStorage.getItem("moons") ?? "[]"));
+        let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
 
         if (data.value > 0) {
             moons.set(data.kingdom, data.value);
@@ -318,7 +318,7 @@ const ablyReady = initAbly().then(() => {
 
         let target = document.getElementById(`capture-tracker-${data.capture}`);
 
-        let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
+        let captures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
 
         if (data.value) {
             target.classList.remove("locked");
@@ -330,12 +330,12 @@ const ablyReady = initAbly().then(() => {
 
         localStorage.setItem("captures", JSON.stringify([...captures]));
     });
-    ably.subscribe("update:ability", (msg) => {
+    ably.subscribe("update:abilities", (msg) => {
         const data = msg.data;
 
         let target = document.getElementById(`ability-tracker-${data.ability}`);
 
-        let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+        let abilities = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
 
         if (data.value) {
             target.classList.remove("locked");
@@ -384,7 +384,7 @@ function toggleUnlock(event) {
 }
 
 function setCapture(capture, state) {
-    let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"))
+    let captures = new Set(JSON.parse(localStorage.getItem("captures")) ?? [])
 
     if (state) {
         captures.add(capture);
@@ -397,7 +397,7 @@ function setCapture(capture, state) {
 }
 
 function setAbility(ability, state) {
-    let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+    let abilities = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
 
     if (state) {
         abilities.add(ability);
@@ -431,7 +431,7 @@ function scrollMoonCount(event) {
 
     updateMoonProgress(target)
 
-    let moons = new Map(JSON.parse(localStorage.getItem("moons") ?? "[]"));
+    let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
 
     let item = target.id.split("-")[2];
 
@@ -500,7 +500,7 @@ function validateTotalMoons(target) {
 
     let num = Number(newValue);
 
-    let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals") ?? "[]"));
+    let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
 
     let item = target.id.split("-")[2];
 
@@ -636,10 +636,10 @@ function confirmReset() {
 }
 
 function resetProgress(forward) {
-    let moons = new Map(JSON.parse(localStorage.getItem("moons") ?? "[]"));
-    let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals") ?? "[]"));
-    let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
-    let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+    let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
+    let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
+    let captures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
+    let abilities = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
 
     moons.forEach((amount, kingdom) => {
         document.getElementById(`moon-tracker-${normalizeName(kingdom)}-amount`).textContent = 0;
