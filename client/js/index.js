@@ -318,22 +318,34 @@ const ablyReady = initAbly().then(() => {
 
         let target = document.getElementById(`capture-tracker-${data.capture}`);
 
+        let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
+
         if (data.value) {
             target.classList.remove("locked");
+            captures.add(data.capture);
         } else {
             target.classList.add("locked");
+            captures.delete(data.capture);
         }
+
+        localStorage.setItem("captures", JSON.stringify([...captures]));
     });
-    ably.subscribe("update:abilities", (msg) => {
+    ably.subscribe("update:ability", (msg) => {
         const data = msg.data;
 
         let target = document.getElementById(`ability-tracker-${data.ability}`);
 
+        let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
+
         if (data.value) {
             target.classList.remove("locked");
+            abilities.add(data.ability);
         } else {
             target.classList.add("locked");
+            abilities.delete(data.ability);
         }
+
+        localStorage.setItem("abilities", JSON.stringify([...abilities]));
     });
     ably.subscribe("post:all", (msg) => {
         const data = msg.data;

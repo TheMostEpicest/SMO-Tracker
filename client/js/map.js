@@ -200,11 +200,11 @@ const ablyReady = initAbly().then(() => {
 
         let captures = new Set(JSON.parse(localStorage.getItem("captures") ?? "[]"));
 
-        if (target.classList.contains("locked")) {
-            target.classList.remove("locked");
+        if (data.value) {
+            if (target) target.classList.remove("locked");
             captures.add(data.capture);
         } else {
-            target.classList.add("locked");
+            if (target) target.classList.add("locked");
             captures.delete(data.capture);
         }
 
@@ -217,11 +217,11 @@ const ablyReady = initAbly().then(() => {
 
         let abilities = new Set(JSON.parse(localStorage.getItem("abilities") ?? "[]"));
 
-        if (target.classList.contains("locked")) {
-            target.classList.remove("locked");
+        if (data.value) {
+            if (target) target.classList.remove("locked");
             abilities.add(data.ability);
         } else {
-            target.classList.add("locked");
+            if (target) target.classList.add("locked");
             abilities.delete(data.ability);
         }
 
