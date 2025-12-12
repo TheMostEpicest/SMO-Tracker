@@ -1,9 +1,7 @@
-import { kingdoms, captures, abilities, noRequirementKingdoms } from "../data/index.js";
+import { kingdoms, captures, abilities, noRequirementKingdoms, moons } from "../data/index.js";
 import { clearCache, initAbly } from "./auth.js";
 
 const kingdomList = document.getElementById("kingdom-list");
-
-const mapDiv = document.getElementById("map");
 
 const sidebar = document.getElementById("sidebar");
 const sidebarContent = document.getElementById("sidebar-content");
@@ -38,42 +36,13 @@ const selectionMenuToggle = document.getElementById("selection-menu-header-colla
 document.getElementById("selection-menu-header").onclick = toggleSelectionMenu;
 
 // INITIAL STATE
-let showText = false;
-let currentKingdom = "Sand";
-let currentSidebarTab = "captures";
+window.showText = false;
+window.currentKingdom = "Sand";
+window.currentSidebarTab = "captures";
+window.currentSelection = "";
+window.selectionPersist = 0;
+window.moonMap = new Map();
 let i;
-
-// MAP FUNCTIONS
-mapDiv.style.width = `calc(100vw - ${parseFloat(window.getComputedStyle(sidebar).width)}px)`;
-const mapBounds = [fractionToLatLng(0, 0), fractionToLatLng(1, 1)];
-const map = L.map("map", {
-    attributionControl: false,
-    zoomControl: false,
-    zoomSnap: 0.1,
-    maxZoom: 3,
-    minZoom: Math.round(10 * (window.innerHeight < window.innerWidth ? window.innerHeight / 512 - 0.1 : window.innerWidth / 512 - 0.1)) / 10,
-    // maxBoundsViscosity: 0.2,
-    maxBounds: mapBounds,
-}).setView([0, 0], 0);
-const mapLayer = L.imageOverlay(`/resource/maps/${currentKingdom}.png`, mapBounds).addTo(map);
-
-function fractionToLatLng(x, y) {
-    return [
-        90 - (180 * x),
-        (360 * x) - 180
-    ]
-}
-
-// SETUP
-kingdoms.forEach((kingdom) => {
-    let newDiv = document.createElement("div");
-    newDiv.id = `kingdom-list-${normalizeName(kingdom)}`;
-    newDiv.innerHTML = `<img src="/resource/kingdoms/${normalizeName(kingdom)}.png" alt="${kingdom}" title="${kingdom}" draggable="false">`;
-    newDiv.onclick = updateCurrentKingdom;
-    kingdomList.appendChild(newDiv);
-});
-setSidebarContentCaptures();
-updateCurrentKingdom();
 
 // ABLY FUNCTIONS
 initAbly().then(({ ably, clientId }) => {
@@ -162,7 +131,68 @@ initAbly().then(({ ably, clientId }) => {
     window.clientId = clientId;
 });
 
+// MAP FUNCTIONS
+document.getElementById("map").style.width = `calc(100vw - ${parseFloat(window.getComputedStyle(sidebar).width)}px)`;
+const mapBounds = [fractionToLatLng([0, 0]), fractionToLatLng([1, 1])];
+window.leafletMap = L.map("map", {
+    attributionControl: false,
+    zoomControl: false,
+    zoomSnap: 0.1,
+    maxZoom: 5,
+    minZoom: Math.round(10 * (window.innerHeight < window.innerWidth ? window.innerHeight / 512 - 0.1 : window.innerWidth / 512 - 0.1)) / 10,
+    // maxBoundsViscosity: 0.2,
+    maxBounds: mapBounds
+}).setView([0, 0], 0)
+const mapLayer = L.imageOverlay(`/resource/maps/${currentKingdom}.png`, mapBounds).addTo(leafletMap);
+// let testIcon = L.icon({
+//     iconUrl: `/resource/icons/moon-Cap.png`,
+//     iconSize: [36, 36],
+//     iconAnchor: [18, 18]
+// });
+// const testMarker = L.marker(fractionToLatLng([0.5, 0.5]), { icon: testIcon, draggable: true });
+// testMarker.on("moveend", (e) => {
+//     let location = testMarker.getLatLng();
+//     let [x, y] = latLngToFraction([location.lat, location.lng]);
+//     console.log(`"x": ${x},\n"y": ${y},`);
+// });
+const completedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
+const availableMoonsLayer = L.layerGroup([]).addTo(leafletMap);
+const lockedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
+const availablePostMoonsLayer = L.layerGroup([]).addTo(leafletMap);
+const lockedPostMoonsLayer = L.layerGroup([]).addTo(leafletMap);
+const linkedZonesLayer = L.layerGroup([]).addTo(leafletMap);
+const availableZonesLayer = L.layerGroup([]).addTo(leafletMap);
+const lockedZonesLayer = L.layerGroup([]).addTo(leafletMap);
+function fractionToLatLng([x, y]) {
+    return [
+        90 - (180 * Number(y)),
+        (360 * Number(x)) - 180
+    ];
+}
+function latLngToFraction([lat, lng]) {
+    return [
+        (Number(lng) + 180) / 360,
+        (90 - Number(lat)) / 180
+    ];
+}
+function icon(name) {
+    return L.icon({
+    iconUrl: `/resource/icons/moon-${name}.png`,
+    iconSize: [36, 36],
+    iconAnchor: [18, 18]
+});
+}
 
+// SETUP
+kingdoms.forEach((kingdom) => {
+    let newDiv = document.createElement("div");
+    newDiv.id = `kingdom-list-${normalizeName(kingdom)}`;
+    newDiv.innerHTML = `<img src="/resource/kingdoms/${normalizeName(kingdom)}.png" alt="${kingdom}" title="${kingdom}" draggable="false">`;
+    newDiv.onclick = updateCurrentKingdom;
+    kingdomList.appendChild(newDiv);
+});
+setSidebarContentCaptures();
+updateCurrentKingdom();
 
 
 // KINGDOM FUNCTIONS
@@ -186,10 +216,22 @@ function updateCurrentKingdom(event) {
         moonsTotal.innerHTML = "";
     }
 
-    map.setView([0, 0], 0);
+    leafletMap.setView([0, 0], 0);
     mapLayer.setUrl(`/resource/maps/${currentKingdom}.png`);
     
+    completedMoonsLayer.clearLayers();
 
+    moons.get(currentKingdom).forEach((moon) => {
+        let mark = L.marker(fractionToLatLng([moon.x, moon.y]), { icon: icon("unknown") });
+        mark.on("click", (e) => {
+            currentSelection = `moon-${moon.kingdomId}`;
+            updateSelectionMenu();
+        })
+        completedMoonsLayer.addLayer(mark);
+    });
+
+    currentSelection = "";
+    updateSelectionMenu();
     updateMoonCounter();
 }
 
@@ -430,7 +472,7 @@ function sidebarDrag(event) {
 
         sidebar.style.width = clampWidth + "px";
         selectionMenu.style.right = (clampWidth + 70)+ "px";
-        mapDiv.style.width = `calc(100vw - ${clampWidth}px)`;
+        document.getElementById("map").style.width = `calc(100vw - ${clampWidth}px)`;
 
         prevX = curX;
     }
@@ -521,6 +563,46 @@ function toggleSelectionMenu() {
     } else {
         selectionMenu.style.marginBottom = "0px";
         selectionMenuToggle.style.transform = "rotate(0deg)";
+    }
+}
+
+function updateSelectionMenu() {
+    let title = document.getElementById("selection-menu-header-title");
+    let icon = document.getElementById("selection-menu-header-icon");
+    let picture = document.getElementById("selection-menu-content-picture");
+    let description = document.getElementById("selection-menu-content-description");
+
+    if (selectionPersist) return;
+
+    if (currentSelection == "") {
+        title.textContent = "No Selection";
+        icon.src = `/resource/icons/moon-empty.png`;
+        picture.src = `/resource/icons/moon-empty.png`;
+        description.textContent = "Select an icon to see details."
+        return;
+    }
+
+    let type = currentSelection.split("-")[0];
+    let kingdomId = currentSelection.split("-")[1];
+    
+    switch (type) {
+        case "moon":
+            let data = moons.get(currentKingdom)[Number(kingdomId) - 1]
+
+            title.textContent = data.name;
+
+            let actualKingdom = moonMap.get(data.id);
+
+            if (actualKingdom) {
+                icon.src = `/resource/icons/moon-${actualKingdom}.png`;
+                picture.src = `/resource/moons/${actualKingdom}.png`;
+                description.textContent = `This is a ${actualKingdom} power moon.`;
+            } else {
+                icon.src = `/resource/icons/moon-unknown.png`;
+                picture.src = `/resource/moons/unknown.png`;
+                description.textContent = "Unknown power moon.";
+            }
+            
     }
 }
 
