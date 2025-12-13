@@ -4,4 +4,6 @@ export * from "./abilities.js";
 export * from "./moons.js";
 export * from "./subareas.js";
 export * from "./zones.js";
-export * from "./moonless.js";
+export * from "./nomoonKingdoms.js";
+export * from "./moonKingdoms.js";
+export * from "./multimoonKingdoms.js";

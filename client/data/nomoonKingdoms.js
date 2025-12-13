@@ -1,4 +1,4 @@
-export const noRequirementKingdoms = new Set([
+export const nomoonKingdoms = new Set([
     "Cap",
     "Cloud",
     "Moon",

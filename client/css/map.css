@@ -402,17 +402,31 @@ div#selection-menu-content-buttons {
     box-sizing: border-box;
 }
 
-div.selection-menu-content-button {
+
+div.selection-menu-content-button-line {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 0px;
+    gap: 0px;
+    transition: gap 0.3s;
+}
+
+div.selection-menu-content-button-line div {
     display: flex;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    padding: 7px 0px;
+    height: 38px;
+    padding: 7px;
     gap: 7px;
     justify-content: center;
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
+    transition: opacity 0.3s, width 0.3s ease, border 0.3s, padding 0.3s;
 }
 
 div.selection-menu-content-button p {
@@ -424,10 +438,9 @@ div.selection-menu-content-button img {
     height: 24px;
     aspect-ratio: 1 / 1;
 }
-
 div.selection-menu-content-button-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     width: 100%;
     box-sizing: border-box;
     padding: 7px 0px;

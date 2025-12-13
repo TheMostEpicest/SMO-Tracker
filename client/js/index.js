@@ -1,7 +1,7 @@
-import { kingdoms, captures, abilities, noRequirementKingdoms } from "/data/index.js";
+import { kingdoms, captures, abilities, nomoonKingdoms, moonKingdoms, multimoonKingdoms } from "../data/index.js";
 import { clearCache, initAbly } from "./auth.js";
 
-const moons = kingdoms.filter((kingdom) => !noRequirementKingdoms.has(kingdom));
+const moons = kingdoms.filter((kingdom) => !nomoonKingdoms.has(kingdom));
 const primaryCaptures = captures.slice(0, 24);
 const secondaryCaptures = captures.slice(24);
 
@@ -200,13 +200,16 @@ initAbly().then(({ ably, clientId }) => {
     });
     ably.subscribe("update:moons", (msg) => {
         const data = msg.data;
-        let target = document.getElementById(`moon-tracker-${data.kingdom}`);
-        let span = document.getElementById(`moon-tracker-${data.kingdom}-amount`);
 
-        span.textContent = data.value;
+        if (!nomoonKingdoms.has(data.kingdom)) {
+            let target = document.getElementById(`moon-tracker-${data.kingdom}`);
+            let span = document.getElementById(`moon-tracker-${data.kingdom}-amount`);
 
-        updateMoonProgress(target);
+            span.textContent = data.value;
 
+            updateMoonProgress(target);
+        }
+        
         let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
 
         if (data.value > 0) {

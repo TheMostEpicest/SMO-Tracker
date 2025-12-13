@@ -6,6 +6,7 @@ export const moons = new Map([
             "id": 1,
             "kingdomId": 1,
             "name": "First moon",
+            "type": "moon",
             "x": 0.5,
             "y": 0.7
         },
@@ -13,6 +14,7 @@ export const moons = new Map([
             "id": 2,
             "kingdomId": 2,
             "name": "Second moon",
+            "type": "multimoon",
             "x": 0.3,
             "y": 0.4
         }
@@ -32,6 +34,7 @@ export const moons = new Map([
             "id": 101,
             "kingdomId": 1,
             "name": "Mush-moon",
+            "type": "moon",
             "x": 0.5,
             "y": 0.7
         },]],
