@@ -229,13 +229,13 @@ function icon(name) {
 
 // ---- SIDEBAR ----
 // Tab Changing
-function updateSidebarTab(newSidebarTab) {
+function updateSidebarTab(newSidebarTab, keepContent) {
     if (localStorage.getItem("sidebarTab")) document.getElementById(`sidebar-tab-${localStorage.getItem("sidebarTab")}`).classList.remove("selected");
     document.getElementById(`sidebar-tab-${newSidebarTab}`).classList.add("selected");
 
     localStorage.setItem("sidebarTab", newSidebarTab);
 
-    nodes.sidebarContent.innerHTML = "";
+    if (!keepContent) nodes.sidebarContent.innerHTML = "";
 }
 function setSidebarContentCaptures() {
     updateSidebarTab("captures");
@@ -274,41 +274,49 @@ function setSidebarContentAbilities() {
 // TODO: Show/Hide completed/locked
 // TODO: Scroll to subarea on warp (and not on refresh)
 function setSidebarContentSubAreas() {
-    updateSidebarTab("subAreas");
-
-    let category = sidebarCreateCategory("", 0);
 
     let subAreaList = subAreas.get(localStorage.getItem("kingdom"));
     let moonList = moons.get(localStorage.getItem("kingdom"));
     let zoneList = zones.get(localStorage.getItem("kingdom"));
-    const mapBounds = [fractionToLatLng([0, 0]), fractionToLatLng([1, 1])];
+    let collectedSet = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
+    let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
 
-    subMapsMap.clear();
+    if (localStorage.getItem("sidebarTab") == "subAreas") {
+        updateSidebarTab("subAreas", 1);
+    } else {
+        updateSidebarTab("subAreas");
 
-    subAreaList.forEach((subArea) => {
-        let el = document.createElement("div");
-        el.id = `subarea-tracker-${subArea.name}`;
-        el.classList.add("sidebar-subarea");
-        el.innerHTML = `<p>${subArea.name}</p><div class="subarea-map" id="map-${subArea.name}"></div>`;
-        category.append(el);
+        let category = sidebarCreateCategory("", 0);
 
-        let subMap = L.map(`map-${subArea.name}`, {
-            attributionControl: false,
-            zoomControl: false,
-            dragging: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-            boxZoom: false,
-            keyboard: false,
-            touchZoom: false,
-            tap: false,
-            zoom: 1,
-            maxBounds: mapBounds
-        }).fitBounds(mapBounds)
-        L.imageOverlay(`/resource/maps/${localStorage.getItem("kingdom")}.png`, mapBounds).addTo(subMap);
+        subMapsMap.clear();
 
-        subMapsMap.set(subArea.name, subMap);
-    });
+        const mapBounds = [fractionToLatLng([0, 0]), fractionToLatLng([1, 1])];
+
+        subAreaList.forEach((subArea) => {
+            let el = document.createElement("div");
+            el.id = `subarea-tracker-${subArea.name}`;
+            el.classList.add("sidebar-subarea");
+            el.innerHTML = `<p>${subArea.name}</p><div class="subarea-map" id="map-${subArea.name}"></div>`;
+            category.append(el);
+
+            let subMap = L.map(`map-${subArea.name}`, {
+                attributionControl: false,
+                zoomControl: false,
+                dragging: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                touchZoom: false,
+                tap: false,
+                zoom: 1,
+                maxBounds: mapBounds
+            }).fitBounds(mapBounds)
+            L.imageOverlay(`/resource/maps/${localStorage.getItem("kingdom")}.png`, mapBounds).addTo(subMap);
+
+            subMapsMap.set(subArea.name, subMap);
+        });
+    }
 
     moonList.filter((moon) => moon.subarea).forEach((moon) => {
         let mark = markMap.get(moon.id);
@@ -318,17 +326,73 @@ function setSidebarContentSubAreas() {
         mark.remove();
         mark.addTo(subMapsMap.get(moon.subarea));
 
-        
-
+        if (collectedSet.has(moon.id)) {
+            mark.off("click");
+            if (Number(localStorage.getItem("display:completed"))) {
+                mark.on("click", (e) => {
+                    setSelection(mark.moonId);
+                });
+                mark.setOpacity(0.5);
+                mark._icon.style.cursor = "pointer";
+                mark.setZIndexOffset(0);
+            } else {
+                mark.setOpacity(0);
+                mark._icon.style.cursor = "grab";
+                mark.setZIndexOffset(-100);
+            }
+        } else if (evaluateLogic(moon.logic)) {
+            mark.off("click");
+            mark.on("click", (e) => {
+                setSelection(mark.moonId);
+            });
+            mark.setOpacity(1);
+            mark._icon.style.cursor = "pointer";
+            mark.setZIndexOffset(100);
+        } else {
+            mark.off("click");
+            if (Number(localStorage.getItem("display:locked"))) {
+                mark.on("click", (e) => {
+                    setSelection(mark.moonId);
+                });
+                mark.setOpacity(0.5);
+                mark._icon.style.cursor = "pointer";
+                mark.setZIndexOffset(0);
+            } else {
+                mark.setOpacity(0);
+                mark._icon.style.cursor = "grab";
+                mark.setZIndexOffset(-100);
+            }
+        }
     });
 
     zoneList.filter((zone) => zone.subarea).forEach((zone) => {
         let mark = markMap.get(zone.id);
-        // console.log(mark);
-        // console.log(zone)
-        // console.log(subMapsMap);
         mark.remove();
         mark.addTo(subMapsMap.get(zone.subarea));
+
+        if (linkMap.has(zone.id)) {
+            mark.off("click");
+            if (Number(localStorage.getItem("display:completed"))) {
+                mark.on("click", (e) => {
+                    setSelection(mark.zoneId);
+                });
+                mark.setOpacity(0.5);
+                mark._icon.style.cursor = "pointer";
+                mark.setZIndexOffset(0);
+            } else {
+                mark.setOpacity(0);
+                mark._icon.style.cursor = "grab";
+                mark.setZIndexOffset(-100);
+            }
+        } else {
+            mark.off("click");
+            mark.on("click", (e) => {
+                setSelection(mark.zoneId);
+            });
+            mark.setOpacity(1);
+            mark._icon.style.cursor = "pointer";
+            mark.setZIndexOffset(100);
+        }
     });
 }
 function setSidebarContentLoadingZones() {
@@ -843,16 +907,16 @@ function updateMapWithDisplaySettings() {
             layer.on("click", (e) => {
                 setSelection(layer.zoneId);
             });
-            layer.setOpacity(1);
+            layer.setOpacity(0.5);
             layer._icon.style.cursor = "pointer";
-            layer.setZIndexOffset(100);
+            layer.setZIndexOffset(0);
         } else {
             layer.on("click", (e) => {
                 setSelection(layer.zoneId);
             });
-            layer.setOpacity(0.5);
-            layer._icon.style.cursor = "pointer";
-            layer.setZIndexOffset(0);
+            layer.setOpacity(0);
+            layer._icon.style.cursor = "grab";
+            layer.setZIndexOffset(-100);
         }
     });
     lockedZonesLayer.eachLayer((layer) => {
@@ -905,6 +969,8 @@ function checkAvailability() {
         }
     });
 
+    let linkMap = new Set(JSON.parse(localStorage.getItem("linkMap")) ?? []);
+
     let zoneList = zones.get(localStorage.getItem("kingdom"));
 
     zoneList.forEach((zone) => {
@@ -912,11 +978,11 @@ function checkAvailability() {
 
         let mark = markMap.get(zone.id);
 
-        // if (collectedMap.has(moon.id)) {
-        //     mark.removeFrom(availableMoonsLayer);
-        //     mark.removeFrom(lockedMoonsLayer);
-        //     mark.addTo(completedMoonsLayer);
-        // } else
+        if (linkMap.has(zone.id)) {
+            mark.removeFrom(availableMoonsLayer);
+            mark.removeFrom(lockedMoonsLayer);
+            mark.addTo(completedMoonsLayer);
+        } else
         if (evaluateLogic(zone.logic)) {
             mark.removeFrom(linkedZonesLayer);
             mark.removeFrom(lockedZonesLayer);
@@ -1026,11 +1092,9 @@ function setSelection(selection) {
 
             nodes.selectionMenuButtons.append(addMoonCollectionButton(data.id));
 
-            if (data.subarea) {
+            if (data.subarea && (localStorage.getItem("sidebarTab") == "moons" || localStorage.getItem("sidebarTab") == "loadingZones")) {
                 if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
-                setTimeout(() => {
-                    document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
-                }, 50);
+                document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "instant", block: "center"});
             }
 
             break;
@@ -1061,11 +1125,9 @@ function setSelection(selection) {
 
             nodes.selectionMenuButtons.append(addZoneLinkButton(data.id));
 
-            if (data.subarea) {
+            if (data.subarea && (localStorage.getItem("sidebarTab") == "moons" || localStorage.getItem("sidebarTab") == "loadingZones")) {
                 if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
-                setTimeout(() => {
-                    document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
-                }, 50);
+                document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "instant", block: "center"});
             }
     }
 
@@ -1220,9 +1282,25 @@ function moonSetCollected(id, state, container) {
                 moon++;
             }
             
-            mark.removeFrom(availableMoonsLayer);
-            mark.removeFrom(lockedMoonsLayer);
-            mark.addTo(completedMoonsLayer);
+            if (!data.subarea) {
+                mark.removeFrom(availableMoonsLayer);
+                mark.removeFrom(lockedMoonsLayer);
+                mark.addTo(completedMoonsLayer);
+            } else {
+                if (Number(localStorage.getItem("display:completed"))) {
+                    mark.on("click", (e) => {
+                        setSelection(mark.moonId);
+                    });
+                    mark.setOpacity(0.5);
+                    mark._icon.style.cursor = "pointer";
+                    mark.setZIndexOffset(0);
+                } else {
+                    mark.setOpacity(0);
+                    mark._icon.style.cursor = "grab";
+                    mark.setZIndexOffset(-100);
+                }
+            }
+            
             nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-positive-background)";
 
             mark.setIcon(icon(`moon-${kingdom}-complete`));
@@ -1250,12 +1328,39 @@ function moonSetCollected(id, state, container) {
                 moon--;
             }
 
-            if (evaluateLogic(data.logic)) {
-                mark.addTo(availableMoonsLayer);
-                nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-incomplete-background)";
+            if (!data.subarea) {
+                mark.removeFrom(completedMoonsLayer);
+                if (evaluateLogic(data.logic)) {
+                    mark.addTo(availableMoonsLayer);
+                    nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-incomplete-background)";
+                } else {
+                    mark.addTo(lockedMoonsLayer);
+                    nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-negative-background)";
+                }
             } else {
-                mark.addTo(lockedMoonsLayer);
-                nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-negative-background)";
+                if (evaluateLogic(data.logic)) {
+                    mark.off("click");
+                    mark.on("click", (e) => {
+                        setSelection(mark.moonId);
+                    });
+                    mark.setOpacity(1);
+                    mark._icon.style.cursor = "pointer";
+                    mark.setZIndexOffset(100);
+                } else {
+                    mark.off("click");
+                    if (Number(localStorage.getItem("display:locked"))) {
+                        mark.on("click", (e) => {
+                            setSelection(mark.moonId);
+                        });
+                        mark.setOpacity(0.5);
+                        mark._icon.style.cursor = "pointer";
+                        mark.setZIndexOffset(0);
+                    } else {
+                        mark.setOpacity(0);
+                        mark._icon.style.cursor = "grab";
+                        mark.setZIndexOffset(-100);
+                    }
+                }
             }
 
             mark.setIcon(icon(`moon-${kingdom}`));
@@ -1395,16 +1500,50 @@ function zoneLinkFinish(id, container) {
         nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-positive-background)";
         nodes.selectionMenuDescription.innerHTML = `<span class="selection-menu-moon-number">This loading zone links to:</span><br />${targetZoneId.split("-")[0]}: ${targetData.name}`;
 
-        mark.removeFrom(availableZonesLayer);
-        mark.removeFrom(lockedZonesLayer);
-        mark.addTo(linkedZonesLayer);
+        if (!data.subarea) {
+            mark.removeFrom(availableZonesLayer);
+            mark.removeFrom(lockedZonesLayer);
+            mark.addTo(linkedZonesLayer);
+        } else {
+            mark.off("click");
+            if (Number(localStorage.getItem("display:completed"))) {
+                mark.on("click", (e) => {
+                    setSelection(mark.zoneId);
+                });
+                mark.setOpacity(1);
+                mark._icon.style.cursor = "pointer";
+                mark.setZIndexOffset(100);
+            } else {
+                mark.setOpacity(0.5);
+                mark._icon.style.cursor = "grab";
+                mark.setZIndexOffset(0);
+            }
+        }
+        
             
         if (localStorage.getItem("kingdom") == targetZoneId.split("-")[0]) {
             let targetMark = markMap.get(targetData.id);
             targetMark.setIcon(icon(`${targetData.type}-linked`));
-            targetMark.removeFrom(availableZonesLayer);
-            targetMark.removeFrom(lockedZonesLayer);
-            targetMark.addTo(linkedZonesLayer);
+
+            if (!targetData.subarea) {
+                targetMark.removeFrom(availableZonesLayer);
+                targetMark.removeFrom(lockedZonesLayer);
+                targetMark.addTo(linkedZonesLayer);
+            } else {
+                targetMark.off("click");
+                if (Number(localStorage.getItem("display:completed"))) {
+                    targetMark.on("click", (e) => {
+                        setSelection(mark.zoneId);
+                    });
+                    targetMark.setOpacity(1);
+                    targetMark._icon.style.cursor = "pointer";
+                    targetMark.setZIndexOffset(100);
+                } else {
+                    targetMark.setOpacity(0.5);
+                    targetMark._icon.style.cursor = "grab";
+                    targetMark.setZIndexOffset(0);
+                }
+            }
         }
 
         let button = container.firstElementChild;
@@ -1454,27 +1593,47 @@ function zoneUnlink(id, container) {
 
         mark.setIcon(icon(`${data.type}`));
         nodes.selectionMenuIcon.src = `/resource/icons/${data.type}.png`;
-        
-        mark.removeFrom(linkedZonesLayer);
 
-        if (evaluateLogic(data.logic)) {
-            mark.addTo(availableZonesLayer);
-            nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-incomplete-background)";
+        if (!data.subarea) {
+            mark.removeFrom(linkedZonesLayer);
+            if (evaluateLogic(data.logic)) {
+                mark.addTo(availableZonesLayer);
+                nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-incomplete-background)";
+            } else {
+                mark.addTo(lockedZonesLayer);
+                nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-negative-background)";
+            }
         } else {
-            mark.addTo(lockedZonesLayer);
-            nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-negative-background)";
+            mark.off("click");
+            mark.on("click", (e) => {
+                setSelection(mark.zoneId);
+            });
+            mark.setOpacity(1);
+            mark._icon.style.cursor = "pointer";
+            mark.setZIndexOffset(100);
         }
+        
 
         let targetMark = markMap.get(targetData.id);
         targetMark.setIcon(icon(`${targetData.type}`));
 
-        targetMark.removeFrom(linkedZonesLayer);
-
-        if (evaluateLogic(targetData.logic)) {
-            targetMark.addTo(availableZonesLayer);
+        if (!targetData.subarea) {
+            targetMark.removeFrom(linkedZonesLayer);
+            if (evaluateLogic(targetData.logic)) {
+                targetMark.addTo(availableZonesLayer);
+            } else {
+                targetMark.addTo(lockedZonesLayer);
+            }
         } else {
-            targetMark.addTo(lockedZonesLayer);
+            targetMark.off("click");
+            targetMark.on("click", (e) => {
+                setSelection(targetMark.zoneId);
+            });
+            targetMark.setOpacity(1);
+            targetMark._icon.style.cursor = "pointer";
+            targetMark.setZIndexOffset(100);
         }
+        
 
         let button = container.firstElementChild;
         let eraser = container.lastElementChild;
@@ -1544,6 +1703,11 @@ function clickOffHamburger(event) {
 }
 // Hamburger Menu Buttons
 function initMenus() {
+    // Default settings
+    if (!localStorage.getItem("display:captions")) localStorage.setItem("display:captions", 0);
+    if (!localStorage.getItem("display:theme")) localStorage.setItem("display:theme", 1);
+    if (!localStorage.getItem("display:completed")) localStorage.setItem("display:completed", 1);
+    if (!localStorage.getItem("display:locked")) localStorage.setItem("display:locked", 1);
 
     createSettingsToggle("display:captions", "Show Icons", "Show Captions", toggleImageText);
     createSettingsToggle("display:theme", "Theme | Light", "Dark", toggleLightDarkMode);
@@ -1680,6 +1844,7 @@ function toggleCompletedIcons() {
     }
 
     updateMapWithDisplaySettings();
+    if (localStorage.getItem("sidebarTab") == "subAreas") refreshSidebar();
 }
 function toggleLockedIcons() {
     if (document.getElementById(`setting-menu-display:locked-toggle`).checked) {
@@ -1689,6 +1854,7 @@ function toggleLockedIcons() {
     }
 
     updateMapWithDisplaySettings();
+    if (localStorage.getItem("sidebarTab") == "subAreas") refreshSidebar();
 }
 
 // Reset Menu
