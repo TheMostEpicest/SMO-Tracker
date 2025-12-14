@@ -6,6 +6,7 @@ const nodes = initNodes();
 initListeners();
 initMenus();
 window.markMap = new Map();
+window.subMapsMap = new Map();
 initAbly().then(ablyPubSubSetup);
 initKingdomList();
 leafletInit();
@@ -26,7 +27,7 @@ function initNodes() {
         sidebarTabSubAreas: document.getElementById("sidebar-tab-subAreas"),
         sidebarTabLoadingZones: document.getElementById("sidebar-tab-loadingZones"),
         sidebarTabMoons: document.getElementById("sidebar-tab-moons"),
-        sidebarTabDisplay: document.getElementById("sidebar-tab-display"),
+        sidebarTabMiscellaneous: document.getElementById("sidebar-tab-miscellaneous"),
         hamburgerButton: document.getElementById("hamburger-button"),
         hamburgerMover: document.getElementById("button-menu-mover"),
         linkButton: document.getElementById("link-button"),
@@ -34,8 +35,6 @@ function initNodes() {
         resetButton: document.getElementById("reset-button"),
         helpButton: document.getElementById("help-button"),
         settingsMenu: document.getElementById("settings-menu"),
-        settingsMenuTextToggle: document.getElementById("setting-menu-showText-toggle"),
-        settingsMenuThemeToggle: document.getElementById("setting-menu-lightDark-toggle"),
         resetMenu: document.getElementById("reset-menu"),
         helpMenu: document.getElementById("help-menu"),
         moonsContainer: document.getElementById("moon-menu-moon-container"),
@@ -57,14 +56,12 @@ function initListeners() {
     nodes.sidebarTabSubAreas.onclick = setSidebarContentSubAreas;
     nodes.sidebarTabLoadingZones.onclick = setSidebarContentLoadingZones;
     nodes.sidebarTabMoons.onclick = setSidebarContentMoons;
-    nodes.sidebarTabDisplay.onclick = setSidebarContentDisplay;
+    nodes.sidebarTabMiscellaneous.onclick = setSidebarContentMiscellaneous;
     nodes.hamburgerButton.onclick = openHamburger;
     nodes.linkButton.onclick = createLinkToast;
     nodes.settingsButton.onclick = openSettings;
     nodes.resetButton.onclick = confirmReset;
     nodes.helpButton.onclick = openHelp;
-    nodes.settingsMenuTextToggle.onchange = toggleImageText;
-    nodes.settingsMenuThemeToggle.onchange = toggleLightDarkMode;
     nodes.selectionMenuHeader.onclick = openSelectionMenu;
 }
 
@@ -203,8 +200,6 @@ function leafletInit() {
     window.completedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.availableMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.lockedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
-    window.availablePostMoonsLayer = L.layerGroup([]).addTo(leafletMap);
-    window.lockedPostMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.linkedZonesLayer = L.layerGroup([]).addTo(leafletMap);
     window.availableZonesLayer = L.layerGroup([]).addTo(leafletMap);
     window.lockedZonesLayer = L.layerGroup([]).addTo(leafletMap);
@@ -253,7 +248,7 @@ function setSidebarContentCaptures() {
         let el = document.createElement("div");
         el.id = `capture-tracker-${normalizeName(capture)}`;
         if (!savedCaptures.has(normalizeName(capture))) el.classList.add("locked");
-        el.innerHTML = Number(localStorage.getItem("showText")) ? `<p>${capture}</p>` : `<img src="/resource/captures/${normalizeName(capture)}.png" alt="${capture}" title="${capture}" draggable="false">`;
+        el.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${capture}</p>` : `<img src="/resource/captures/${normalizeName(capture)}.png" alt="${capture}" title="${capture}" draggable="false">`;
         el.onclick = clickCapture;
         category.appendChild(el);
         setTimeout(wrapText, 1, el);
@@ -270,35 +265,75 @@ function setSidebarContentAbilities() {
         let el = document.createElement("div");
         el.id = `ability-tracker-${normalizeName(ability)}`;
         if (!savedAbilties.has(normalizeName(ability))) el.classList.add("locked");
-        el.innerHTML = Number(localStorage.getItem("showText")) ? `<p>${ability}</p>` : `<img src="/resource/abilities/${normalizeName(ability)}.png" alt="${ability}" title="${ability}" draggable="false">`;
+        el.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${ability}</p>` : `<img src="/resource/abilities/${normalizeName(ability)}.png" alt="${ability}" title="${ability}" draggable="false">`;
         el.onclick = clickAbility;
         category.appendChild(el);
         setTimeout(wrapText, 1, el);
     });
 }
+// TODO: Show/Hide completed/locked
+// TODO: Scroll to subarea on warp (and not on refresh)
 function setSidebarContentSubAreas() {
     updateSidebarTab("subAreas");
 
     let category = sidebarCreateCategory("", 0);
 
     let subAreaList = subAreas.get(localStorage.getItem("kingdom"));
+    let moonList = moons.get(localStorage.getItem("kingdom"));
+    let zoneList = zones.get(localStorage.getItem("kingdom"));
+    const mapBounds = [fractionToLatLng([0, 0]), fractionToLatLng([1, 1])];
+
+    subMapsMap.clear();
 
     subAreaList.forEach((subArea) => {
         let el = document.createElement("div");
-        el.id = `moonlist-tracker-${subArea.id}`;
-        el.innerHTML = `<p>${subArea.name}</p>`;
-
-
-
+        el.id = `subarea-tracker-${subArea.name}`;
+        el.classList.add("sidebar-subarea");
+        el.innerHTML = `<p>${subArea.name}</p><div class="subarea-map" id="map-${subArea.name}"></div>`;
         category.append(el);
+
+        let subMap = L.map(`map-${subArea.name}`, {
+            attributionControl: false,
+            zoomControl: false,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            boxZoom: false,
+            keyboard: false,
+            touchZoom: false,
+            tap: false,
+            zoom: 1,
+            maxBounds: mapBounds
+        }).fitBounds(mapBounds)
+        L.imageOverlay(`/resource/maps/${localStorage.getItem("kingdom")}.png`, mapBounds).addTo(subMap);
+
+        subMapsMap.set(subArea.name, subMap);
+    });
+
+    moonList.filter((moon) => moon.subarea).forEach((moon) => {
+        let mark = markMap.get(moon.id);
+        // console.log(mark);
+        // console.log(moon)
+        // console.log(subMapsMap);
+        mark.remove();
+        mark.addTo(subMapsMap.get(moon.subarea));
+    });
+
+    zoneList.filter((zone) => zone.subarea).forEach((zone) => {
+        let mark = markMap.get(zone.id);
+        // console.log(mark);
+        // console.log(zone)
+        // console.log(subMapsMap);
+        mark.remove();
+        mark.addTo(subMapsMap.get(zone.subarea));
     });
 }
 function setSidebarContentLoadingZones() {
     updateSidebarTab("loadingZones");
 
-    let availableCategory = sidebarCreateCategory("Available", 0);
-    let lockedCategory = sidebarCreateCategory("Locked", 0);
-    let linkedCategory = sidebarCreateCategory("Linked", 0);
+    let availableCategory = sidebarCreateCategory("Available Checks", 0);
+    let lockedCategory = sidebarCreateCategory("Locked Checks", 0);
+    let linkedCategory = sidebarCreateCategory("Completed Checks", 0);
 
     let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
     let zoneList = zones.get(localStorage.getItem("kingdom"));
@@ -330,9 +365,9 @@ function setSidebarContentLoadingZones() {
 function setSidebarContentMoons() {
     updateSidebarTab("moons");
     
-    let availableCategory = sidebarCreateCategory("Available", 0);
-    let lockedCategory = sidebarCreateCategory("Locked", 0);
-    let collectedCategory = sidebarCreateCategory("Collected", 0);
+    let availableCategory = sidebarCreateCategory("Available Checks", 0);
+    let lockedCategory = sidebarCreateCategory("Locked Checks", 0);
+    let collectedCategory = sidebarCreateCategory("Completed Checks", 0);
     
     let collectedSet = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
     let moonMap = new Map(JSON.parse(localStorage.getItem("moonMap")) ?? []);
@@ -356,8 +391,10 @@ function setSidebarContentMoons() {
         }
     });
 }
-function setSidebarContentDisplay() {
-    updateSidebarTab("display");
+function setSidebarContentMiscellaneous() {
+    updateSidebarTab("miscellaneous");
+
+    nodes.sidebarContent.textContent = "Coming Soon."
 }
 function sidebarDrag(event) {
     let prevX = event.screenX;
@@ -412,8 +449,8 @@ function refreshSidebar() {
             case "moons":
             setSidebarContentMoons();
             break;
-            case "display":
-            setSidebarContentDisplay();
+            case "miscellaneous":
+            setSidebarContentMiscellaneous();
             break;
     }
 }
@@ -765,9 +802,11 @@ function updateMapWithDisplaySettings() {
             });
             layer.setOpacity(0.5);
             layer._icon.style.cursor = "pointer";
+            layer.setZIndexOffset(0);
         } else {
             layer.setOpacity(0);
             layer._icon.style.cursor = "grab";
+            layer.setZIndexOffset(-100);
         }
     });
     lockedMoonsLayer.eachLayer((layer) => {
@@ -778,9 +817,11 @@ function updateMapWithDisplaySettings() {
             });
             layer.setOpacity(0.5);
             layer._icon.style.cursor = "pointer";
+            layer.setZIndexOffset(0);
         } else {
             layer.setOpacity(0);
             layer._icon.style.cursor = "grab";
+            layer.setZIndexOffset(-100);
         }
     });
     availableMoonsLayer.eachLayer((layer) => {
@@ -790,6 +831,7 @@ function updateMapWithDisplaySettings() {
         });
         layer.setOpacity(1);
         layer._icon.style.cursor = "pointer";
+        layer.setZIndexOffset(100);
     });
 
     linkedZonesLayer.eachLayer((layer) => {
@@ -800,12 +842,14 @@ function updateMapWithDisplaySettings() {
             });
             layer.setOpacity(1);
             layer._icon.style.cursor = "pointer";
+            layer.setZIndexOffset(100);
         } else {
             layer.on("click", (e) => {
                 setSelection(layer.zoneId);
             });
             layer.setOpacity(0.5);
             layer._icon.style.cursor = "pointer";
+            layer.setZIndexOffset(0);
         }
     });
     lockedZonesLayer.eachLayer((layer) => {
@@ -816,9 +860,11 @@ function updateMapWithDisplaySettings() {
             });
             layer.setOpacity(0.5);
             layer._icon.style.cursor = "pointer";
+            layer.setZIndexOffset(0);
         } else {
             layer.setOpacity(0);
             layer._icon.style.cursor = "grab";
+            layer.setZIndexOffset(-100);
         }
     });
     availableZonesLayer.eachLayer((layer) => {
@@ -828,6 +874,7 @@ function updateMapWithDisplaySettings() {
         });
         layer.setOpacity(1);
         layer._icon.style.cursor = "pointer";
+        layer.setZIndexOffset(100);
     });
 }
 function checkAvailability() {
@@ -901,21 +948,20 @@ function toggleLinkReveal() {
     let link = document.getElementById("toast-link-text");
     let eye = document.getElementById("toast-reveal");
 
-    if (link.textContent == `http://localhost:3000/?roomId=************************************`) {
-        link.textContent = `http://localhost:3000/?roomId=${localStorage.getItem("roomId")}`;
+    if (link.textContent == `http://localhost:3000/overlay?roomId=************************************`) {
+        link.textContent = `http://localhost:3000/overlay?roomId=${localStorage.getItem("roomId")}`;
         eye.src = "/resource/hide.png";
         eye.title = "Hide";
     } else {
-        link.textContent = `http://localhost:3000/?roomId=************************************`;
+        link.textContent = `http://localhost:3000/overlay?roomId=************************************`;
         eye.src = "/resource/reveal.png";
         eye.title = "Reveal";
     }
 }
 function copyLink() {
-    navigator.clipboard.writeText(`http://localhost:3000/?roomId=${localStorage.getItem("roomId")}`);
+    navigator.clipboard.writeText(`http://localhost:3000/overlay?roomId=${localStorage.getItem("roomId")}`);
     hideToast("toast-link-div");
 }
-
 
 // ---- SELECTION MENU ----
 // Open/Close Selection Menu
@@ -977,6 +1023,13 @@ function setSelection(selection) {
 
             nodes.selectionMenuButtons.append(addMoonCollectionButton(data.id));
 
+            if (data.subarea && localStorage.getItem("sidebarTab") != "subAreas") {
+                setSidebarContentSubAreas();
+                setTimeout(() => {
+                    document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
+                }, 50);
+            }
+
             break;
         case "pipe":
         case "moonpipe":
@@ -1002,9 +1055,15 @@ function setSelection(selection) {
                 nodes.selectionMenuIcon.src = `/resource/icons/${data.type}.png`;
                 nodes.selectionMenuDescription.textContent = "This is a unlinked loading zone.";
             }
-            
 
             nodes.selectionMenuButtons.append(addZoneLinkButton(data.id));
+
+            if (data.subarea && localStorage.getItem("sidebarTab") != "subAreas") {
+                setSidebarContentSubAreas();
+                setTimeout(() => {
+                    document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
+                }, 50);
+            }
     }
 
     openSelectionMenu();
@@ -1333,13 +1392,16 @@ function zoneLinkFinish(id, container) {
         nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-positive-background)";
         nodes.selectionMenuDescription.innerHTML = `<span class="selection-menu-moon-number">This loading zone links to:</span><br />${targetZoneId.split("-")[0]}: ${targetData.name}`;
 
-        mark.removeFrom(availableMoonsLayer);
-        mark.removeFrom(lockedMoonsLayer);
-        mark.addTo(completedMoonsLayer);
+        mark.removeFrom(availableZonesLayer);
+        mark.removeFrom(lockedZonesLayer);
+        mark.addTo(linkedZonesLayer);
             
         if (localStorage.getItem("kingdom") == targetZoneId.split("-")[0]) {
             let targetMark = markMap.get(targetData.id);
             targetMark.setIcon(icon(`${targetData.type}-linked`));
+            targetMark.removeFrom(availableZonesLayer);
+            targetMark.removeFrom(lockedZonesLayer);
+            targetMark.addTo(linkedZonesLayer);
         }
 
         let button = container.firstElementChild;
@@ -1472,11 +1534,13 @@ function clickOffHamburger(event) {
 }
 // Hamburger Menu Buttons
 function initMenus() {
-    if (Number(localStorage.getItem("showText"))) {
-        nodes.settingsMenuTextToggle.checked = true;
-    }
-    if (Number(localStorage.getItem("darkMode"))) {
-        nodes.settingsMenuThemeToggle.checked = true;
+
+    createSettingsToggle("display:captions", "Show Icons", "Show Captions", toggleImageText);
+    createSettingsToggle("display:theme", "Theme | Light", "Dark", toggleLightDarkMode);
+    createSettingsToggle("display:completed", "Completed Checks | Hide", "Show", toggleCompletedIcons);
+    createSettingsToggle("display:locked", "Locked Checks | Hide", "Show", toggleLockedIcons);
+
+    if (Number(localStorage.getItem("display:theme"))) {
         nodes.root.style.setProperty("--background", "#0F0F13");
     }
     localStorage.removeItem("linking");
@@ -1490,7 +1554,7 @@ function createLinkToast() {
     let el = document.createElement("div");
     el.classList.add("toast");
     el.id = "toast-link-div";
-    el.innerHTML = `<h1 class="toast-title">Copy this link into an OBS browser source.</h1><p id="toast-link"><span id="toast-link-text">http://localhost:3000/?roomId=************************************</span><img id="toast-reveal" src="/resource/reveal.png" alt="Eye" title="Reveal"><img id="toast-copy" src="/resource/link.png" alt="Link" title="Copy"></p>`;
+    el.innerHTML = `<h1 class="toast-title">Copy this link into an OBS browser source.</h1><p id="toast-link"><span id="toast-link-text">http://localhost:3000/overlay?roomId=************************************</span><img id="toast-reveal" src="/resource/reveal.png" alt="Eye" title="Reveal"><img id="toast-copy" src="/resource/link.png" alt="Link" title="Copy"></p>`;
     nodes.toaster.appendChild(el);
     el.style.top = "-200px";
     let reveal = document.getElementById("toast-reveal");
@@ -1534,11 +1598,20 @@ function openHelp() {
 
 // ---- POPUP MENUS ----
 // Settings Menu
+function createSettingsToggle(name, opt1, opt2, callback) {
+    let el = document.createElement("div");
+    el.classList.add("setting-menu-line");
+    el.id = `setting-menu-${name}`;
+    el.innerHTML = `<span>${opt1}</span><label class="toggle-switch"><input type="checkbox" id="setting-menu-${name}-toggle"><span class="slider"></span></label><span>${opt2}</span>`;
+    nodes.settingsMenu.append(el);
+    if (Number(localStorage.getItem(name))) {
+        document.getElementById(`setting-menu-${name}-toggle`).checked = true;
+    }
+    document.getElementById(`setting-menu-${name}-toggle`).onclick = callback;
+}
 function toggleImageText() {
-    let showText = nodes.settingsMenuTextToggle.checked;
-
-    if (showText) {
-        localStorage.setItem("showText", 1);
+    if (document.getElementById(`setting-menu-display:captions-toggle`).checked) {
+        localStorage.setItem("display:captions", 1);
 
         switch (localStorage.getItem("sidebarTab")) {
             case "captures":
@@ -1557,7 +1630,7 @@ function toggleImageText() {
                 break;
         }
     } else {
-        localStorage.setItem("showText", 0);
+        localStorage.setItem("display:captions", 0);
 
         switch (localStorage.getItem("sidebarTab")) {
             case "captures":
@@ -1575,32 +1648,39 @@ function toggleImageText() {
                 });
                 break;
         }
-
-        // moons.forEach((kingdom) => {
-        //     let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
-        //     div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/${normalizeName(kingdom)}.png" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`);
-        //     wrapText(div);
-        // });
-        
-
-    
-
     }
 }
 function toggleLightDarkMode() {
-    let togglePosition = nodes.settingsMenuThemeToggle.checked;
-
-    if (togglePosition) {
-        localStorage.setItem("darkMode", 1);
+    if (document.getElementById(`setting-menu-display:theme-toggle`).checked) {
+        localStorage.setItem("display:theme", 1);
 
         nodes.root.style.setProperty("--background", "#0F0F13");
 
     } else {
-        localStorage.setItem("darkMode", 0);
+        localStorage.setItem("display:theme", 0);
 
         nodes.root.style.setProperty("--background", "#F2F2F2");
     }
 }
+function toggleCompletedIcons() {
+    if (document.getElementById(`setting-menu-display:completed-toggle`).checked) {
+        localStorage.setItem("display:completed", 1);
+    } else {
+        localStorage.setItem("display:completed", 0);
+    }
+
+    updateMapWithDisplaySettings();
+}
+function toggleLockedIcons() {
+    if (document.getElementById(`setting-menu-display:locked-toggle`).checked) {
+        localStorage.setItem("display:locked", 1);
+    } else {
+        localStorage.setItem("display:locked", 0);
+    }
+
+    updateMapWithDisplaySettings();
+}
+
 // Reset Menu
 function confirmReset() {
     nodes.resetMenu.style.opacity = 1;

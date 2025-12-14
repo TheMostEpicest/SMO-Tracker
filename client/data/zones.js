@@ -3,6 +3,62 @@ export const zones = new Map([
         {
             "id": 1001,
             "kingdomId": 1,
+            "name": "Top Hat Tower Exterior (Bottom)",
+            "subarea": "",
+            "type": "door",
+            "x": 0.6744384765625,
+            "y": 0.2962865615614008,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1002,
+            "kingdomId": 2,
+            "name": "Top Hat Tower Interior (Bottom)",
+            "subarea": "Top Hat Tower",
+            "type": "door",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1003"
+                ]
+            }
+        },
+        {
+            "id": 1003,
+            "kingdomId": 3,
+            "name": "Top Hat Tower Interior (Top)",
+            "subarea": "Top Hat Tower",
+            "type": "door",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1002"
+                ]
+            }
+        },
+        {
+            "id": 1004,
+            "kingdomId": 4,
+            "name": "Top Hat Tower Exterior (Top)",
+            "subarea": "",
+            "type": "door",
+            "x": 0.6893310546875,
+            "y": 0.29667839370516547,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1005,
+            "kingdomId": 5,
             "name": "Poison Tide Exterior",
             "subarea": "",
             "type": "door",
@@ -14,64 +70,38 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1002,
-            "kingdomId": 2,
+            "id": 1006,
+            "kingdomId": 6,
             "name": "Poison Tide Interior (Start)",
             "subarea": "Poison Tide",
             "type": "door",
             "x": 0,
-            "y": 0,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1003"
+                    "l1007"
                 ]
             }
         },
         {
-            "id": 1003,
-            "kingdomId": 3,
+            "id": 1007,
+            "kingdomId": 7,
             "name": "Poison Tide Interior (End)",
             "subarea": "Poison Tide",
             "type": "door",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1002"
+                    "l1006"
                 ]
             }
         },
         {
-            "id": 1004,
-            "kingdomId": 4,
-            "name": "Frog Pond Exterior",
-            "subarea": "",
-            "type": "door",
-            "x": 0.3790283203125,
-            "y": 0.27809201965569874,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 1005,
-            "kingdomId": 5,
-            "name": "Frog Pond Interior",
-            "subarea": "Frog Pond",
-            "type": "door",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "FALSE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 1006,
-            "kingdomId": 6,
+            "id": 1008,
+            "kingdomId": 8,
             "name": "Push-Block Exterior",
             "subarea": "",
             "type": "door",
@@ -83,38 +113,65 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1007,
-            "kingdomId": 7,
+            "id": 1009,
+            "kingdomId": 9,
             "name": "Push-Block Room Interior (Start)",
             "subarea": "Push-Block Room",
             "type": "door",
             "x": 0,
-            "y": 0,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1008"
+                    "l1010"
                 ]
             }
         },
         {
-            "id": 1008,
-            "kingdomId": 8,
+            "id": 1010,
+            "kingdomId": 10,
             "name": "Push-Block Room Interior (End)",
             "subarea": "Push-Block Room",
             "type": "door",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1007"
+                    "l1009"
                 ]
             }
         },
         {
-            "id": 1009,
-            "kingdomId": 9,
+            "id": 1011,
+            "kingdomId": 11,
+            "name": "Frog Pond Exterior",
+            "subarea": "",
+            "type": "door",
+            "x": 0.3790283203125,
+            "y": 0.27809201965569874,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1012,
+            "kingdomId": 12,
+            "name": "Frog Pond Interior",
+            "subarea": "Frog Pond",
+            "type": "door",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "FALSE",
+                "reqs": []
+            }
+        },
+        
+        {
+            "id": 1013,
+            "kingdomId": 13,
             "name": "Rolling Room Exterior",
             "subarea": "",
             "type": "moonpipe",
@@ -128,37 +185,37 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1010,
-            "kingdomId": 10,
+            "id": 1014,
+            "kingdomId": 14,
             "name": "Rolling Room Interior (Start)",
             "subarea": "Rolling Room",
             "type": "moonpipe",
             "x": 0,
-            "y": 0,
+            "y": 1,
             "logic": {
                 "op": "FALSE",
                 "reqs": []
             }
         },
         {
-            "id": 1011,
-            "kingdomId": 11,
+            "id": 1015,
+            "kingdomId": 15,
             "name": "Rolling Room Interior (End)",
             "subarea": "Rolling Room",
             "type": "moonpipe",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1010"
+                    "l1014"
                 ]
             }
         }
     ]],
     ["Cascade", [
         {
-            "id": 1012,
+            "id": 1016,
             "kingdomId": 1,
             "name": "Dinosaur Nest Exterior",
             "subarea": "",
@@ -171,65 +228,21 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1013,
+            "id": 1017,
             "kingdomId": 2,
             "name": "Dinosaur Nest Interior",
             "subarea": "Dinosaur Nest",
             "type": "door",
             "x": 0,
-            "y": 0,
+            "y": 1,
             "logic": {
                 "op": "FALSE",
                 "reqs": []
             }
         },
         {
-            "id": 1014,
+            "id": 1018,
             "kingdomId": 3,
-            "name": "2D Chasm Exterior",
-            "subarea": "",
-            "type": "door",
-            "x": 0.6021456183541694,
-            "y": 0.33636430814403323,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 1015,
-            "kingdomId": 4,
-            "name": "2D Chasm Interior (Start)",
-            "subarea": "2D Chasm",
-            "type": "door",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l1016"
-                ]
-            }
-        },
-        {
-            "id": 1016,
-            "kingdomId": 5,
-            "name": "2D Chasm Interior (End)",
-            "subarea": "2D Chasm",
-            "type": "door",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l1015"
-                ]
-            }
-        },
-        
-        {
-            "id": 1017,
-            "kingdomId": 6,
             "name": "Chain Chomp Room Exterior",
             "subarea": "",
             "type": "pipe",
@@ -241,13 +254,28 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1018,
-            "kingdomId": 7,
+            "id": 1019,
+            "kingdomId": 4,
             "name": "Chain Chomp Room Interior (Start)",
             "subarea": "Chain Chomp Room",
             "type": "pipe",
             "x": 0,
-            "y": 0,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1020"
+                ]
+            }
+        },
+        {
+            "id": 1020,
+            "kingdomId": 5,
+            "name": "Chain Chomp Room Interior (End)",
+            "subarea": "Chain Chomp Room",
+            "type": "pipe",
+            "x": 1,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
@@ -256,43 +284,41 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1019,
-            "kingdomId": 8,
-            "name": "Chain Chomp Room Interior (End)",
-            "subarea": "Chain Chomp Room",
-            "type": "pipe",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l1018"
-                ]
-            }
-        },
-        {
-            "id": 1020,
-            "kingdomId": 9,
-            "name": "Gusty Bridges Exterior",
-            "subarea": "",
-            "type": "moonpipe",
-            "x": 0.47025363084769417,
-            "y": 0.550775976847842,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "wCascade"
-                ]
-            }
-        },
-        {
             "id": 1021,
-            "kingdomId": 10,
-            "name": "Gusty Bridges Interior (Start)",
-            "subarea": "Gusty Bridges",
-            "type": "moonpipe",
+            "kingdomId": 6,
+            "name": "2D Chasm Exterior",
+            "subarea": "",
+            "type": "door",
+            "x": 0.6021456183541694,
+            "y": 0.33636430814403323,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1022,
+            "kingdomId": 7,
+            "name": "2D Chasm Interior (Start)",
+            "subarea": "2D Chasm",
+            "type": "door",
             "x": 0,
-            "y": 0,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1023"
+                ]
+            }
+        },
+        {
+            "id": 1023,
+            "kingdomId": 8,
+            "name": "2D Chasm Interior (End)",
+            "subarea": "2D Chasm",
+            "type": "door",
+            "x": 1,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
@@ -301,23 +327,8 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1022,
-            "kingdomId": 11,
-            "name": "Gusty Bridges Interior (End)",
-            "subarea": "Gusty Bridges",
-            "type": "moonpipe",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l1021"
-                ]
-            }
-        },
-        {
-            "id": 1023,
-            "kingdomId": 12,
+            "id": 1024,
+            "kingdomId": 9,
             "name": "Mysterious Clouds Exterior",
             "subarea": "",
             "type": "moonpipe",
@@ -331,13 +342,28 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1024,
-            "kingdomId": 13,
+            "id": 1025,
+            "kingdomId": 10,
             "name": "Mysterious Clouds Interior (Start)",
             "subarea": "Mysterious Clouds",
             "type": "moonpipe",
             "x": 0,
-            "y": 0,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1026"
+                ]
+            }
+        },
+        {
+            "id": 1026,
+            "kingdomId": 11,
+            "name": "Mysterious Clouds Interior (End)",
+            "subarea": "Mysterious Clouds",
+            "type": "moonpipe",
+            "x": 1,
+            "y": 1,
             "logic": {
                 "op": "AND",
                 "reqs": [
@@ -346,21 +372,50 @@ export const zones = new Map([
             }
         },
         {
-            "id": 1025,
-            "kingdomId": 14,
-            "name": "Mysterious Clouds Interior (End)",
-            "subarea": "Mysterious Clouds",
+            "id": 1027,
+            "kingdomId": 12,
+            "name": "Gusty Bridges Exterior",
+            "subarea": "",
             "type": "moonpipe",
-            "x": 0,
-            "y": 0,
+            "x": 0.47025363084769417,
+            "y": 0.550775976847842,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1024"
+                    "wCascade"
                 ]
             }
         },
-
+        {
+            "id": 1028,
+            "kingdomId": 13,
+            "name": "Gusty Bridges Interior (Start)",
+            "subarea": "Gusty Bridges",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1029"
+                ]
+            }
+        },
+        {
+            "id": 1029,
+            "kingdomId": 14,
+            "name": "Gusty Bridges Interior (End)",
+            "subarea": "Gusty Bridges",
+            "type": "moonpipe",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "AND",
+                "reqs": [
+                    "l1028"
+                ]
+            }
+        }
     ]],
     ["Sand", []],
     ["Lake", []],

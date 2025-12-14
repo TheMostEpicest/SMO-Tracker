@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Hi :33 -->
+<head>
+    <title>SMO Randomzier Overlay</title>
+    <link href="/css/shared.css" type="text/css" rel="stylesheet">
+    <link href="/resource/favicon.png?v=1" type="image/png" rel="icon">
+    <link href="/css/overlay.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+    <script src="/js/auth.js" type="module"></script>
+</head>
+<body>
+    <div class="container" id="moon-tracker"></div>
+    <div class="container" id="ability-tracker"></div>
+    <div class="container" id="capture-tracker">
+        <div id="capture-overflow-hamburger">
+            <img src="/resource/hamburger.png" alt="Show Additional Captures" title="Show Additional Captures" draggable="false">
+        </div>
+    </div>
+    <div class="container" id="capture-overflow">
+        <div id="button-menu">
+            <div id="help-button">
+                <img src="/resource/help.png" alt="Help" title="Help">
+            </div>
+            <div id="settings-button">
+                <img src="/resource/settings.png" alt="Settings" title="Settings">
+            </div>
+            <div id="github-button">
+                <a href="https://github.com/TheMostEpicest/SMO-Tracker"><img src="/resource/github.png" alt="Github" title="Github"></a>
+            </div>
+            <div id="reset-button">
+                <img src="/resource/reset.png" alt="Reset" title="Reset">
+            </div>
+        </div>
+    </div>
+    <div class="menu" id="settings-menu">
+        <h1>Settings</h1>
+        <div class="setting-menu-line" id="setting-menu-showText">
+                <span>Show Icons</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="setting-menu-showText-toggle">
+                    <span class="slider"></span>
+                </label>
+                <span>Show Captions</span>
+            </div>
+        <div class="menu-button-container">
+            <p class="menu-button" id="settings-close">Close</p>
+        </div>
+    </div>
+    <div class="menu" id="reset-menu">
+        <h1>Reset</h1>
+        <p>Are you sure you want to reset your progress?</p>
+        <div class="menu-button-container">
+            <p class="menu-button" id="reset-yes">Yes</p>
+            <p class="menu-button" id="reset-no">No</p>
+        </div>
+    </div>
+    <div class="menu" id="help-menu">
+        <h1>Help</h1>
+        <p>Good luck.</p>
+        <div class="menu-button-container">
+            <p class="menu-button" id="help-close">Close</p>
+        </div>
+    </div>
+    <script src="/js/overlay.js" type="module"></script>
+</body>

@@ -75,22 +75,23 @@ export const moons = new Map([
             "id": 6,
             "kingdomId": 6,
             "name": "Skimming the Poison Tide",
-            "subarea": "Poison Waves",
+            "subarea": "Poison Tide",
             "type": "moon",
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "AND",
+                "op": "OR",
                 "reqs": [
+                    "l1007",
                     {
-                        "op": "OR",
+                        "op": "AND",
                         "reqs": [
-                            "l1002",
-                            "l1003"
+                            "l1006",
+                            "cParagoomba",
+                            "gCap Throw"
+                            
                         ]
-                    },
-                    "cParagoomba",
-                    "gCap Throw"
+                    }
                 ]
             }
         },
@@ -98,9 +99,9 @@ export const moons = new Map([
             "id": 7,
             "kingdomId": 7,
             "name": "Slipping Through the Poison Tide",
-            "subarea": "Poison Waves",
+            "subarea": "Poison Tide",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
@@ -108,8 +109,8 @@ export const moons = new Map([
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1002",
-                            "l1003"
+                            "l1006",
+                            "l1007"
                         ]
                     },
                     "cParagoomba",
@@ -128,11 +129,11 @@ export const moons = new Map([
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1008",
+                    "l1010",
                     {
                         "op": "AND",
                         "reqs": [
-                            "l1007",
+                            "l1009",
                             "cSpark Pylon",
                             "gCap Throw"
                         ]
@@ -146,7 +147,7 @@ export const moons = new Map([
             "name": "Hidden Among the Push-Blocks",
             "subarea": "Push-Block Room",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
@@ -154,8 +155,8 @@ export const moons = new Map([
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1007",
-                            "l1008"
+                            "l1009",
+                            "l1010"
                         ]
                     },
                     "cSpark Pylon",
@@ -167,14 +168,14 @@ export const moons = new Map([
             "id": 10,
             "kingdomId": 10,
             "name": "Searching the Frog Pond",
-            "subarea": "Frog Room",
+            "subarea": "Frog Pond",
             "type": "moon",
             "x": 0,
             "y": 0,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1005",
+                    "l1012",
                     "cFrog",
                     "gCap Throw"
                 ]
@@ -184,14 +185,14 @@ export const moons = new Map([
             "id": 11,
             "kingdomId": 11,
             "name": "Secrets of the Frog Pond",
-            "subarea": "Frog Room",
+            "subarea": "Frog Pond",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1005",
+                    "l1012",
                     "cFrog",
                     "gCap Throw"
                 ]
@@ -473,15 +474,15 @@ export const moons = new Map([
             "id": 30,
             "kingdomId": 30,
             "name": "Roll On and On",
-            "subarea": "Rolling",
+            "subarea": "Rolling Room",
             "type": "moon",
             "x": 0,
             "y": 0,
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1010",
-                    "l1011"
+                    "l1014",
+                    "l1015"
                 ]
             }
         },
@@ -489,14 +490,14 @@ export const moons = new Map([
             "id": 31,
             "kingdomId": 31,
             "name": "Precision Rolling",
-            "subarea": "Rolling",
+            "subarea": "Rolling Room",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1010"
+                    "l1014"
                 ]
             }
         }
@@ -659,7 +660,7 @@ export const moons = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1013",
+                    "l1017",
                     "gCap Throw"
                 ]
             }
@@ -670,12 +671,12 @@ export const moons = new Map([
             "name": "Dinosaur Nest: Running Wild!",
             "subarea": "Dinosaur Nest",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1013",
+                    "l1017",
                     "gCap Throw",
                     "cDinosaur"
                 ]
@@ -695,8 +696,8 @@ export const moons = new Map([
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1018",
-                            "l1019"
+                            "l1019",
+                            "l1020"
                         ]
                     },
                     "gCap Throw",
@@ -710,7 +711,7 @@ export const moons = new Map([
             "name": "Very Nice Shot with the Chain Chomp!",
             "subarea": "Chain Chomp Room",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
@@ -718,8 +719,8 @@ export const moons = new Map([
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1018",
-                            "l1019"
+                            "l1019",
+                            "l1020"
                         ]
                     },
                     "gCap Throw",
@@ -738,11 +739,11 @@ export const moons = new Map([
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1016",
+                    "l1023",
                     {
                         "op": "AND",
                         "reqs": [
-                            "l1015",
+                            "l1022",
                             "g2D Jump"
                         ]
                     }
@@ -756,7 +757,7 @@ export const moons = new Map([
             "name": "Hidden Chasm Passage",
             "subarea": "2D Chasm",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "AND",
@@ -764,8 +765,8 @@ export const moons = new Map([
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1015",
-                            "l1016",
+                            "l1022",
+                            "l1023",
                         ]
                     },
                     "g2D Jump"
@@ -1054,15 +1055,15 @@ export const moons = new Map([
             "id": 68,
             "kingdomId": 37,
             "name": "Across the Mysterious Clouds",
-            "subarea": "Swinging Platform Room",
+            "subarea": "Mysterious Clouds",
             "type": "moon",
             "x": 0,
             "y": 0,
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1024",
-                    "l1025"
+                    "l1025",
+                    "l1026"
                 ]
             }
         },
@@ -1070,15 +1071,15 @@ export const moons = new Map([
             "id": 69,
             "kingdomId": 38,
             "name": "Atop a Wall Among the Clouds",
-            "subarea": "Swinging Platform Room",
+            "subarea": "Mysterious Clouds",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1024",
-                    "l1025"
+                    "l1025",
+                    "l1026"
                 ]
             }
         },
@@ -1086,15 +1087,15 @@ export const moons = new Map([
             "id": 70,
             "kingdomId": 39,
             "name": "Across the Gusty Bridges",
-            "subarea": "Windy Subarea",
+            "subarea": "Gusty Bridges",
             "type": "moon",
             "x": 0,
             "y": 0,
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1021",
-                    "l1022"
+                    "l1028",
+                    "l1029"
                 ]
             }
         },
@@ -1102,47 +1103,20 @@ export const moons = new Map([
             "id": 71,
             "kingdomId": 40,
             "name": "Flying Far Away from Gusty Bridges",
-            "subarea": "Windy Subarea",
+            "subarea": "Gusty Bridges",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1021",
-                    "l1022"
+                    "l1028",
+                    "l1029"
                 ]
             }
         }
     ]],
-    ["Sand", [
-        {
-            "id": 44,
-            "kingdomId": 1,
-            "name": "First moon",
-            "subarea": "",
-            "type": "moon",
-            "x": 0.5,
-            "y": 0.7,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 45,
-            "kingdomId": 2,
-            "name": "Second moon",
-            "subarea": "",
-            "type": "multimoon",
-            "x": 0.3,
-            "y": 0.4,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        }
-    ]],
+    ["Sand", []],
     ["Lake", []],
     ["Wooded", []],
     ["Cloud", []],
@@ -1154,19 +1128,7 @@ export const moons = new Map([
     ["Ruined", []],
     ["Bowser", []],
     ["Moon", []],
-    ["Mushroom", [{
-            "id": 101,
-            "kingdomId": 1,
-            "name": "Mush-moon",
-			"subarea": "",
-            "type": "moon",
-            "x": 0.5,
-            "y": 0.7,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },]],
+    ["Mushroom", []],
     ["Dark", []],
     ["Darker", []],
 ]);
