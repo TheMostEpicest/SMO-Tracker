@@ -1017,18 +1017,18 @@ function toggleLinkReveal() {
     let link = document.getElementById("toast-link-text");
     let eye = document.getElementById("toast-reveal");
 
-    if (link.textContent == `http://localhost:3000/overlay?roomId=************************************`) {
-        link.textContent = `http://localhost:3000/overlay?roomId=${localStorage.getItem("roomId")}`;
+    if (eye.src == `/resource/reveal.png`) {
+        link.textContent = `${window.location.origin}/overlay?roomId=${localStorage.getItem("roomId")}`;
         eye.src = "/resource/hide.png";
         eye.title = "Hide";
     } else {
-        link.textContent = `http://localhost:3000/overlay?roomId=************************************`;
+        link.textContent = `${window.location.origin}/overlay?roomId=************************************`;
         eye.src = "/resource/reveal.png";
         eye.title = "Reveal";
     }
 }
 function copyLink() {
-    navigator.clipboard.writeText(`http://localhost:3000/overlay?roomId=${localStorage.getItem("roomId")}`);
+    navigator.clipboard.writeText(`${window.location.origin}/overlay?roomId=${localStorage.getItem("roomId")}`);
     hideToast("toast-link-div");
 }
 
@@ -1726,7 +1726,7 @@ function createLinkToast() {
     let el = document.createElement("div");
     el.classList.add("toast");
     el.id = "toast-link-div";
-    el.innerHTML = `<h1 class="toast-title">Copy this link into an OBS browser source.</h1><p id="toast-link"><span id="toast-link-text">http://localhost:3000/overlay?roomId=************************************</span><img id="toast-reveal" src="/resource/reveal.png" alt="Eye" title="Reveal"><img id="toast-copy" src="/resource/link.png" alt="Link" title="Copy"></p>`;
+    el.innerHTML = `<h1 class="toast-title">Copy this link into an OBS browser source.</h1><p id="toast-link"><span id="toast-link-text">${window.location.origin}/overlay?roomId=************************************</span><img id="toast-reveal" src="/resource/reveal.png" alt="Eye" title="Reveal"><img id="toast-copy" src="/resource/link.png" alt="Link" title="Copy"></p>`;
     nodes.toaster.appendChild(el);
     el.style.top = "-200px";
     let reveal = document.getElementById("toast-reveal");
