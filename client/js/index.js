@@ -1103,7 +1103,10 @@ function setSelection(selection) {
             break;
         case "pipe":
         case "moonpipe":
+        case "capdoor":
         case "door":
+        case "rocket":
+        case "otherzone":
             var data = zones.get(localStorage.getItem("kingdom"))[Number(kingdomId) - 1];
             var linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
 

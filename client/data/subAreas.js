@@ -109,7 +109,28 @@ export const subAreas = new Map([
             "name": "Freezing Waterway",
         }
     ]],
-    ["Lake", []],
+    ["Lake", [
+        {
+            "id": 27,
+            "name": "Shop",
+        },
+        {
+            "id": 28,
+            "name": "Puzzle Room",
+        },
+        {
+            "id": 29,
+            "name": "Zipper Room",
+        },
+        {
+            "id": 30,
+            "name": "Jump, Grab, Cling, and Climb",
+        },
+        {
+            "id": 31,
+            "name": "Waves of Poison",
+        },
+    ]],
     ["Wooded", []],
     ["Cloud", []],
     ["Lost", []],
