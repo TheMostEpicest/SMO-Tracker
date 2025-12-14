@@ -8,8 +8,8 @@ const secondaryCaptures = captures.slice(24);
 // SETUP
 const nodes = initNodes();
 initListeners(nodes);
-initMenus();
 initOverlay();
+initMenus();
 initAbly().then(ablyPubSubSetup);
 
 // ---- DOM ELEMENTS ----
@@ -194,7 +194,7 @@ function ablySubUpdateAbilities(ably, clientId) {
 }
 function ablySubPostReset(ably, clientId) {
     ably.subscribe("post:reset", (msg) => {
-        resetProgress(1);
+        resetProgress(0);
     });
 }
 function ablySubPostAll(ably, clientId) {
@@ -628,7 +628,7 @@ function confirmReset() {
         setTimeout(() => {nodes.resetMenu.style.zIndex = -1}, 200);
         document.getElementById("reset-yes").onclick = null;
         document.getElementById("reset-no").onclick = null;
-        resetProgress();
+        resetProgress(1);
     }
     document.getElementById("reset-no").onclick = (e) => {
         nodes.resetMenu.style.opacity = 0;
@@ -638,32 +638,23 @@ function confirmReset() {
     }
 }
 function resetProgress(forward) {
-    let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
-    let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
-    let captures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
-    let abilities = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
-
-    moons.forEach((amount, kingdom) => {
+    moons.forEach((kingdom) => {
         document.getElementById(`moon-tracker-${normalizeName(kingdom)}-amount`).textContent = 0;
-        updateMoonProgress(document.getElementById(`moon-tracker-${normalizeName(kingdom)}`));
-    });
-
-    moonTotals.forEach((total, kingdom) => {
         document.getElementById(`moon-tracker-${normalizeName(kingdom)}-total`).textContent = "??";
         updateMoonProgress(document.getElementById(`moon-tracker-${normalizeName(kingdom)}`));
     });
 
     captures.forEach((capture) => {
-        document.getElementById(`capture-tracker-${capture}`).classList.add("locked");
+        document.getElementById(`capture-tracker-${normalizeName(capture)}`).classList.add("locked");
     });
 
     abilities.forEach((ability) => {
-        document.getElementById(`ability-tracker-${ability}`).classList.add("locked");
+        document.getElementById(`ability-tracker-${normalizeName(ability)}`).classList.add("locked");
     });
 
-    checkMoonReqs();
-
     clearCache();
+
+    checkMoonReqs();
 
     if (forward) ably.publish("post:reset", {});
 }

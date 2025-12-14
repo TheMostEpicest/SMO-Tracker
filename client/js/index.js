@@ -156,7 +156,7 @@ function ablySubUpdateAbilities(ably, cliendId) {
 }
 function ablySubPostReset(ably, clientId) {
     ably.subscribe("post:reset", (msg) => {
-        resetProgress(1);
+        resetProgress(0);
     });
 }
 function ablySubGetAll(ably, clientId) {
@@ -1415,7 +1415,7 @@ function addZoneLinkButton(id) {
         container.style.gap = "5px";
         button.innerText = "Warp";
         button.onclick =  zoneWarp(id);
-        button.style.cursor = "auto";
+        button.style.cursor = "pointer";
         eraser.onclick = zoneUnlink(id, container);
         eraser.style.width = "38px";
         eraser.style.borderWidth = "1px";
@@ -1552,7 +1552,7 @@ function zoneLinkFinish(id, container) {
         button.onclick = zoneWarp(id);
 
         button.textContent = "Warp";
-        button.style.cursor = "auto"
+        button.style.cursor = "pointer";
         eraser.style.width = "38px";
         container.style.gap = "5px";
         eraser.style.borderWidth = "1px";
@@ -1867,7 +1867,7 @@ function confirmReset() {
         setTimeout(() => {nodes.resetMenu.style.zIndex = -1}, 200);
         document.getElementById("reset-yes").onclick = null;
         document.getElementById("reset-no").onclick = null;
-        resetProgress();
+        resetProgress(1);
     }
     document.getElementById("reset-no").onclick = (e) => {
         nodes.resetMenu.style.opacity = 0;
