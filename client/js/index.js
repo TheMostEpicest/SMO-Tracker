@@ -237,7 +237,7 @@ function updateSidebarTab(newSidebarTab, keepContent) {
 
     if (!keepContent) nodes.sidebarContent.innerHTML = "";
 }
-function setSidebarContentCaptures() {
+function setSidebarContentCaptures(force) {
     updateSidebarTab("captures");
 
     let savedCaptures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
@@ -254,7 +254,7 @@ function setSidebarContentCaptures() {
         setTimeout(wrapText, 1, el);
     })
 }
-function setSidebarContentAbilities() {
+function setSidebarContentAbilities(force) {
     updateSidebarTab("abilities");
 
     let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
@@ -273,7 +273,7 @@ function setSidebarContentAbilities() {
 }
 // TODO: Show/Hide completed/locked
 // TODO: Scroll to subarea on warp (and not on refresh)
-function setSidebarContentSubAreas() {
+function setSidebarContentSubAreas(force) {
 
     let subAreaList = subAreas.get(localStorage.getItem("kingdom"));
     let moonList = moons.get(localStorage.getItem("kingdom"));
@@ -281,7 +281,7 @@ function setSidebarContentSubAreas() {
     let collectedSet = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
     let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
 
-    if (localStorage.getItem("sidebarTab") == "subAreas") {
+    if (localStorage.getItem("sidebarTab") == "subAreas" && !force) {
         updateSidebarTab("subAreas", 1);
     } else {
         updateSidebarTab("subAreas");
@@ -395,7 +395,7 @@ function setSidebarContentSubAreas() {
         }
     });
 }
-function setSidebarContentLoadingZones() {
+function setSidebarContentLoadingZones(force) {
     updateSidebarTab("loadingZones");
 
     let availableCategory = sidebarCreateCategory("Available Checks", 0);
@@ -429,7 +429,7 @@ function setSidebarContentLoadingZones() {
         }
     });
 }
-function setSidebarContentMoons() {
+function setSidebarContentMoons(force) {
     updateSidebarTab("moons");
     
     let availableCategory = sidebarCreateCategory("Available Checks", 0);
@@ -458,7 +458,7 @@ function setSidebarContentMoons() {
         }
     });
 }
-function setSidebarContentMiscellaneous() {
+function setSidebarContentMiscellaneous(force) {
     updateSidebarTab("miscellaneous");
 
     nodes.sidebarContent.textContent = "Coming Soon."
@@ -499,25 +499,25 @@ function sidebarCreateCategory(name, grid) {
     nodes.sidebarContent.append(el);
     return el;
 }
-function refreshSidebar() {
+function refreshSidebar(force) {
     switch (localStorage.getItem("sidebarTab")) {
         case "captures":
-            setSidebarContentCaptures();
+            setSidebarContentCaptures(force);
             break;
             case "abilities":
-            setSidebarContentAbilities();
+            setSidebarContentAbilities(force);
             break;
             case "subAreas":
-            setSidebarContentSubAreas();
+            setSidebarContentSubAreas(force);
             break;
             case "loadingZones":
-            setSidebarContentLoadingZones();
+            setSidebarContentLoadingZones(force);
             break;
             case "moons":
-            setSidebarContentMoons();
+            setSidebarContentMoons(force);
             break;
             case "miscellaneous":
-            setSidebarContentMiscellaneous();
+            setSidebarContentMiscellaneous(force);
             break;
     }
 }
@@ -810,7 +810,7 @@ function updateCurrentKingdom(currentKingdom) {
     });
 
     updateMapWithDisplaySettings();
-    refreshSidebar();
+    refreshSidebar(1);
 
     if (!Number(localStorage.getItem("selectPersist"))) setSelection("");
     updateMoonCounter();
@@ -1613,27 +1613,27 @@ function zoneUnlink(id, container) {
             mark.setZIndexOffset(100);
         }
         
+        if (localStorage.getItem("kingdom") == targetZoneId.split("-")[0]) {
+            let targetMark = markMap.get(targetData.id);
+            targetMark.setIcon(icon(`${targetData.type}`));
 
-        let targetMark = markMap.get(targetData.id);
-        targetMark.setIcon(icon(`${targetData.type}`));
-
-        if (!targetData.subarea) {
-            targetMark.removeFrom(linkedZonesLayer);
-            if (evaluateLogic(targetData.logic)) {
-                targetMark.addTo(availableZonesLayer);
+            if (!targetData.subarea) {
+                targetMark.removeFrom(linkedZonesLayer);
+                if (evaluateLogic(targetData.logic)) {
+                    targetMark.addTo(availableZonesLayer);
+                } else {
+                    targetMark.addTo(lockedZonesLayer);
+                }
             } else {
-                targetMark.addTo(lockedZonesLayer);
+                targetMark.off("click");
+                targetMark.on("click", (e) => {
+                    setSelection(targetMark.zoneId);
+                });
+                targetMark.setOpacity(1);
+                targetMark._icon.style.cursor = "pointer";
+                targetMark.setZIndexOffset(100);
             }
-        } else {
-            targetMark.off("click");
-            targetMark.on("click", (e) => {
-                setSelection(targetMark.zoneId);
-            });
-            targetMark.setOpacity(1);
-            targetMark._icon.style.cursor = "pointer";
-            targetMark.setZIndexOffset(100);
         }
-        
 
         let button = container.firstElementChild;
         let eraser = container.lastElementChild;
@@ -1673,9 +1673,7 @@ function zoneWarp(id) {
 
         if (targetData.subarea) {
             if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
-            setTimeout(() => {
-                document.getElementById(`subarea-tracker-${targetData.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
-            }, 50);
+            document.getElementById(`subarea-tracker-${targetData.subarea}`).scrollIntoView({ behavior: "instant", block: "center"});
         }
 
         // setTimeout(() => {
