@@ -3,9 +3,9 @@ import path from "path";
 
 const files = [
     path.resolve(__dirname, "..", "..", "client", "index.html"),
-    path.resolve(__dirname, "..", "..", "client", "map", "index.html"),
+    path.resolve(__dirname, "..", "..", "client", "overlay", "index.html"),
     path.resolve(__dirname, "..", "..", "client", "js", "index.js"),
-    path.resolve(__dirname, "..", "..", "client", "js", "map.js"),
+    path.resolve(__dirname, "..", "..", "client", "js", "overlay.js"),
 ];
 
 files.map((file) => {

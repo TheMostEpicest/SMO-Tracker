@@ -317,6 +317,9 @@ function setSidebarContentSubAreas() {
         // console.log(subMapsMap);
         mark.remove();
         mark.addTo(subMapsMap.get(moon.subarea));
+
+        
+
     });
 
     zoneList.filter((zone) => zone.subarea).forEach((zone) => {
@@ -1023,8 +1026,8 @@ function setSelection(selection) {
 
             nodes.selectionMenuButtons.append(addMoonCollectionButton(data.id));
 
-            if (data.subarea && localStorage.getItem("sidebarTab") != "subAreas") {
-                setSidebarContentSubAreas();
+            if (data.subarea) {
+                if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
                 setTimeout(() => {
                     document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
                 }, 50);
@@ -1058,8 +1061,8 @@ function setSelection(selection) {
 
             nodes.selectionMenuButtons.append(addZoneLinkButton(data.id));
 
-            if (data.subarea && localStorage.getItem("sidebarTab") != "subAreas") {
-                setSidebarContentSubAreas();
+            if (data.subarea) {
+                if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
                 setTimeout(() => {
                     document.getElementById(`subarea-tracker-${data.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
                 }, 50);
@@ -1508,6 +1511,13 @@ function zoneWarp(id) {
         }
 
         setSelection(`${targetData.type}-${targetData.kingdomId}`);
+
+        if (targetData.subarea) {
+            if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
+            setTimeout(() => {
+                document.getElementById(`subarea-tracker-${targetData.subarea}`).scrollIntoView({ behavior: "smooth", block: "center"});
+            }, 50);
+        }
 
         // setTimeout(() => {
         //     leafletMap.setView(fractionToLatLng([targetData.x, targetData.y]), 3);
