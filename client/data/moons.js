@@ -278,8 +278,8 @@ export const moons = new Map([
             "name": "Found with Cap Kingdom Art",
             "subarea": "",
             "type": "moon",
-            "x": 0.5,
-            "y": 0.7,
+            "x": 0,
+            "y": 0,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -1670,7 +1670,7 @@ export const moons = new Map([
             "name": "Employees Only",
             "subarea": "Shop",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1735,7 +1735,7 @@ export const moons = new Map([
             "name": "Goomba Tower Assembly",
             "subarea": "Underground Temple",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1748,7 +1748,7 @@ export const moons = new Map([
             "name": "Under the Mummy's Curse",
             "subarea": "Knucklotec Arena",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1826,7 +1826,7 @@ export const moons = new Map([
             "name": "Skull Sign in the Transparent Maze",
             "subarea": "Invisible Maze",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1852,7 +1852,7 @@ export const moons = new Map([
             "name": "The Bullet Bill Maze: Side Path",
             "subarea": "Bullet Bill Maze",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1878,7 +1878,7 @@ export const moons = new Map([
             "name": "Jaxi Stunt Driving",
             "subarea": "Jaxi Ruins",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1904,7 +1904,7 @@ export const moons = new Map([
             "name": "Above a Strange Neighborhood",
             "subarea": "Strange Neighborhood",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -1982,7 +1982,7 @@ export const moons = new Map([
             "name": "Binding Band Returned",
             "subarea": "Knucklotec Arena",
             "type": "moon",
-            "x": 0,
+            "x": 0.5,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -2216,7 +2216,7 @@ export const moons = new Map([
             "name": "Jump Onto the Transparent Lift",
             "subarea": "Transparent Platforms",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -2242,7 +2242,7 @@ export const moons = new Map([
             "name": "Sinking Colossal Ruins: Hurry!",
             "subarea": "Colossal Ruins",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -2268,7 +2268,7 @@ export const moons = new Map([
             "name": "Freezing Waterway: Hidden Room",
             "subarea": "Freezing Waterway",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -2276,7 +2276,554 @@ export const moons = new Map([
             }
         },
     ]],
-    ["Lake", []],
+    ["Lake", [
+        {
+            "id": 161,
+            "kingdomId": 1,
+            "name": "Broodals Over the Lake",
+            "subarea": "",
+            "type": "multimoon",
+            "x": 0.417020130341941,
+            "y": 0.21325108454702602,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 162,
+            "kingdomId": 2,
+            "name": "Dorrie-Back Rider",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.2933007268917605,
+            "y": 0.29060758456191865,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 163,
+            "kingdomId": 3,
+            "name": "Cheep Cheep Crossing",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5963781446799132,
+            "y": 0.3248616098721947,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 164,
+            "kingdomId": 4,
+            "name": "End of the Hidden Passage",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5985035122660853,
+            "y": 0.1914889907232072,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 165,
+            "kingdomId": 5,
+            "name": "What's in the Box?",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.12300727915768447,
+            "y": 0.42996043940934064,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 166,
+            "kingdomId": 6,
+            "name": "On the Lakeshore",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6924854234062243,
+            "y": 0.7412504699035001,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 167,
+            "kingdomId": 7,
+            "name": "From the Broken Pillar",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.2933951399168477,
+            "y": 0.4000907754940144,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 168,
+            "kingdomId": 8,
+            "name": "Treasure in the Spiky Waterway",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5849679497721,
+            "y": 0.10007051438611943,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 169,
+            "kingdomId": 9,
+            "name": "Lake Gardening: Spiky Passage Seed",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7661728285771241,
+            "y": 0.15382051643005387,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 170,
+            "kingdomId": 10,
+            "name": "Lake Kingdom Timer Challenge 1",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5075377795779161,
+            "y": 0.35463066587338476,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 171,
+            "kingdomId": 11,
+            "name": "Lake Kingdom Timer Challenge 2",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3710891805456623,
+            "y": 0.21370089081240767,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 172,
+            "kingdomId": 12,
+            "name": "	Moon Shards in the Lake",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3234809466154055,
+            "y": 0.30151117217272627,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 173,
+            "kingdomId": 13,
+            "name": "Taking Notes: Dive and Swim",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7744839484011418,
+            "y": 0.5564347617464527,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 174,
+            "kingdomId": 14,
+            "name": "Taking Notes: In the Cliffside",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3600372690975669,
+            "y": 0.5396270661848699,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 175,
+            "kingdomId": 15,
+            "name": "Lake Fishing",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5653477779217994,
+            "y": 0.6224572087112732,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 176,
+            "kingdomId": 16,
+            "name": "I Met a Lake Cheep Cheep!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.25334381627172353,
+            "y": 0.38344760066370326,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 177,
+            "kingdomId": 17,
+            "name": "Our Secret Little Room",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.15302646620439678,
+            "y": 0.293307324966216,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 178,
+            "kingdomId": 18,
+            "name": "Let's Go Swimming, Captain Toad!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.15295410156249997,
+            "y": 0.2695796655540099,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 179,
+            "kingdomId": 19,
+            "name": "Shopping in Lake Lamode",
+            "subarea": "Shop",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 180,
+            "kingdomId": 20,
+            "name": "A Successful Repair Job",
+            "subarea": "Puzzle Room",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 181,
+            "kingdomId": 21,
+            "name": "I Feel Underdressed",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.1198707318601108,
+            "y": 0.2946637613595746,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 182,
+            "kingdomId": 22,
+            "name": "Unzip the Chasm",
+            "subarea": "Zipper Room",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 183,
+            "kingdomId": 23,
+            "name": "Super-Secret Zipper",
+            "subarea": "Zipper Room",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 184,
+            "kingdomId": 24,
+            "name": "Jump, Grab, Cling, and Climb",
+            "subarea": "Jump, Grab, Cling, and Climb",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 185,
+            "kingdomId": 25,
+            "name": "Jump, Grab, and Climb Some More",
+            "subarea": "Jump, Grab, Cling, and Climb",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 186,
+            "kingdomId": 26,
+            "name": "Secret Path to Lake Lamode!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5808928434644947,
+            "y": 0.15166740228055875,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 187,
+            "kingdomId": 27,
+            "name": "Found with Lake Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 188,
+            "kingdomId": 28,
+            "name": "Taxi Flying Through Lake Lamode",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7091079305354869,
+            "y": 0.6944723893753115,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 189,
+            "kingdomId": 29,
+            "name": "That Trendy \"Pirate\" Look",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.17382812499999997,
+            "y": 0.31754070204469825,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 190,
+            "kingdomId": 30,
+            "name": "Space Is \"In\" Right Now",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.17309570312499997,
+            "y": 0.2935537969625735,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 191,
+            "kingdomId": 31,
+            "name": "That \"Old West\" Style",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.17333984374999997,
+            "y": 0.26648347593088106,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 192,
+            "kingdomId": 32,
+            "name": "Lake Kingdom Regular Cup",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7301046840148963,
+            "y": 0.7488211477053696,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 193,
+            "kingdomId": 33,
+            "name": "Peach in the Lake Kingdom",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4307618831238881,
+            "y": 0.2521095268752124,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 194,
+            "kingdomId": 34,
+            "name": "Behind the Floodgate",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7729034830009346,
+            "y": 0.37496508239609844,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 195,
+            "kingdomId": 35,
+            "name": "High-Flying Leap",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.16041393043415617,
+            "y": 0.4894081554656895,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 196,
+            "kingdomId": 36,
+            "name": "Deep, Deep Down",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.15368327601034543,
+            "y": 0.3174702427172671,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 197,
+            "kingdomId": 37,
+            "name": "Rooftop of the Water Plaza",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.13853930355677116,
+            "y": 0.27866902912255964,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 198,
+            "kingdomId": 38,
+            "name": "Bird Traveling Over the Lake",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6955009571271109,
+            "y": 0.42068968626368325,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 199,
+            "kingdomId": 39,
+            "name": "Love by the Lake",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7338051639136032,
+            "y": 0.8678074617984015,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 200,
+            "kingdomId": 40,
+            "name": "Lake Kingdom Master Cup",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.7360254518528274,
+            "y": 0.7456540938361352,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 201,
+            "kingdomId": 41,
+            "name": "Waves of Poison: Hoppin' Over",
+            "subarea": "Waves of Poison",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 202,
+            "kingdomId": 42,
+            "name": "Waves of Poison: Hop to It!",
+            "subarea": "Waves of Poison",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
+    ]],
     ["Wooded", []],
     ["Cloud", []],
     ["Lost", []],

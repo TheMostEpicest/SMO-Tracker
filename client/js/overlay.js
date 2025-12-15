@@ -349,31 +349,33 @@ function enterMoonTotal(event) {
         nodes.moonEditor.contentEditable = "false";
         nodes.moonEditor.removeEventListener("keydown", enterMoonTotal);
         nodes.moonEditor.removeEventListener("blur", blurMoonTotal);
-        validateTotalMoons(nodes.moonEditor.parentElement);
+        validateTotalMoons();
     }
 }
 function blurMoonTotal(event) {
     nodes.moonEditor.contentEditable = "false";
     nodes.moonEditor.removeEventListener("keydown", enterMoonTotal);
     nodes.moonEditor.removeEventListener("blur", blurMoonTotal);
-    validateTotalMoons(nodes.moonEditor.parentElement.parentElement);
+    validateTotalMoons();
 }
-function validateTotalMoons(target) {
-    let span = document.getElementById(target.id + "-total");
-
-    let newValue = span.textContent.trim();
+function validateTotalMoons() {
+    let newValue = nodes.moonEditor.textContent.trim();
 
     let num = Number(newValue);
 
     let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
 
-    let item = target.id.split("-")[2];
+    let item = nodes.moonEditor.id.split("-")[2];
 
     if (isNaN(num) || num >= 100 || num <= 0) {
-        span.textContent = "??";
+        nodes.moonEditor.textContent = "??";
+        nodes.moonEditor.style.backgroundPositionY = "0%";
+        nodes.moonEditor.style.color = "black";
         moonTotals.clear(item);
     } else {
-        span.textContent = String(num);
+        nodes.moonEditor.textContent = String(num);
+
+        updateMoonProgress(nodes.moonEditor.parentElement.parentElement);
         moonTotals.set(item, num);
     }
     updateMoonProgress(target);
