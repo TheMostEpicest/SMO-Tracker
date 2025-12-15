@@ -56,11 +56,11 @@ function initOverlay() {
         newDiv.id = `moon-tracker-${normalizeName(kingdom)}`;
         newDiv.classList.add("moon-panel");
         newDiv.innerHTML = (Number(localStorage.getItem("showText")) ? `<p>${kingdom}</p>` : `<img src="/resource/moons/progress-${normalizeName(kingdom)}.webp" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`) + `<div class="moon-filter"></div><span id="moon-tracker-${normalizeName(kingdom)}-amount" class="moon-amount">${savedMoons.has(kingdom) ? savedMoons.get(kingdom) : 0}</span><span class="moon-total">/ <span id="moon-tracker-${normalizeName(kingdom)}-total" contenteditable="false">${savedMoonTotals.has(kingdom) ? savedMoonTotals.get(kingdom) : "??"}</span></span>`;
-        newDiv.onwheel = scrollMoonCount;
-        newDiv.onclick = setMoonTotal;
+        newDiv.onwheel = scrollMoonCount(kingdom);
+        newDiv.onclick = setMoonTotal(kingdom);
         nodes.divMoon.appendChild(newDiv);
         setTimeout(wrapText, 1, newDiv);
-        updateMoonProgress(newDiv);
+        updateMoonProgress(kingdom);
     });
     abilities.forEach((ability) => {
         let newDiv = document.createElement("div");
@@ -119,18 +119,17 @@ function ablyPubSubSetup({ ably, clientId }) {
 function ablySubUpdateMoonTotals(ably, clientId) {
     ably.subscribe("update:moonTotals", (msg) => {
         const data = msg.data;
-        let target = document.getElementById(`moon-tracker-${data.kingdom}`);
         let span = document.getElementById(`moon-tracker-${data.kingdom}-total`);
 
         let moonTotals = new Map(JSON.parse(localStorage.getItem("moonTotals")) ?? []);
 
         if (data.value == 0) {
             span.textContent = "??";
-            updateMoonProgress(target);
+            updateMoonProgress(data.kingdom);
             moonTotals.clear(data.kingdom);
         } else {
             span.textContent = data.value;
-            updateMoonProgress(target);
+            updateMoonProgress(data.kingdom);
             moonTotals.set(data.kingdom, data.value);
         }
 
@@ -142,12 +141,11 @@ function ablySubUpdateMoons(ably, clientId) {
         const data = msg.data;
 
         if (!nomoonKingdoms.has(data.kingdom)) {
-            let target = document.getElementById(`moon-tracker-${data.kingdom}`);
             let span = document.getElementById(`moon-tracker-${data.kingdom}-amount`);
 
             span.textContent = data.value;
 
-            updateMoonProgress(target);
+            updateMoonProgress(data.kingdom);
         }
         
         let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
@@ -277,88 +275,88 @@ function setAbility(ability, state) {
     ably.publish("update:abilities", { ability: ability, value: state });
 }
 // Moon Tracker
-function scrollMoonCount(event) {
-    let target = event.target.tagName == "IMG" || event.target.tagName == "P" ? event.target.parentElement : event.target;
-    if (target.tagName == "SPAN") target = target.parentElement.parentElement;
+function scrollMoonCount(kingdom) {
+    return (event) => {
+        event.preventDefault();
 
-    event.preventDefault();
+        let delta = event.deltaY > 0 ? -1 : 1;
 
-    let span = document.getElementById(target.id + "-amount");
+        let target = document.getElementById(`moon-tracker-${kingdom}-amount`);
 
-    let delta = event.deltaY > 0 ? -1 : 1;
+        let amount = parseInt(target.textContent);
+        if (isNaN(amount)) amount = 0;
 
-    let amount = parseInt(span.textContent);
-    if (isNaN(amount)) amount = 0;
+        amount+= delta;
 
-    amount+= delta;
+        if (amount < 0) amount = 0;
+        if (amount > 99) amount = 99;
 
-    if (amount < 0) amount = 0;
-    if (amount > 99) amount = 99;
+        let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
 
-    span.textContent = amount;
+        target.textContent = amount;
 
-    updateMoonProgress(target)
+        updateMoonProgress(kingdom);
 
-    let moons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
+        if (amount > 0) {
+            moons.set(kingdom, amount);
+        } else {
+            moons.clear(kingdom);
+        }
 
-    let item = target.id.split("-")[2];
+        localStorage.setItem("moons", JSON.stringify([...moons]));
 
-    if (amount > 0) {
-        moons.set(item, amount);
-    } else {
-        moons.clear(item);
+        ably.publish("update:moons", { kingdom: kingdom, value: amount });
     }
-
-    localStorage.setItem("moons", JSON.stringify([...moons]));
-
-    ably.publish("update:moons", { kingdom: item, value: amount });
 }
-function updateMoonProgress(target) {
-    let amount = Number(document.getElementById(target.id + "-amount").textContent);
-    let total = Number(document.getElementById(target.id + "-total").textContent);
-    let filter = target.querySelector(".moon-filter");
+function updateMoonProgress(kingdom) {
+    let amount = Number(document.getElementById(`moon-tracker-${kingdom}-amount`).textContent);
+    let total = Number(document.getElementById(`moon-tracker-${kingdom}-total`).textContent);
+    let filter = document.getElementById(`moon-tracker-${kingdom}`).querySelector(".moon-filter");
     if (isNaN(amount) || isNaN(total)) {
         filter.style.height = "100%";
     };
     filter.style.height = Math.min(Math.max(15, 15 + (total - amount) / total * 67), 82) + "%";
-    fullMoons(target);
+    fullMoons(kingdom);
 }
 // Moon Total Tracker
-function setMoonTotal(event) {
-    let target = event.target.tagName == "IMG" || event.target.tagName == "P" ? event.target.parentElement : event.target;
-    if (target.tagName == "SPAN") target = target.parentElement.parentElement;
-
-    event.preventDefault();
-
-    nodes.moonEditor = document.getElementById(target.id + "-total");
-
-    nodes.moonEditor.contentEditable = true;
-    nodes.moonEditor.focus();
-    const range = document.createRange();
-    const sel = window.getSelection();
-    range.selectNodeContents(nodes.moonEditor);
-    sel.removeAllRanges();
-    sel.addRange(range);
-
-    nodes.moonEditor.addEventListener("blur", blurMoonTotal);
-    nodes.moonEditor.addEventListener('keydown', enterMoonTotal);
-}
-function enterMoonTotal(event) {
-    if (event.key == 'Enter') {
+function setMoonTotal(kingdom) {
+    return (event) => {
         event.preventDefault();
+
+        nodes.moonEditor = document.getElementById(`moon-tracker-${kingdom}-total`);
+
+        nodes.moonEditor.contentEditable = true;
+        nodes.moonEditor.focus();
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.selectNodeContents(nodes.moonEditor);
+        sel.removeAllRanges();
+        sel.addRange(range);
+
+        nodes.moonEditor.addEventListener("blur", blurMoonTotal(kingdom));
+        nodes.moonEditor.addEventListener('keydown', enterMoonTotal(kingdom));
+    }
+}
+function enterMoonTotal(kingdom) {
+    return (event) => {
+        if (event.key == 'Enter') {
+            event.preventDefault();
+            nodes.moonEditor.contentEditable = "false";
+            nodes.moonEditor.removeEventListener("keydown", enterMoonTotal);
+            nodes.moonEditor.removeEventListener("blur", blurMoonTotal);
+            validateTotalMoons(kingdom);
+        }
+    }
+}
+function blurMoonTotal(kingdom) {
+    return (event) => {
         nodes.moonEditor.contentEditable = "false";
         nodes.moonEditor.removeEventListener("keydown", enterMoonTotal);
         nodes.moonEditor.removeEventListener("blur", blurMoonTotal);
-        validateTotalMoons();
+        validateTotalMoons(kingdom);
     }
 }
-function blurMoonTotal(event) {
-    nodes.moonEditor.contentEditable = "false";
-    nodes.moonEditor.removeEventListener("keydown", enterMoonTotal);
-    nodes.moonEditor.removeEventListener("blur", blurMoonTotal);
-    validateTotalMoons();
-}
-function validateTotalMoons() {
+function validateTotalMoons(kingdom) {
     let newValue = nodes.moonEditor.textContent.trim();
 
     let num = Number(newValue);
@@ -373,18 +371,18 @@ function validateTotalMoons() {
     } else {
         nodes.moonEditor.textContent = String(num);
 
-        updateMoonProgress(nodes.moonEditor.parentElement.parentElement);
         moonTotals.set(item, num);
     }
-    updateMoonProgress(target);
+    updateMoonProgress(kingdom);
 
     localStorage.setItem("moonTotals", JSON.stringify([...moonTotals]));
     ably.publish("update:moonTotals", { kingdom: item, value: num });
 }
 // Moon Tracker Styling
-function fullMoons(target) {
-    let total = document.getElementById(target.id + "-total");
-    let amount = document.getElementById(target.id + "-amount");
+function fullMoons(kingdom) {
+    let total = document.getElementById(`moon-tracker-${kingdom}-total`);
+    let amount = document.getElementById(`moon-tracker-${kingdom}-amount`);
+    let target = document.getElementById(`moon-tracker-${kingdom}`);
 
     if (Number(amount.textContent) >= Number(total.textContent)) {
         target.style.color = "#55ff55";
@@ -479,7 +477,7 @@ function setAll() {
             if (!nodes.moonEditor || nodes.moonEditor.id.split("-")[2] != kingdom) total.textContent = "??";
         }
 
-        fullMoons(el);
+        fullMoons(kingdom);
     });
     primaryCaptures.forEach((capture) => {
         let el = document.getElementById(`capture-tracker-${normalizeName(capture)}`);
@@ -637,7 +635,7 @@ function toggleMoonBackgrounds() {
     localStorage.setItem("moonBackgrounds", nodes.moonBackgroundToggle.checked);
     moons.forEach((kingdom) => {
         let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
-        fullMoons(div);
+        fullMoons(kingdom);
     });
     document.getElementById(`moon-tracker-moon`).style.backgroundColor = nodes.moonBackgroundToggle.checked ? "#4e4e4e" : "transparent";
 }
@@ -666,7 +664,7 @@ function resetProgress(forward) {
     moons.forEach((kingdom) => {
         document.getElementById(`moon-tracker-${normalizeName(kingdom)}-amount`).textContent = 0;
         document.getElementById(`moon-tracker-${normalizeName(kingdom)}-total`).textContent = "??";
-        updateMoonProgress(document.getElementById(`moon-tracker-${normalizeName(kingdom)}`));
+        updateMoonProgress(normalizeName(kingdom));
     });
 
     captures.forEach((capture) => {

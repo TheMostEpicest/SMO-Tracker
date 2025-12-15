@@ -50,6 +50,7 @@ div#moon-tracker {
 div#moon-tracker p {
     font-size: clamp(20px, 3vmin, 36px);
     text-shadow: black 0 0 10px, black 0 0 14px;
+
 }
 
 div#moon-tracker div#moon-tracker-moon {
@@ -139,6 +140,7 @@ div#moon-tracker > div.moon-panel > span {
     font-size: clamp(20px, 3vmin, 36px);
     right: 12px;
     text-shadow: black 0 0 10px, black 0 0 14px;
+    outline: none;
 }
 
 div#moon-tracker > div.moon-panel span.moon-amount {
@@ -147,6 +149,10 @@ div#moon-tracker > div.moon-panel span.moon-amount {
 
 div#moon-tracker > div.moon-panel span.moon-total {
     bottom: 8px;
+}
+
+div#moon-tracker > div.moon-panel span.moon-total span {
+    outline: none;
 }
 
 div#capture-overflow img {
