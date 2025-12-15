@@ -47,10 +47,16 @@ div#moon-tracker {
     justify-items: stretch;
 }
 
+div#moon-tracker p {
+    font-size: clamp(20px, 3vmin, 36px);
+    text-shadow: black 0 0 10px, black 0 0 14px;
+}
+
 div#moon-tracker div#moon-tracker-moon {
     grid-row: 2;
     grid-column: 6;
-    transition: background-position-y 0.5s;
+    color: white !important;
+    transition: background-color linear 0.2s;
 }
 
 div#ability-tracker {
@@ -106,6 +112,7 @@ div#moon-tracker > div.moon-panel {
     padding: 6px 4px;
     background: transparent;
     color: white;
+    transition: background-color linear 0.2s;
 }
 
 div.moon-panel div.moon-filter {
