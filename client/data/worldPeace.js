@@ -59,6 +59,7 @@ export const worldPeace = new Map([
         "op": "AND",
         "reqs": [
             "gJump",
+            "gCap Throw",
             "cBowser",
             {
                 "op": "OR",
@@ -68,14 +69,12 @@ export const worldPeace = new Map([
                         "reqs": [
                             "aGround Pound",
                             "aWall Jump",
-                            "gCap Throw",
                             "aCap Bounce"
                         ]
                     },
                     {
                         "op": "AND",
                         "reqs": [
-                            "gCap Throw",
                             {
                                 "op": "OR",
                                 "reqs": [
