@@ -28,6 +28,7 @@ function initNodes() {
         resetButton: document.getElementById("reset-button"),
         helpButton: document.getElementById("help-button"),
         showTextToggle: document.getElementById("setting-menu-showText-toggle"),
+        moonBackgroundToggle: document.getElementById("setting-menu-moonBackground-toggle"),
         moonEditor: null
     }
 }
@@ -38,6 +39,7 @@ function initListeners(nodes) {
     nodes.resetButton.onclick = confirmReset;
     nodes.helpButton.onclick = openHelp;
     nodes.showTextToggle.onchange = toggleImageText;
+    nodes.moonBackgroundToggle.onchange = toggleMoonBackgrounds;
 }
 function initOverlay() {
     let savedMoons = new Map(JSON.parse(localStorage.getItem("moons")) ?? []);
@@ -45,10 +47,15 @@ function initOverlay() {
     let savedCaptures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
     let savedAbilties = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []);
 
+    if (localStorage.getItem("moonBackgrounds")) {
+        nodes.moonBackgroundToggle.checked = true;
+    }
+
     moons.forEach((kingdom) => {
         let newDiv = document.createElement("div");
         newDiv.id = `moon-tracker-${normalizeName(kingdom)}`;
-        newDiv.innerHTML = (Number(localStorage.getItem("showText")) ? `<p>${kingdom}</p>` : `<img src="/resource/moons/${normalizeName(kingdom)}.png" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`) + `<p class="moon-counter"><span id="moon-tracker-${normalizeName(kingdom)}-amount">${savedMoons.has(kingdom) ? savedMoons.get(kingdom) : 0}</span> / <span id="moon-tracker-${normalizeName(kingdom)}-total" contenteditable="false">${savedMoonTotals.has(kingdom) ? savedMoonTotals.get(kingdom) : "??"}</span></p>`;
+        newDiv.classList.add("moon-panel");
+        newDiv.innerHTML = (Number(localStorage.getItem("showText")) ? `<p>${kingdom}</p>` : `<img src="/resource/moons/progress-${normalizeName(kingdom)}.webp" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`) + `<div class="moon-filter"></div><span id="moon-tracker-${normalizeName(kingdom)}-amount" class="moon-amount">${savedMoons.has(kingdom) ? savedMoons.get(kingdom) : 0}</span><span class="moon-total">/ <span id="moon-tracker-${normalizeName(kingdom)}-total" contenteditable="false">${savedMoonTotals.has(kingdom) ? savedMoonTotals.get(kingdom) : "??"}</span></span>`;
         newDiv.onwheel = scrollMoonCount;
         newDiv.onclick = setMoonTotal;
         nodes.divMoon.appendChild(newDiv);
@@ -84,6 +91,8 @@ function initOverlay() {
     });
     let newDiv = document.createElement("div");
     newDiv.id = `moon-tracker-moon`;
+    newDiv.classList.add("moon-panel");
+    newDiv.style.backgroundColor = nodes.moonBackgroundToggle.checked ? "#4e4e4e" : "transparent";
     newDiv.innerHTML = Number(localStorage.getItem("showText")) ? '<p>Moon Requirements</p>' : '<img src="/resource/moons/Mushroom.png" alt="Moon Requirements" title="Moon Requirements">';
     nodes.divMoon.appendChild(newDiv);
     setTimeout(wrapText, 1, newDiv);
@@ -117,13 +126,11 @@ function ablySubUpdateMoonTotals(ably, clientId) {
 
         if (data.value == 0) {
             span.textContent = "??";
-            target.style.backgroundPositionY = "0%";
-            target.style.color = "black";
+            updateMoonProgress(target);
             moonTotals.clear(data.kingdom);
         } else {
             span.textContent = data.value;
             updateMoonProgress(target);
-            fullMoons(target);
             moonTotals.set(data.kingdom, data.value);
         }
 
@@ -309,11 +316,11 @@ function scrollMoonCount(event) {
 function updateMoonProgress(target) {
     let amount = Number(document.getElementById(target.id + "-amount").textContent);
     let total = Number(document.getElementById(target.id + "-total").textContent);
+    let filter = target.querySelector(".moon-filter");
     if (isNaN(amount) || isNaN(total)) {
-        target.style.backgroundPositionY = "0%";
-        target.style.color = "black";
+        filter.style.height = "100%";
     };
-    target.style.backgroundPositionY = Math.min(Math.max(0, amount / total * 100), 100) + "%";
+    filter.style.height = Math.min(Math.max(15, 15 + (total - amount) / total * 67), 82) + "%";
     fullMoons(target);
 }
 // Moon Total Tracker
@@ -362,16 +369,14 @@ function validateTotalMoons() {
 
     if (isNaN(num) || num >= 100 || num <= 0) {
         nodes.moonEditor.textContent = "??";
-        nodes.moonEditor.style.backgroundPositionY = "0%";
-        nodes.moonEditor.style.color = "black";
         moonTotals.clear(item);
-
     } else {
         nodes.moonEditor.textContent = String(num);
 
         updateMoonProgress(nodes.moonEditor.parentElement.parentElement);
         moonTotals.set(item, num);
     }
+    updateMoonProgress(target);
 
     localStorage.setItem("moonTotals", JSON.stringify([...moonTotals]));
     ably.publish("update:moonTotals", { kingdom: item, value: num });
@@ -381,14 +386,14 @@ function fullMoons(target) {
     let total = document.getElementById(target.id + "-total");
     let amount = document.getElementById(target.id + "-amount");
 
-    
-
     if (Number(amount.textContent) >= Number(total.textContent)) {
-        target.style.color = "green";
-        target.style.backgroundPositionY = "100%";
+        target.style.color = "#55ff55";
+        if (nodes.moonBackgroundToggle.checked) target.style.backgroundColor = "#f2f2f2";
     } else {
-        target.style.color = "black";
+        target.style.color = "white";
+        if (nodes.moonBackgroundToggle.checked) target.style.backgroundColor = "#4e4e4e";
     }
+    if (!nodes.moonBackgroundToggle.checked) target.style.backgroundColor = "transparent";
 }
 function checkMoonReqs() {
     let state = evaluateLogic(worldPeace.get("Moon"));
@@ -602,7 +607,7 @@ function toggleImageText() {
 
         moons.forEach((kingdom) => {
             let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
-            div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/${normalizeName(kingdom)}.png" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`);
+            div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/progress-${normalizeName(kingdom)}.webp" alt="${kingdom} Moons" title="${kingdom}" draggable="false">`);
             wrapText(div);
         });
         
@@ -627,6 +632,14 @@ function toggleImageText() {
         div.innerHTML = div.innerHTML.replace(/<p.*?>.*?<\/p>/, `<img src="/resource/moons/Mushroom.png" alt="Moon Requirements" title="Moon Requirements" draggable="false">`);
         wrapText(div);
     }
+}
+function toggleMoonBackgrounds() {
+    localStorage.setItem("moonBackgrounds", nodes.moonBackgroundToggle.checked);
+    moons.forEach((kingdom) => {
+        let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
+        fullMoons(div);
+    });
+    document.getElementById(`moon-tracker-moon`).style.backgroundColor = nodes.moonBackgroundToggle.checked ? "#4e4e4e" : "transparent";
 }
 // Reset Menu
 function confirmReset() {
