@@ -60,33 +60,44 @@ export const worldPeace = new Map([
         "reqs": [
             "gJump",
             "cBowser",
-            [
-                "OR",
-                [
-                    "AND",
-                    "aGround Pound",
-                    "aWall Jump",
-                    "gCap Throw",
-                    "aCap Bounce"
-                ],
-                [
-                    "AND",
-                    "gCap Throw",
-                    [
-                        "OR",
-                        "cParabones",
-                        [  
-                            "AND",
-                            "aTriple Jump",
-                            "aCap Bounce",
-                            "aDive"
+            {
+                "op": "OR",
+                "reqs": [
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "aGround Pound",
+                            "aWall Jump",
+                            "gCap Throw",
+                            "aCap Bounce"
                         ]
-                    ],
-                    "cSpark Pylon",
-                    "cBanzai Bill",
-                    "cGolden Chain Chomp"
+                    },
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "gCap Throw",
+                            {
+                                "op": "OR",
+                                "reqs": [
+                                    "cParabones",
+                                    {
+                                        "op": "AND",
+                                        "reqs": [
+                                            "aTriple Jump",
+                                            "aCap Bounce",
+                                            "aDive"
+                                        ]
+                                    }
+                                    
+                                ]
+                            },
+                            "cSpark Pylon",
+                            "cBanzai Bill",
+                            "cGolden Chain Chomp"
+                        ]
+                    }
                 ]
-            ]  
+            }  
         ]
     }],
     ["Mushroom", {

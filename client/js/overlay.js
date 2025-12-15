@@ -236,7 +236,7 @@ function clickCapture(event) {
 
     setCapture(target.id.split("-")[2], target.classList.contains("locked"));
 
-    checkMoonReqs();
+    
 }
 function setCapture(capture, state) {
     let captures = new Set(JSON.parse(localStorage.getItem("captures")) ?? []);
@@ -250,6 +250,9 @@ function setCapture(capture, state) {
     }
     
     localStorage.setItem("captures", JSON.stringify([...captures]));
+
+    checkMoonReqs();
+
     ably.publish("update:captures", { capture: capture, value: state });
 }
 // Abilitiy Tracker
@@ -272,6 +275,9 @@ function setAbility(ability, state) {
     }
 
     localStorage.setItem("abilities", JSON.stringify([...abilities]));
+
+    checkMoonReqs();
+
     ably.publish("update:abilities", { ability: ability, value: state });
 }
 // Moon Tracker
@@ -398,12 +404,12 @@ function checkMoonReqs() {
 
     let div = document.getElementById("moon-tracker-moon");
 
-    if (state && div.style.backgroundPositionY != "100%") {
-        div.style.backgroundPositionY = "100%";
-        div.style.color = "green";
-    } else if (!state && div.style.backgroundPositionY != "0%") {
-        div.style.backgroundPositionY = "0%";
-        div.style.color = "black";
+    if (state) {
+        div.style.filter = "none";
+        if (Number(localStorage.getItem("moonBackgrounds"))) div.style.background = "var(--neutral-light)";
+    } else {
+        div.style.filter = "grayscale(1)";
+        if (Number(localStorage.getItem("moonBackgrounds"))) div.style.background = "var(--locked)";
     }
 }
 function evaluateLogic(logic) {
@@ -632,12 +638,12 @@ function toggleImageText() {
     }
 }
 function toggleMoonBackgrounds() {
-    localStorage.setItem("moonBackgrounds", nodes.moonBackgroundToggle.checked);
+    localStorage.setItem("moonBackgrounds", nodes.moonBackgroundToggle.checked ? 1 : 0);
     moons.forEach((kingdom) => {
         let div = document.getElementById(`moon-tracker-${normalizeName(kingdom)}`);
         fullMoons(kingdom);
     });
-    document.getElementById(`moon-tracker-moon`).style.backgroundColor = nodes.moonBackgroundToggle.checked ? "#4e4e4e" : "transparent";
+    document.getElementById(`moon-tracker-moon`).style.backgroundColor = nodes.moonBackgroundToggle.checked ? (evaluateLogic(worldPeace.get("Moon")) ? "var(--neutral-light)" : "var(--locked)") : "transparent";
 }
 // Reset Menu
 function confirmReset() {
