@@ -13,6 +13,8 @@
     --toast-negative-background: #d8a0a0;
     --toast-negative-border: #855454;
     --toast-incomplete-background: #e2c678;
+    --selection-color: #F2F2F2;
+    --selection-background-color: #0F0F13;
 }
 
 @font-face {
@@ -25,8 +27,8 @@
 }
 
 ::selection {
-    background-color: black;
-    color: white;
+    background-color: var(--selection-background-color);
+    color: var(--selection-color);
 }
 
 body {

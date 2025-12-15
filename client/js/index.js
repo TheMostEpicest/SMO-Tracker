@@ -1720,6 +1720,8 @@ function initMenus() {
 
     if (Number(localStorage.getItem("display:theme"))) {
         nodes.root.style.setProperty("--background", "#0F0F13");
+        nodes.root.style.setProperty("--selection-background-color", "#F2F2F2");
+        nodes.root.style.setProperty("--selection-color", "#0F0F13");
     }
     localStorage.removeItem("linking");
     localStorage.removeItem("selectPersist");
@@ -1833,11 +1835,15 @@ function toggleLightDarkMode() {
         localStorage.setItem("display:theme", 1);
 
         nodes.root.style.setProperty("--background", "#0F0F13");
+        nodes.root.style.setProperty("--selection-background-color", "#F2F2F2");
+        nodes.root.style.setProperty("--selection-color", "#0F0F13");
 
     } else {
         localStorage.setItem("display:theme", 0);
 
         nodes.root.style.setProperty("--background", "#F2F2F2");
+        nodes.root.style.setProperty("--selection-background-color", "#0F0F13");
+        nodes.root.style.setProperty("--selection-color", "#F2F2F2");
     }
 }
 function toggleCompletedIcons() {
