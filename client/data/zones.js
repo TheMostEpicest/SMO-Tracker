@@ -1225,9 +1225,530 @@ export const zones = new Map([
                 "op": "TRUE",
                 "reqs": []
             }
-        },
+        }
     ]],
-    ["Wooded", []],
+    ["Wooded", [
+        {
+            "id": 1092,
+            "kingdomId": 1,
+            "name": "Sky Garden Tower Exterior (Bottom)",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.4257111275102872,
+            "y": 0.11435483532145412,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1093,
+            "kingdomId": 2,
+            "name": "Sky Garden Tower Interior (Bottom)",
+            "subarea": "Sky Garden Tower",
+            "type": "otherzone",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1094,
+            "kingdomId": 3,
+            "name": "Sky Garden Tower Interior (Top)",
+            "subarea": "Sky Garden Tower",
+            "type": "otherzone",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1095,
+            "kingdomId": 4,
+            "name": "Sky Garden Tower Exterior (Top)",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.42587633252972806,
+            "y": 0.14168267143824775,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1096,
+            "kingdomId": 5,
+            "name": "Secret Flower Field Exterior",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.5888819484601686,
+            "y": 0.1072720255077413,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1097,
+            "kingdomId": 6,
+            "name": "Secret Flower Field Interior",
+            "subarea": "Secret Flower Field",
+            "type": "pipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1098,
+            "kingdomId": 7,
+            "name": "Spinning-Platforms Treasure Exterior (Entrance)",
+            "subarea": "",
+            "type": "pipe",
+            "x": 0.6510560272636765,
+            "y": 0.47740839514185307,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+
+        {
+            "id": 1099,
+            "kingdomId": 8,
+            "name": "Spinning-Platforms Treasure Interior (Entrance)",
+            "subarea": "Spinning-Platforms Treasure",
+            "type": "pipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1100,
+            "kingdomId": 9,
+            "name": "Spinning-Platforms Treasure Interior (Exit)",
+            "subarea": "Spinning-Platforms Treasure",
+            "type": "pipe",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },{
+            "id": 1101,
+            "kingdomId": 10,
+            "name": "Spinning-Platforms Treasure Exterior (Exit)",
+            "subarea": "",
+            "type": "pipe",
+            "x": 0.6565325005261616,
+            "y": 0.4780511097550251,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1102,
+            "kingdomId": 11,
+            "name": "Deep Woods (Zone 1)",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.29508526520214134,
+            "y": 0.30473195067684045,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1103,
+            "kingdomId": 12,
+            "name": "Deep Woods (Zone 2)",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.1662270707907259,
+            "y": 0.8945896815397557,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1104,
+            "kingdomId": 13,
+            "name": "Deep Woods (Zone 3)",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.5901705304042827,
+            "y": 0.936844461872205,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1105,
+            "kingdomId": 14,
+            "name": "Deep Woods (Stalk 1)",
+            "subarea": "Deep Woods",
+            "type": "vine",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1106,
+            "kingdomId": 15,
+            "name": "Deep Woods (Stalk 2)",
+            "subarea": "Deep Woods",
+            "type": "vine",
+            "x": 0.25,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1107,
+            "kingdomId": 16,
+            "name": "Deep Woods (Stalk 3)",
+            "subarea": "Deep Woods",
+            "type": "vine",
+            "x": 0.5,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1108,
+            "kingdomId": 17,
+            "name": "Deep Woods Treasure Trap Exterior",
+            "subarea": "Deep Woods",
+            "type": "door",
+            "x": 0.75,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1109,
+            "kingdomId": 18,
+            "name": "Deep Woods Treasure Trap Interior",
+            "subarea": "Deep Woods Treasure Trap",
+            "type": "door",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1110,
+            "kingdomId": 19,
+            "name": "Outfit Room Exterior",
+            "subarea": "Deep Woods",
+            "type": "door",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1111,
+            "kingdomId": 20,
+            "name": "Outfit Room Interior",
+            "subarea": "Outfit Room",
+            "type": "door",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1112,
+            "kingdomId": 21,
+            "name": "Flooding Pipeway Exterior",
+            "subarea": "",
+            "type": "capdoor",
+            "x": 0.4578834919889033,
+            "y": 0.3488182464130812,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1113,
+            "kingdomId": 22,
+            "name": "Flooding Pipeway Interior (Start)",
+            "subarea": "Flooding Pipeway",
+            "type": "pipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1114,
+            "kingdomId": 23,
+            "name": "Flooding Pipeway Interior (End)",
+            "subarea": "Flooding Pipeway",
+            "type": "pipe",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1115,
+            "kingdomId": 24,
+            "name": "Foggy Subarea Exterior",
+            "subarea": "",
+            "type": "rocket",
+            "x": 0.3297792322120165,
+            "y": 0.47370166503075295,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1116,
+            "kingdomId": 25,
+            "name": "Foggy Subarea Interior",
+            "subarea": "Foggy Subarea",
+            "type": "rocket",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1117,
+            "kingdomId": 26,
+            "name": "Flower Road Exterior",
+            "subarea": "",
+            "type": "capdoor",
+            "x": 0.6296145894607051,
+            "y": 0.5401945282216232,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1118,
+            "kingdomId": 27,
+            "name": "Flower Road Interior (Start)",
+            "subarea": "Flower Road",
+            "type": "pipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1119,
+            "kingdomId": 28,
+            "name": "Flower Road Interior (End)",
+            "subarea": "Flower Road",
+            "type": "pipe",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1120,
+            "kingdomId": 29,
+            "name": "Elevator Escalation Exterior",
+            "subarea": "",
+            "type": "capdoor",
+            "x": 0.6536093501929083,
+            "y": 0.5944113267029935,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1121,
+            "kingdomId": 30,
+            "name": "Elevator Escalation Interior (Start)",
+            "subarea": "Elevator Escalation",
+            "type": "otherzone",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1122,
+            "kingdomId": 31,
+            "name": "Elevator Escalation Interior (End)",
+            "subarea": "Elevator Escalation",
+            "type": "pipe",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1123,
+            "kingdomId": 32,
+            "name": "Uproot Subarea Exterior",
+            "subarea": "",
+            "type": "vine",
+            "x": 0.601053953369492,
+            "y": 0.5656147053261685,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1124,
+            "kingdomId": 33,
+            "name": "Uproot Subarea Interior",
+            "subarea": "Uproot Subarea",
+            "type": "otherzone",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1125,
+            "kingdomId": 34,
+            "name": "Invisible Road Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.5721489541975503,
+            "y": 0.2126454296024387,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1126,
+            "kingdomId": 35,
+            "name": "Invisible Road Interior (Start)",
+            "subarea": "Invisible Road",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+
+        {
+            "id": 1127,
+            "kingdomId": 36,
+            "name": "Invisible Road Interior (End)",
+            "subarea": "Invisible Road",
+            "type": "moonpipe",
+            "x": 1,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1128,
+            "kingdomId": 37,
+            "name": "Herding Sheep Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.4004192532348383,
+            "y": 0.7203198637735132,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1129,
+            "kingdomId": 38,
+            "name": "Herding Sheep Interior",
+            "subarea": "Herding Sheep",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },{
+            "id": 1130,
+            "kingdomId": 39,
+            "name": "Breakdown Road Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.5117885147502604,
+            "y": 0.34704593343408624,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1131,
+            "kingdomId": 40,
+            "name": "Breakdown Road Interior",
+            "subarea": "Breakdown Road",
+            "type": "capdoor",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
+    ]],
     ["Cloud", []],
     ["Lost", []],
     ["Metro", []],

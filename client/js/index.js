@@ -176,15 +176,25 @@ function ablySubGetAll(ably, clientId) {
 // Map Setup
 function leafletInit() {
     document.getElementById("map").style.width = `calc(100vw - ${parseFloat(window.getComputedStyle(nodes.sidebar).width)}px)`;
+
     const mapBounds = [fractionToLatLng([0, 0]), fractionToLatLng([1, 1])];
+    let options = { paddingTopLeft: [250, 60], paddingBottomRight: [60, 60], animate: false };
+
     window.leafletMap = L.map("map", {
         attributionControl: false,
         zoomControl: false,
         zoomSnap: 0.1,
-        maxZoom: 5,
-        minZoom: Math.round(10 * (window.innerHeight < window.innerWidth ? window.innerHeight / 512 - 0.1 : window.innerWidth / 512 - 0.1)) / 10,
-        maxBounds: mapBounds
-    }).setView([0, 0], 0);
+        maxZoom: Infinity,
+        minZoom: -Infinity,
+        maxBounds: mapBounds,
+        trackResize: true
+    })
+    leafletMap.invalidateSize({ animate: false });
+    
+    // let minZoom = leafletMap.getBoundsZoom(mapBounds, false, [100, 100]);
+    // console.log(minZoom);
+    // leafletMap.setMinZoom(minZoom);
+    // leafletMap.fitBounds(mapBounds, options);
     // let testIcon = L.icon({
     //     iconUrl: `/resource/icons/moon-Cap.png`,
     //     iconSize: [36, 36],
@@ -197,6 +207,7 @@ function leafletInit() {
     //     console.log(`"x": ${x},\n"y": ${y},`);
     // });
     // testMarker.addTo(leafletMap);
+    window.addEventListener("resize", leafletResize(mapBounds));
     window.completedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.availableMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.lockedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
@@ -204,6 +215,18 @@ function leafletInit() {
     window.availableZonesLayer = L.layerGroup([]).addTo(leafletMap);
     window.lockedZonesLayer = L.layerGroup([]).addTo(leafletMap);
     window.mapLayer = L.imageOverlay(`/resource/maps/${localStorage.getItem("kingdom")}.png`, mapBounds).addTo(leafletMap);
+}
+function leafletResize(mapBounds) {
+    return (e) => {
+        leafletMap.invalidateSize();
+        leafletMap.setMinZoom(-Infinity);
+        let options = { paddingTopLeft: [160, 20], paddingBottomRight: [20, 20], animate: false };
+        leafletMap.fitBounds(mapBounds, options);
+        let zoom = leafletMap.getBoundsZoom(mapBounds, false, [90, 20]);
+        console.log(zoom)
+        leafletMap.setMinZoom(zoom);
+    }
+    
 }
 // Coordinate Conversions
 function fractionToLatLng([x, y]) {
@@ -482,6 +505,8 @@ function sidebarDrag(event) {
         prevX = curX;
     }
     window.onmouseup = (e) => {
+        document.getElementById("map").style.width = `calc(100vw - ${parseFloat(window.getComputedStyle(nodes.sidebar).width)}px)`;
+        leafletResize([fractionToLatLng([0, 0]), fractionToLatLng([1, 1])])();
         window.onmousemove = null;
         window.onmouseup = null;
     }
@@ -726,7 +751,7 @@ function initKingdomList() {
     kingdoms.forEach((kingdom) => {
         let el = document.createElement("div");
         el.id = `kingdom-list-${normalizeName(kingdom)}`;
-        el.innerHTML = `<img src="/resource/kingdoms/${normalizeName(kingdom)}.png" alt="${kingdom}" title="${kingdom}" draggable="false">`;
+        el.innerHTML = `<img src="/resource/kingdoms/${normalizeName(kingdom)}.png" alt="${kingdom}" title="${kingdom}" draggable="false">`; //`<div></div><p>${normalizeName(kingdom)}</p>`
         el.onclick = clickKingdom;
         nodes.kingdomList.appendChild(el);
     });
@@ -751,7 +776,7 @@ function updateCurrentKingdom(currentKingdom) {
         nodes.moonsTotal.innerHTML = "";
     }
 
-    leafletMap.setView([0, 0], 0);
+    leafletMap.fitBounds([fractionToLatLng([0, 0]), fractionToLatLng([1, 1])])
     mapLayer.setUrl(`/resource/maps/${currentKingdom}.png`);
     
     availableMoonsLayer.clearLayers();
@@ -1106,6 +1131,7 @@ function setSelection(selection) {
         case "capdoor":
         case "door":
         case "rocket":
+        case "vine":
         case "otherzone":
             var data = zones.get(localStorage.getItem("kingdom"))[Number(kingdomId) - 1];
             var linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
@@ -1192,9 +1218,9 @@ function moonSetKingdom(id, kingdom, multi) {
                     oldMoon--;
                 }
 
-                moonList.set(oldKingdom, oldMoon);
+                moonList.set(oldKingdom, oldMoon >= 0 ? oldMoon : 0);
 
-                ably.publish("update:moons", { kingdom: oldKingdom, value: oldMoon });
+                ably.publish("update:moons", { kingdom: oldKingdom, value: oldMoon >= 0 ? oldMoon : 0 });
             }
 
             if (kingdom) {
@@ -1387,13 +1413,13 @@ function moonSetCollected(id, state, container) {
             }, 300);
         }
         if (kingdom != "unknown") {
-            savedMoons.set(kingdom, moon);
+            savedMoons.set(kingdom, moon >= 0 ? moon : 0);
 
             localStorage.setItem("moons", JSON.stringify([...savedMoons]));
 
             if (localStorage.getItem("kingdom") == kingdom) updateMoonCounter();
 
-            ably.publish("update:moons", { kingdom: kingdom, value: moon });
+            ably.publish("update:moons", { kingdom: kingdom, value: moon >= 0 ? moon : moon });
         }
 
         localStorage.setItem("collectedMap", JSON.stringify([...collectedMap]));

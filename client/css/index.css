@@ -2,11 +2,45 @@ div#kingdom-list {
     background: none;
     position: fixed;
     top: 0px;
-    left: 10px;
+    left: 15px;
     width: 120px;
     overflow-y: scroll;
     height: 100%;
+    z-index: 10;
 }
+
+/* div#kingdom-list-bar {
+    position: fixed;
+    height: 100%;
+    width: 4px;
+    top: 0;
+    left: 25px;
+    background-color: var(--yellow);
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    margin: 0;
+}
+
+div#kingdom-list > div {
+    color: var(--neutral-light);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+div#kingdom-list div div {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--yellow);
+}
+
+div#kingdom-list div p {
+    margin: 0;
+    padding-left: 10px;
+} */
 
 div#kingdom-list div {
     margin-bottom: 10px;

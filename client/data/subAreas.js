@@ -131,7 +131,65 @@ export const subAreas = new Map([
             "name": "Waves of Poison",
         },
     ]],
-    ["Wooded", []],
+    ["Wooded", [
+        {
+            "id": 32,
+            "name": "Sky Garden Tower",
+        },
+        {
+            "id": 33,
+            "name": "Secret Flower Field",
+        },
+        {
+            "id": 34,
+            "name": "Spinning-Platforms Treasure",
+        },
+        {
+            "id": 35,
+            "name": "Deep Woods",
+        },
+        {
+            "id": 36,
+            "name": "Deep Woods Treasure Trap",
+        },
+        {
+            "id": 37,
+            "name": "Outfit Room",
+        },
+        {
+            "id": 38,
+            "name": "Flooding Pipeway",
+        },
+        {
+            "id": 39,
+            "name": "Foggy Subarea",
+        },
+        {
+            "id": 40,
+            "name": "Flower Road",
+        },
+        {
+            "id": 41,
+            "name": "Elevator Escalation",
+        },
+        {
+            "id": 42,
+            "name": "Uproot Subarea",
+        },
+        {
+            "id": 43,
+            "name": "Invisible Road",
+        },
+        {
+            "id": 44,
+            "name": "Herding Sheep",
+        },
+        {
+            "id": 45,
+            "name": "Breakdown Road",
+        },
+
+    ]],
     ["Cloud", []],
     ["Lost", []],
     ["Metro", []],

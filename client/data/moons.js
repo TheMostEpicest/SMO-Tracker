@@ -2824,7 +2824,996 @@ export const moons = new Map([
             }
         }
     ]],
-    ["Wooded", []],
+    ["Wooded", [
+        {
+            "id": 203,
+            "kingdomId": 1,
+            "name": "Road to Sky Garden",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.55517578125,
+            "y": 0.11438198690570797,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 204,
+            "kingdomId": 2,
+            "name": "Flower Thieves of Sky Garden",
+            "subarea": "",
+            "type": "multimoon",
+            "x": 0.443359375,
+            "y": 0.12664426475888438,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 205,
+            "kingdomId": 3,
+            "name": "Path to the Secret Flower Field",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.58984375,
+            "y": 0.17325699046828988,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 206,
+            "kingdomId": 4,
+            "name": "Defend the Secret Flower Field!",
+            "subarea": "Secret Flower Field",
+            "type": "multimoon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 207,
+            "kingdomId": 5,
+            "name": "Behind the Rock Wall",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.559882608674373,
+            "y": 0.7046588654434676,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 208,
+            "kingdomId": 6,
+            "name": "Back Way Up the Mountain",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.65478515625,
+            "y": 0.25158047926654814,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 209,
+            "kingdomId": 7,
+            "name": "Rolling Rock in the Woods",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.38037109375,
+            "y": 0.8009024109337101,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 210,
+            "kingdomId": 8,
+            "name": "Caught Hopping in the Forest!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3896484375,
+            "y": 0.8163609676713978,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 211,
+            "kingdomId": 9,
+            "name": "Thanks for the Charge!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.392578125,
+            "y": 0.5078117157524176,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 212,
+            "kingdomId": 10,
+            "name": "Atop the Tall Tree",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.65380859375,
+            "y": 0.8961155162020806,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 213,
+            "kingdomId": 11,
+            "name": "Tucked Away Inside the Tunnel",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.60302734375,
+            "y": 0.6962075907179882,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 214,
+            "kingdomId": 12,
+            "name": "Over the Cliff's Edge",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.666015625,
+            "y": 0.6598203283649513,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 215,
+            "kingdomId": 13,
+            "name": "The Nut 'Round the Corner",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.32263102522149634,
+            "y": 0.5568161915559424,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 216,
+            "kingdomId": 14,
+            "name": "Climb the Cliff to Get the Nut",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.528677951339288,
+            "y": 0.4883487802020545,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 217,
+            "kingdomId": 15,
+            "name": "The Nut in the Red Maze",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5528710158791954,
+            "y": 0.27805536349285087,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 218,
+            "kingdomId": 16,
+            "name": "The Nut at the Dead End",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6345721846533089,
+            "y": 0.17468515139169866,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 219,
+            "kingdomId": 17,
+            "name": "Cracked Nut on a Crumbling Tower",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.46244447956609885,
+            "y": 0.04476175542396869,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 220,
+            "kingdomId": 18,
+            "name": "The Nut that Grew on the Tall Fence",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5144000771845885,
+            "y": 0.6441707242962628,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 221,
+            "kingdomId": 19,
+            "name": "Fire in the Cave",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.571114966187978,
+            "y": 0.2792734736793137,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 222,
+            "kingdomId": 20,
+            "name": "Hey Out There, Captain Toad!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.8927637422841239,
+            "y": 0.47014609131966245,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 223,
+            "kingdomId": 21,
+            "name": "Love in the Forest Ruins",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.38041140035802434,
+            "y": 0.7657621903105266,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 224,
+            "kingdomId": 22,
+            "name": "Inside a Rock in the Forest",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.2933007268917605,
+            "y": 0.8923156184114712,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 225,
+            "kingdomId": 23,
+            "name": "Shopping in Steam Gardens",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.43973608902230255,
+            "y": 0.8662772365082569,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 226,
+            "kingdomId": 24,
+            "name": "Nut Planted in the Tower",
+            "subarea": "Sky Garden Tower",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 227,
+            "kingdomId": 25,
+            "name": "Stretching Your Legs",
+            "subarea": "Sky Garden Tower",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 228,
+            "kingdomId": 26,
+            "name": "Spinning-Platforms Treasure",
+            "subarea": "Spinning-Platforms Treasure",
+            "type": "moon",
+            "x": 0.6576523379879582,
+            "y": 0.43817815353548356,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 229,
+            "kingdomId": 27,
+            "name": "Make the Secret Flower Field Bloom",
+            "subarea": "Secret Flower Field",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 230,
+            "kingdomId": 28,
+            "name": "Rolling Rock in the Deep Woods",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 231,
+            "kingdomId": 29,
+            "name": "Glowing in the Deep Woods",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 0.2,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 232,
+            "kingdomId": 30,
+            "name": "Past the Peculiar Pipes",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 0.4,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 233,
+            "kingdomId": 31,
+            "name": "By the Babbling Brook in Deep Woods",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 0.6,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 234,
+            "kingdomId": 32,
+            "name": "The Hard Rock in Deep Woods",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 0.8,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 235,
+            "kingdomId": 33,
+            "name": "A Treasure Made from Coins",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 236,
+            "kingdomId": 34,
+            "name": "Beneath the Roots of the Moving Tree",
+            "subarea": "Deep Woods",
+            "type": "moon",
+            "x": 0,
+            "y": 0.2,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 237,
+            "kingdomId": 35,
+            "name": "Deep Woods Treasure Trap",
+            "subarea": "Deep Woods Treasure Trap",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 238,
+            "kingdomId": 36,
+            "name": "Exploring for Treasure",
+            "subarea": "Outfit Room",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 239,
+            "kingdomId": 37,
+            "name": "Wooded Kingdom Timer Challenge 1",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5512497202330509,
+            "y": 0.1829225185391292,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 240,
+            "kingdomId": 38,
+            "name": "Wooded Kingdom Timer Challenge 2",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3919463659672292,
+            "y": 0.48468098965490763,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 241,
+            "kingdomId": 39,
+            "name": "Flooding Pipeway",
+            "subarea": "Flooding Pipeway",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 242,
+            "kingdomId": 40,
+            "name": "Flooding Pipeway Ceiling Secret",
+            "subarea": "Flooding Pipeway",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 243,
+            "kingdomId": 41,
+            "name": "Wandering in the Fog",
+            "subarea": "Foggy Subarea",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 244,
+            "kingdomId": 42,
+            "name": "Nut Hidden in the Fog",
+            "subarea": "Foggy Subarea",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 245,
+            "kingdomId": 43,
+            "name": "Flower Road Run",
+            "subarea": "Flower Road",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 246,
+            "kingdomId": 44,
+            "name": "Flower Road Reach",
+            "subarea": "Flower Road",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 247,
+            "kingdomId": 45,
+            "name": "Elevator Escalation",
+            "subarea": "Elevator Escalation",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 248,
+            "kingdomId": 46,
+            "name": "Elevator Blind Spot",
+            "subarea": "Elevator Escalation",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 249,
+            "kingdomId": 47,
+            "name": "Walking on Clouds",
+            "subarea": "Uproot Subarea",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 250,
+            "kingdomId": 48,
+            "name": "Above the Clouds",
+            "subarea": "Uproot Subarea",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 251,
+            "kingdomId": 49,
+            "name": "Secret Path to the Steam Gardens!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4646848786697364,
+            "y": 0.6431066559315899,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 252,
+            "kingdomId": 50,
+            "name": "Found with Wooded Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 253,
+            "kingdomId": 51,
+            "name": "Swing Around Secret Flower Field",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.615572206672458,
+            "y": 0.1758583779168906,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 254,
+            "kingdomId": 52,
+            "name": "Jammin' in the Wooded Kingdom",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.581908101620058,
+            "y": 0.8046339637302788,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 255,
+            "kingdomId": 53,
+            "name": "Wooded Kingdom Regular Cup",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.32702273479474336,
+            "y": 0.6030550109895796,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 256,
+            "kingdomId": 54,
+            "name": "Peach in the Wooded Kingdom",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6248523018888348,
+            "y": 0.5110653144470394,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 257,
+            "kingdomId": 55,
+            "name": "High Up in the Cave",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5222802322320412,
+            "y": 0.7194516565536124,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 258,
+            "kingdomId": 56,
+            "name": "Lost in the Tall Trees",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4542477370515148,
+            "y": 0.8909456615544261,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 259,
+            "kingdomId": 57,
+            "name": "Looking Down on the Goombas",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4241473218363122,
+            "y": 0.7623786942617755,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 260,
+            "kingdomId": 58,
+            "name": "High Up on a Rock Wall",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5552498260502963,
+            "y": 0.31343795886822434,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 261,
+            "kingdomId": 59,
+            "name": "The Nut in the Robot Storeroom",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3696779418808318,
+            "y": 0.5117085630764439,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 262,
+            "kingdomId": 60,
+            "name": "Above the Iron Mountain Path",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.49559056104583465,
+            "y": 0.32312473547253,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 263,
+            "kingdomId": 61,
+            "name": "The Nut Under the Observation Deck",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6515419730750414,
+            "y": 0.5152483235364366,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 264,
+            "kingdomId": 62,
+            "name": "Bird Traveling the Forest",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.37784201169492354,
+            "y": 0.2963202474196421,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 265,
+            "kingdomId": 63,
+            "name": "Invader in the Sky Garden",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4443045262174378,
+            "y": 0.13876477620515013,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 266,
+            "kingdomId": 64,
+            "name": "Hot, Hot, Hot from the Campfire",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3658054933168304,
+            "y": 0.3160609901874976,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 267,
+            "kingdomId": 65,
+            "name": "Wooded Kingdom Timer Challenge 3",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5615297486823448,
+            "y": 0.6239864438667978,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 268,
+            "kingdomId": 66,
+            "name": "Moon Shards in the Forest",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.541643327014191,
+            "y": 0.20779358092685282,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 269,
+            "kingdomId": 67,
+            "name": "Taking Notes: On Top of the Wall",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4453449677088115,
+            "y": 0.9551918974436461,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 270,
+            "kingdomId": 68,
+            "name": "Taking Notes: Stretching",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.46471427477159577,
+            "y": 0.6103159194982862,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 271,
+            "kingdomId": 69,
+            "name": "Wooded Kingdom Master Cup",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.33517046833935243,
+            "y": 0.6043338272422283,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 272,
+            "kingdomId": 70,
+            "name": "I Met an Uproot!",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4699475436316362,
+            "y": 0.041573590291198,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 273,
+            "kingdomId": 71,
+            "name": "Invisible Road: Danger!",
+            "subarea": "Invisible Road",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 274,
+            "kingdomId": 72,
+            "name": "Invisible Road: Hidden Room",
+            "subarea": "Invisible Road",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 275,
+            "kingdomId": 73,
+            "name": "Herding Sheep Above the Forest Fog",
+            "subarea": "Herding Sheep",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 276,
+            "kingdomId": 74,
+            "name": "Herding Sheep on the Iron Bridge",
+            "subarea": "Herding Sheep",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 277,
+            "kingdomId": 75,
+            "name": "Down and Back Breakdown Road",
+            "subarea": "Breakdown Road",
+            "type": "moon",
+            "x": 0,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 278,
+            "kingdomId": 76,
+            "name": "Below Breakdown Road",
+            "subarea": "Breakdown Road",
+            "type": "moon",
+            "x": 1,
+            "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+    ]],
     ["Cloud", []],
     ["Lost", []],
     ["Metro", []],
