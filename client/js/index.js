@@ -191,22 +191,21 @@ function leafletInit() {
     })
     leafletMap.invalidateSize({ animate: false });
     
-    // let minZoom = leafletMap.getBoundsZoom(mapBounds, false, [100, 100]);
-    // console.log(minZoom);
-    // leafletMap.setMinZoom(minZoom);
-    // leafletMap.fitBounds(mapBounds, options);
-    // let testIcon = L.icon({
-    //     iconUrl: `/resource/icons/moon-Cap.png`,
-    //     iconSize: [36, 36],
-    //     iconAnchor: [18, 18]
-    // });
-    // const testMarker = L.marker(fractionToLatLng([0.5, 0.5]), { icon: testIcon, draggable: true })
-    // testMarker.on("moveend", (e) => {
-    //     let location = testMarker.getLatLng();
-    //     let [x, y] = latLngToFraction([location.lat, location.lng]);
-    //     console.log(`"x": ${x},\n"y": ${y},`);
-    // });
-    // testMarker.addTo(leafletMap);
+    let minZoom = leafletMap.getBoundsZoom(mapBounds, false, [100, 100]);
+    leafletMap.setMinZoom(minZoom);
+    leafletMap.fitBounds(mapBounds, options);
+    let testIcon = L.icon({
+        iconUrl: `/resource/icons/moon-Cap.png`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
+    });
+    const testMarker = L.marker(fractionToLatLng([0.5, 0.5]), { icon: testIcon, draggable: true })
+    testMarker.on("moveend", (e) => {
+        let location = testMarker.getLatLng();
+        let [x, y] = latLngToFraction([location.lat, location.lng]);
+        console.log(`"x": ${x},\n"y": ${y},`);
+    });
+    testMarker.addTo(leafletMap);
     window.addEventListener("resize", leafletResize(mapBounds));
     window.completedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.availableMoonsLayer = L.layerGroup([]).addTo(leafletMap);
@@ -223,7 +222,7 @@ function leafletResize(mapBounds) {
         let options = { paddingTopLeft: [160, 20], paddingBottomRight: [20, 20], animate: false };
         leafletMap.fitBounds(mapBounds, options);
         let zoom = leafletMap.getBoundsZoom(mapBounds, false, [90, 20]);
-        console.log(zoom)
+        // console.log(zoom)
         leafletMap.setMinZoom(zoom);
     }
     

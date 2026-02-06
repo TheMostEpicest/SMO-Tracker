@@ -78,6 +78,7 @@ div#kingdom-list div:hover img {
 div#map {
     height: 100vh;
     width: 100vw;
+    padding-left: 150px;
     z-index: 0;
 }
 

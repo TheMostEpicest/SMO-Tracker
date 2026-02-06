@@ -1749,13 +1749,211 @@ export const zones = new Map([
             }
         }
     ]],
-    ["Cloud", []],
-    ["Lost", []],
+    ["Cloud", [
+        {
+            "id": 1132,
+            "kingdomId": 1,
+            "name": "Picture Match Exterior",
+            "subarea": "",
+            "type": "pipe",
+            "x": 0.5047990817858062,
+            "y": 0.6209956215446675,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1133,
+            "kingdomId": 2,
+            "name": "Picture Match Interior",
+            "subarea": "Picture Match",
+            "type": "pipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1134,
+            "kingdomId": 3,
+            "name": "Cube Room Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.40520254890841934,
+            "y": 0.7735278246729524,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1135,
+            "kingdomId": 4,
+            "name": "Cube Room Interior",
+            "subarea": "Cube Room",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
+    ]],
+    ["Lost", [
+        {
+            "id": 1136,
+            "kingdomId": 1,
+            "name": "Shop Exterior",
+            "subarea": "",
+            "type": "otherzone",
+            "x": 0.374488565749151,
+            "y": 0.4732577278759391,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1137,
+            "kingdomId": 2,
+            "name": "Shop Interior",
+            "subarea": "Shop",
+            "type": "otherzone",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1138,
+            "kingdomId": 3,
+            "name": "Poison Platforms Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.6564651340306263,
+            "y": 0.7862668402855509,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1139,
+            "kingdomId": 4,
+            "name": "Poison Platforms Interior (Start)",
+            "subarea": "Poison Platforms",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1140,
+            "kingdomId": 5,
+            "name": "Poison Platforms Interior (End)",
+            "subarea": "Poison Platforms",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1141,
+            "kingdomId": 6,
+            "name": "Klepto Room Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.4307358602094977,
+            "y": 0.46074446815071296,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1142,
+            "kingdomId": 7,
+            "name": "Klepto Room Interior",
+            "subarea": "Klepto Room",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
+    ]],
     ["Metro", []],
     ["Snow", []],
     ["Seaside", []],
     ["Luncheon", []],
-    ["Ruined", []],
+    ["Ruined", [
+        {
+            "id": 1142,
+            "kingdomId": 1,
+            "name": "Roulette Tower Exterior",
+            "subarea": "",
+            "type": "rocket",
+            "x": 0.35139434725176977,
+            "y": 0.08774685167121853,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1142,
+            "kingdomId": 2,
+            "name": "Roulette Tower Interior",
+            "subarea": "Roulette Tower",
+            "type": "rocket",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1142,
+            "kingdomId": 3,
+            "name": "Chargin' Chuck Room Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.6095607593416724,
+            "y": 0.9502302787872261,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 1142,
+            "kingdomId": 4,
+            "name": "Chargin' Chuck Room Interior",
+            "subarea": "Chargin' Chuck Room",
+            "type": "moonpipe",
+            "x": 0,
+            "y": 1,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
+    ]],
     ["Bowser", []],
     ["Moon", []],
     ["Mushroom", []],
