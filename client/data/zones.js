@@ -24,7 +24,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1003"
+                    "l2003"
                 ]
             }
         },
@@ -39,7 +39,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1002"
+                    "l2002"
                 ]
             }
         },
@@ -80,7 +80,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1007"
+                    "l2007"
                 ]
             }
         },
@@ -95,7 +95,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1006"
+                    "l2006"
                 ]
             }
         },
@@ -123,7 +123,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1010"
+                    "l2010"
                 ]
             }
         },
@@ -138,7 +138,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1009"
+                    "l2009"
                 ]
             }
         },
@@ -208,7 +208,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1014"
+                    "l2014"
                 ]
             }
         }
@@ -268,7 +268,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1020"
+                    "l2105"
                 ]
             }
         },
@@ -283,7 +283,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1019"
+                    "l2104"
                 ]
             }
         },
@@ -313,7 +313,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1023"
+                    "l2108"
                 ]
             }
         },
@@ -328,7 +328,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1022"
+                    "l2107"
                 ]
             }
         },
@@ -358,7 +358,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1026"
+                    "l2111"
                 ]
             }
         },
@@ -373,7 +373,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1025"
+                    "l2110"
                 ]
             }
         },
@@ -403,7 +403,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1029"
+                    "l2114"
                 ]
             }
         },
@@ -418,7 +418,7 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1028"
+                    "l2113"
                 ]
             }
         }

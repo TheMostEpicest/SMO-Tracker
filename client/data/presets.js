@@ -8,6 +8,11 @@ export const presets = new Map([
             *Multiple zones can be mapped onto one zone. This is useful for sub areas with two exits inside but only one entrance outside*
 
     */
+    ["None", {
+        "description": "No preset",
+        "moons": [],
+        "zones": [],
+    }],
     ["Full Randomizer",{
         "description": "Fully randomized. This includes Moons, Moon Requirements, Loading Zones, Captures (Mushroom Moons), and Abilities (Dark Side Moons). Loading Zones related to World Peace are not randomized. Cloud Kingdom is not randomized.",
         "moons": [
