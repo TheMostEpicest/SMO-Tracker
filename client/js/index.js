@@ -859,7 +859,7 @@ function evaluateLogic(logic) {
             } else if (value.charAt(0) == "w") { // World Peace
                 let peace = worldPeace.get(value.substring(1));
                 return peace ? evaluateLogic(peace) : false;
-            } else if (value.charAt(0) == "r") { // Moon Rock
+            } else if (value.charAt(0) == "r") { // Moon Rock - Not Currently Used
                 let peace = new Set(JSON.parse(localStorage.getItem("moonRock")) ?? []).has(normalizeName(value.substring(1)));
                 return peace ? evaluateLogic(peace) : false;
             } else if (value.charAt(0) == "o") { // Outfit
@@ -1129,6 +1129,7 @@ function setSelection(selection) {
         case "moonpipe":
         case "capdoor":
         case "door":
+        case "scarecrowdoor":
         case "rocket":
         case "vine":
         case "otherzone":
@@ -1506,6 +1507,7 @@ function zoneLinkStart(id, container) {
         button.onclick = cancelZoneLink;
     }
 }
+// TODO: Doesn't refresh map
 function zoneLinkFinish(id, container) {
     return (e) => {
         localStorage.setItem("selectPersist", 0);
@@ -1606,6 +1608,7 @@ function cancelZoneLink() {
 
     // If selection is loading zone, change button text
 }
+// TODO: Doesn't update selection menu header color when unlinking from subarea
 function zoneUnlink(id, container) {
     return (e) => {
         let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);

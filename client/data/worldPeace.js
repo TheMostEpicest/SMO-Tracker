@@ -52,8 +52,10 @@ export const worldPeace = new Map([
         "reqs": []
     }],
     ["Bowser", {
-        "op": "TRUE",
-        "reqs": []
+        "op": "AND",
+        "reqs": [
+            "m611"
+        ]
     }],
     ["Moon", {
         "op": "AND",
@@ -104,8 +106,10 @@ export const worldPeace = new Map([
         "reqs": []
     }],
     ["Dark", {
-        "op": "TRUE",
-        "reqs": []
+        "op": "AND",
+        "reqs": [
+            "m812"
+        ]
     }],
     ["Darker", {
         "op": "TRUE",

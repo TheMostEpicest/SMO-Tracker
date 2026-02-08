@@ -26,5 +26,12 @@ export const groups = new Map([
             "aTriple Jump",
             "aBackflip",
         ]
+    }],
+    ["Open Treasure Chest", {
+        "op": "OR",
+        "reqs": [
+            "gCap Throw",
+            "aGround Pound"
+        ]
     }]
 ])

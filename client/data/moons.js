@@ -554,8 +554,10 @@ export const moons = new Map([
             "x": 0.5627973368183927,
             "y": 0.491272535880957,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "g2D Jump"
+                ]
             }
         },
         {
@@ -567,8 +569,10 @@ export const moons = new Map([
             "x": 0.7432426712751882,
             "y": 0.7360326627282294,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -580,8 +584,11 @@ export const moons = new Map([
             "x": 0.503396862114179,
             "y": 0.6649031945160692,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade",
+                    "gOpen Treasure Chest"
+                ]
             }
         },
         {
@@ -593,8 +600,10 @@ export const moons = new Map([
             "x": 0.4384765625,
             "y": 0.7844826855270312,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -606,8 +615,10 @@ export const moons = new Map([
             "x": 0.2501559894182995,
             "y": 0.08129542070295154,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -619,8 +630,10 @@ export const moons = new Map([
             "x": 0.608563337486222,
             "y": 0.7320393958087392,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -632,8 +645,10 @@ export const moons = new Map([
             "x": 0.41561791067031384,
             "y": 0.19838858636183007,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -645,8 +660,10 @@ export const moons = new Map([
             "x": 0.3612117874111769,
             "y": 0.2926979995289375,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -660,7 +677,8 @@ export const moons = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1017",
+                    "wCascade",
+                    "l2102",
                     "gCap Throw"
                 ]
             }
@@ -676,7 +694,8 @@ export const moons = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l1017",
+                    "wCascade",
+                    "l2102",
                     "gCap Throw",
                     "cDinosaur"
                 ]
@@ -693,15 +712,21 @@ export const moons = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
+                    "wCascade",
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1019",
-                            "l1020"
+                            "l2105",
+                            {
+                                "op": "AND",
+                                "reqs": [
+                                    "l2104",
+                                    "gCap Throw",
+                                    "cChain Chomp"
+                                ]
+                            }
                         ]
-                    },
-                    "gCap Throw",
-                    "cChain Chomp"
+                    }
                 ]
             }
         },
@@ -716,11 +741,12 @@ export const moons = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
+                    "wCascade",
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1019",
-                            "l1020"
+                            "l2104",
+                            "l2105"
                         ]
                     },
                     "gCap Throw",
@@ -737,17 +763,22 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "OR",
+                "op": "AND",
                 "reqs": [
-                    "l1023",
+                    "wCascade",
                     {
-                        "op": "AND",
+                        "op": "OR",
                         "reqs": [
-                            "l1022",
-                            "g2D Jump"
+                            "l2108",
+                            {
+                                "op": "AND",
+                                "reqs": [
+                                    "l2107",
+                                    "g2D Jump"
+                                ]
+                            }
                         ]
                     }
-                    
                 ]
             }
         },
@@ -762,11 +793,12 @@ export const moons = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
+                    "wCascade",
                     {
                         "op": "OR",
                         "reqs": [
-                            "l1022",
-                            "l1023",
+                            "l2107",
+                            "l2108",
                         ]
                     },
                     "g2D Jump"
@@ -795,8 +827,10 @@ export const moons = new Map([
             "x": 0.6861311746563903,
             "y": 0.8473685589226309,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "m374"
+                ]
             }
         },
         {
@@ -808,8 +842,10 @@ export const moons = new Map([
             "x": 0.4451677318144552,
             "y": 0.5411995256444655,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -836,8 +872,10 @@ export const moons = new Map([
             "x": 0.7038312767340762,
             "y": 0.8764844650114946,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -849,8 +887,10 @@ export const moons = new Map([
             "x": 0.41845703125,
             "y": 0.27159739561566176,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -862,8 +902,10 @@ export const moons = new Map([
             "x": 0.6660863817672645,
             "y": 0.5796942538779501,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -875,8 +917,12 @@ export const moons = new Map([
             "x": 0.6379627345370912,
             "y": 0.9118974583090383,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade",
+                    "gCap Throw",
+                    "cBinoculars"
+                ]
             }
         },
         {
@@ -919,8 +965,10 @@ export const moons = new Map([
             "x": 0.5568370920332786,
             "y": 0.3359081707716817,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wCascade"
+                ]
             }
         },
         {
@@ -1062,8 +1110,8 @@ export const moons = new Map([
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1025",
-                    "l1026"
+                    "l2110",
+                    "l2111"
                 ]
             }
         },
@@ -1078,8 +1126,8 @@ export const moons = new Map([
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1025",
-                    "l1026"
+                    "l2110",
+                    "l2111"
                 ]
             }
         },
@@ -1094,8 +1142,8 @@ export const moons = new Map([
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1028",
-                    "l1029"
+                    "l2113",
+                    "l2114"
                 ]
             }
         },
@@ -1110,8 +1158,8 @@ export const moons = new Map([
             "logic": {
                 "op": "OR",
                 "reqs": [
-                    "l1028",
-                    "l1029"
+                    "l2113",
+                    "l2114"
                 ]
             }
         }
@@ -4811,7 +4859,7 @@ export const moons = new Map([
             "id": 355,
             "kingdomId": 33,
             "name": "Taking Notes: In the Private Room",
-            "subarea": "Private Room",
+            "subarea": "Notes Room",
             "type": "moon",
             "x": 0,
             "y": 0,
@@ -5019,7 +5067,7 @@ export const moons = new Map([
             "id": 371,
             "kingdomId": 49,
             "name": "Motor Scooter: Escape!",
-            "subarea": "Escape!",
+            "subarea": "Dino Room",
             "type": "moon",
             "x": 0,
             "y": 0,
@@ -5032,7 +5080,7 @@ export const moons = new Map([
             "id": 372,
             "kingdomId": 50,
             "name": "Big Jump: Escape!",
-            "subarea": "Escape!",
+            "subarea": "Dino Room",
             "type": "moon",
             "x": 0,
             "y": 0,
@@ -8115,8 +8163,17 @@ export const moons = new Map([
             "x": 0.41387939453125,
             "y": 0.8435876823865139,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "aGround Pound",
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "cPokio",
+                            "gCap Throw"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8128,8 +8185,10 @@ export const moons = new Map([
             "x": 0.3089900715420366,
             "y": 0.544133344177046,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "m608"
+                ]
             }
         },
         {
@@ -8141,8 +8200,10 @@ export const moons = new Map([
             "x": 0.6076187993676936,
             "y": 0.24372880035050812,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "m609"
+                ]
             }
         },
         {
@@ -8154,8 +8215,10 @@ export const moons = new Map([
             "x": 0.8696127761961511,
             "y": 0.04990266422267524,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "m610"
+                ]
             }
         },
         {
@@ -8219,8 +8282,10 @@ export const moons = new Map([
             "x": 0.6782769881059436,
             "y": 0.11490474152229524,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8232,8 +8297,10 @@ export const moons = new Map([
             "x": 0.7816844495148162,
             "y": 0.11650054268976212,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8245,8 +8312,11 @@ export const moons = new Map([
             "x": 0.7504377875532037,
             "y": 0.10408455501751064,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "gJump"
+                ]
             }
         },
         {
@@ -8258,8 +8328,10 @@ export const moons = new Map([
             "x": 0.26165419072564283,
             "y": 0.9608617209352065,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw"
+                ]
             }
         },
         {
@@ -8271,8 +8343,12 @@ export const moons = new Map([
             "x": 0.7912702516381226,
             "y": 0.08098452195384351,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "aGround Pound",
+                    "gCap Throw",
+                    "cSpark Pylon"
+                ]
             }
         },
         {
@@ -8297,8 +8373,10 @@ export const moons = new Map([
             "x": 0.8122033270782845,
             "y": 0.07109217650980655,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8310,8 +8388,17 @@ export const moons = new Map([
             "x": 0.7275133247467365,
             "y": 0.8590089639854729,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "aGround Pound",
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "cPokio",
+                            "gCap Throw"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8323,8 +8410,11 @@ export const moons = new Map([
             "x": 0.8844224373468432,
             "y": 0.045869493687852585,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "gJump"
+                ]
             }
         },
         {
@@ -8336,8 +8426,10 @@ export const moons = new Map([
             "x": 0.3805343553712111,
             "y": 0.8547567294708964,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gJump"
+                ]
             }
         },
         {
@@ -8349,8 +8441,11 @@ export const moons = new Map([
             "x": 0.25342596552291297,
             "y": 0.9407075264030834,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cGoomba"
+                ]
             }
         },
         {
@@ -8362,8 +8457,10 @@ export const moons = new Map([
             "x": 0.6573486328125,
             "y": 0.168020027503576,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw"
+                ]
             }
         },
         {
@@ -8375,8 +8472,11 @@ export const moons = new Map([
             "x": 0.3741497091858219,
             "y": 0.8480077206305152,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8388,8 +8488,11 @@ export const moons = new Map([
             "x": 0.28641714415992375,
             "y": 0.5768229020278781,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8401,8 +8504,11 @@ export const moons = new Map([
             "x": 0.7423391877967439,
             "y": 0.10445563907719983,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8414,8 +8520,11 @@ export const moons = new Map([
             "x": 0.3919733332705416,
             "y": 0.3290726639643694,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cJizo"
+                ]
             }
         },
         {
@@ -8427,8 +8536,11 @@ export const moons = new Map([
             "x": 0.39141826128573565,
             "y": 0.31930756863848714,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cJizo"
+                ]
             }
         },
         {
@@ -8440,8 +8552,11 @@ export const moons = new Map([
             "x": 0.6356201171875,
             "y": 0.2073164290984587,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cSpark Pylon"
+                ]
             }
         },
         {
@@ -8453,8 +8568,12 @@ export const moons = new Map([
             "x": 0.6936697873983673,
             "y": 0.11636388848000082,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cLakitu"
+                ]
             }
         },
         {
@@ -8479,8 +8598,10 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3202"
+                ]
             }
         },
         {
@@ -8492,8 +8613,11 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3204",
+                    "gOpen Treasure Chest"
+                ]
             }
         },
         {
@@ -8505,8 +8629,10 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3206"
+                ]
             }
         },
         {
@@ -8518,8 +8644,10 @@ export const moons = new Map([
             "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3206"
+                ]
             }
         },
         {
@@ -8531,8 +8659,18 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3209",
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "l3208",
+                            "gCap Throw",
+                            "cPokio"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8544,8 +8682,18 @@ export const moons = new Map([
             "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cPokio",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "l3211",
+                            "l3212"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8557,8 +8705,18 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3212",
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "l3211",
+                            "gCap Throw",
+                            "cJizo"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8570,8 +8728,18 @@ export const moons = new Map([
             "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cJizo",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "l3211",
+                            "l3212"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8583,8 +8751,10 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3214"
+                ]
             }
         },
         {
@@ -8596,8 +8766,10 @@ export const moons = new Map([
             "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3214"
+                ]
             }
         },
         {
@@ -8609,8 +8781,12 @@ export const moons = new Map([
             "x": 0.6414136660191021,
             "y": 0.17458173271883454,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cBinoculars"
+                ]
             }
         },
         {
@@ -8622,8 +8798,12 @@ export const moons = new Map([
             "x": 0.6923614701833571,
             "y": 0.29548147976803757,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8635,8 +8815,10 @@ export const moons = new Map([
             "x": 0.7389548399769051,
             "y": 0.1194227981960577,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8648,8 +8830,11 @@ export const moons = new Map([
             "x": 0.86947923063867,
             "y": 0.042993148216131434,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "aGround Pound"
+                ]
             }
         },
         {
@@ -8674,8 +8859,10 @@ export const moons = new Map([
             "x": 0.36708478132951966,
             "y": 0.3379777527503486,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8700,8 +8887,12 @@ export const moons = new Map([
             "x": 0.4344363401082048,
             "y": 0.8236170437335785,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8713,8 +8904,11 @@ export const moons = new Map([
             "x": 0.6631146868857195,
             "y": 0.1848563161658873,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gOpen Treasure Chest"
+                ]
             }
         },
         {
@@ -8726,8 +8920,11 @@ export const moons = new Map([
             "x": 0.8018201147250327,
             "y": 0.0622492303441685,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw"
+                ]
             }
         },
         {
@@ -8739,8 +8936,12 @@ export const moons = new Map([
             "x": 0.635272371506864,
             "y": 0.1985774697928482,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8752,8 +8953,10 @@ export const moons = new Map([
             "x": 0.21575454278212497,
             "y": 0.9491479658348556,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8765,8 +8968,10 @@ export const moons = new Map([
             "x": 0.6138974394999256,
             "y": 0.27053472013858487,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8778,8 +8983,11 @@ export const moons = new Map([
             "x": 0.5808677071335102,
             "y": 0.3063536963685033,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "aClimb"
+                ]
             }
         },
         {
@@ -8791,8 +8999,10 @@ export const moons = new Map([
             "x": 0.6925510279542042,
             "y": 0.16755077217935366,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8804,8 +9014,12 @@ export const moons = new Map([
             "x": 0.39291382665541547,
             "y": 0.8370170564582581,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cPokio"
+                ]
             }
         },
         {
@@ -8817,8 +9031,10 @@ export const moons = new Map([
             "x": 0.5911183137299839,
             "y": 0.23546850797733765,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8830,8 +9046,12 @@ export const moons = new Map([
             "x": 0.3204589532499209,
             "y": 0.8795537739336251,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser",
+                    "gCap Throw",
+                    "cSpark Pylon"
+                ]
             }
         },
         {
@@ -8843,8 +9063,10 @@ export const moons = new Map([
             "x": 0.37360437371463556,
             "y": 0.6575787961548354,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8856,8 +9078,10 @@ export const moons = new Map([
             "x": 0.7433154624516547,
             "y": 0.1157066436206637,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wBowser"
+                ]
             }
         },
         {
@@ -8869,8 +9093,12 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3216",
+                    "gCap Throw",
+                    "cParabones"
+                ]
             }
         },
         {
@@ -8882,8 +9110,12 @@ export const moons = new Map([
             "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3216",
+                    "gCap Throw",
+                    "cParabones"
+                ]
             }
         },
         {
@@ -8895,8 +9127,18 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3219",
+                    {
+                        "op": "AND",
+                        "reqs": [
+                            "l3218",
+                            "gCap Throw",
+                            "cPokio"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -8908,8 +9150,18 @@ export const moons = new Map([
             "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gCap Throw",
+                    "cPokio",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "l3218",
+                            "l3219"
+                        ]
+                    }
+                ]
             }
         }
     ]],
@@ -9141,8 +9393,8 @@ export const moons = new Map([
             "name": "Moon Quiz: Amazing!",
             "subarea": "",
             "type": "moon",
-            "x": 0.4666385990522418,
-            "y": 0.2141069428487274,
+            "x": 0.46672302722442355,
+            "y": 0.20509002884107452,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9416,8 +9668,8 @@ export const moons = new Map([
             "name": "Perched on the Castle Roof",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5600230464280176,
+            "y": 0.16767511456493928,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9429,8 +9681,8 @@ export const moons = new Map([
             "name": "Pops Out of the Tail",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.4343613153833609,
+            "y": 0.6607605025390509,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9442,8 +9694,8 @@ export const moons = new Map([
             "name": "Caught Hopping at Peach's Castle!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.7263443725743419,
+            "y": 0.26443046531558323,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9455,8 +9707,8 @@ export const moons = new Map([
             "name": "Gardening for Toad: Garden Seed",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.7012650350575101,
+            "y": 0.22852489336998025,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9468,8 +9720,8 @@ export const moons = new Map([
             "name": "Gardening for Toad: Field Seed",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.7125294832642227,
+            "y": 0.2286647412902524,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9481,8 +9733,8 @@ export const moons = new Map([
             "name": "Gardening for Toad: Pasture Seed",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.7009462299195843,
+            "y": 0.24418367041467728,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9494,8 +9746,8 @@ export const moons = new Map([
             "name": "Gardening for Toad: Lake Seed",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.7122106781262968,
+            "y": 0.24403619073095248,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9507,8 +9759,8 @@ export const moons = new Map([
             "name": "Grow a Flower Garden",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.6966954947472399,
+            "y": 0.1476806736711065,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9520,8 +9772,8 @@ export const moons = new Map([
             "name": "Mushroom Kingdom Timer Challenge",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.6724663042648771,
+            "y": 0.13317296682645371,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9533,8 +9785,8 @@ export const moons = new Map([
             "name": "Found at Peach's Castle! Good Dog!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.6596834822975085,
+            "y": 0.7832426832902871,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9546,8 +9798,8 @@ export const moons = new Map([
             "name": "Taking Notes: Around the Well",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.3252859159947658,
+            "y": 0.1932605692918789,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9559,8 +9811,8 @@ export const moons = new Map([
             "name": "Herding Sheep at Peach's Castle",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.32101128746395763,
+            "y": 0.6277775940622916,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9572,8 +9824,8 @@ export const moons = new Map([
             "name": "Gobbling Fruit with Yoshi",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5368678522670921,
+            "y": 0.17573422850557813,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9585,8 +9837,8 @@ export const moons = new Map([
             "name": "Yoshi's Second Helping!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5367696902989073,
+            "y": 0.187526195544025,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9598,8 +9850,8 @@ export const moons = new Map([
             "name": "Yoshi's All Filled Up!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.536489246364582,
+            "y": 0.19871620086616598,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9611,8 +9863,8 @@ export const moons = new Map([
             "name": "Love at Peach's Castle",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5115297362096171,
+            "y": 0.1530404914964913,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9624,8 +9876,8 @@ export const moons = new Map([
             "name": "Toad Defender",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5883713742147898,
+            "y": 0.12490996161210212,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9637,8 +9889,8 @@ export const moons = new Map([
             "name": "Forever Onward, Captain Toad!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.6396179959956011,
+            "y": 0.5765039954887723,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9650,8 +9902,8 @@ export const moons = new Map([
             "name": "Jammin' in the Mushroom Kingdom",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5795035226877437,
+            "y": 0.7036197723508045,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9676,8 +9928,8 @@ export const moons = new Map([
             "name": "Mushroom Kingdom Regular Cup",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.4418413788127507,
+            "y": 0.8395870501920224,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9689,8 +9941,8 @@ export const moons = new Map([
             "name": "Mushroom Kingdom Master Cup",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.43507855410292506,
+            "y": 0.8440421505805396,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9715,7 +9967,7 @@ export const moons = new Map([
             "name": "Picture Match: A Stellar Mario!",
             "subarea": "Picture Match",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -9741,7 +9993,7 @@ export const moons = new Map([
             "name": "Loose-Tile Trackdown",
             "subarea": "Peach's Castle",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -9767,7 +10019,7 @@ export const moons = new Map([
             "name": "Courtyard Chest Trap",
             "subarea": "SM64 Room",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -9793,7 +10045,7 @@ export const moons = new Map([
             "name": "Sunken Star in the Sea of Clouds",
             "subarea": "Sea of Clouds",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -9819,7 +10071,7 @@ export const moons = new Map([
             "name": "2D Boost from Bullet Bill",
             "subarea": "2D Room",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -9910,8 +10162,8 @@ export const moons = new Map([
             "name": "Secret Path to Peach's Castle!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5333923884917526,
+            "y": 0.9531473265347595,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9923,8 +10175,8 @@ export const moons = new Map([
             "name": "A Tourist in the Mushroom Kingdom!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.6091892972671766,
+            "y": 0.5593879758739893,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9949,8 +10201,8 @@ export const moons = new Map([
             "name": "Hat-and-Seek: Mushroom Kingdom",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.37122472802218565,
+            "y": 0.10318009344570377,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9962,8 +10214,8 @@ export const moons = new Map([
             "name": "Princess Peach, Home Again!",
             "subarea": "",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.511406322001311,
+            "y": 0.23117414989376786,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -9988,7 +10240,7 @@ export const moons = new Map([
             "name": "Achieve World Peace",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.125,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10001,7 +10253,7 @@ export const moons = new Map([
             "name": "Power Moon Knight",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.25,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10014,7 +10266,7 @@ export const moons = new Map([
             "name": "Power Moon Wizard",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.375,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10027,7 +10279,7 @@ export const moons = new Map([
             "name": "Power Moon Ruler",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.5,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10040,7 +10292,7 @@ export const moons = new Map([
             "name": "Regional Coin Shopper",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.625,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10053,7 +10305,7 @@ export const moons = new Map([
             "name": "Flat Moon Finder",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.75,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10066,7 +10318,7 @@ export const moons = new Map([
             "name": "Flat Moon Fanatic",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 0.875,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10079,7 +10331,7 @@ export const moons = new Map([
             "name": "Treasure Chest Hunter",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
                 "op": "TRUE",
@@ -10093,7 +10345,7 @@ export const moons = new Map([
             "subarea": "Toadette's ***",
             "type": "moon",
             "x": 0,
-            "y": 0,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10105,8 +10357,8 @@ export const moons = new Map([
             "name": "Note-Collecting World Tour",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.125,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10118,8 +10370,8 @@ export const moons = new Map([
             "name": "Note-Collecting Space Tour",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.25,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10131,8 +10383,8 @@ export const moons = new Map([
             "name": "Timer Challenge Amateur",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.375,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10144,8 +10396,8 @@ export const moons = new Map([
             "name": "Timer Challenge Professional",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10157,8 +10409,8 @@ export const moons = new Map([
             "name": "Captain Toad Meeter",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.625,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10170,8 +10422,8 @@ export const moons = new Map([
             "name": "Captain Toad Greeter",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.75,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10183,8 +10435,8 @@ export const moons = new Map([
             "name": "Touring with Princess Peach",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.875,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10196,8 +10448,8 @@ export const moons = new Map([
             "name": "Globe-Trotting with Princess Peach",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 0.125,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10210,7 +10462,7 @@ export const moons = new Map([
             "subarea": "Toadette's ***",
             "type": "moon",
             "x": 0,
-            "y": 0,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10222,8 +10474,8 @@ export const moons = new Map([
             "name": "Gaga for Goombette",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.125,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10235,8 +10487,8 @@ export const moons = new Map([
             "name": "Lakitu Fishing Trip",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.25,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10248,8 +10500,8 @@ export const moons = new Map([
             "name": "Flower-Growing Guru",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.375,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10261,8 +10513,8 @@ export const moons = new Map([
             "name": "Flower-Growing Sage",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10274,8 +10526,8 @@ export const moons = new Map([
             "name": "Running with Rabbits",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.625,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10287,8 +10539,8 @@ export const moons = new Map([
             "name": "Racing with Rabbits",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.75,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10300,8 +10552,8 @@ export const moons = new Map([
             "name": "Ground Pound Instructor",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.875,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10313,8 +10565,8 @@ export const moons = new Map([
             "name": "Ground Pound Professor",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 0.25,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10327,7 +10579,7 @@ export const moons = new Map([
             "subarea": "Toadette's ***",
             "type": "moon",
             "x": 0,
-            "y": 0,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10339,8 +10591,8 @@ export const moons = new Map([
             "name": "Super Rad Hatter",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.125,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10352,8 +10604,8 @@ export const moons = new Map([
             "name": "Traveling-Bird Herder",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.25,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10365,8 +10617,8 @@ export const moons = new Map([
             "name": "Wearing It Well!",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.375,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10378,8 +10630,8 @@ export const moons = new Map([
             "name": "Wearing It Great!",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10391,8 +10643,8 @@ export const moons = new Map([
             "name": "Wearing It Perfect!",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.625,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10404,8 +10656,8 @@ export const moons = new Map([
             "name": "Hat-Seeking Missile",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.75,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10417,8 +10669,8 @@ export const moons = new Map([
             "name": "Music Maestro",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.875,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10430,8 +10682,8 @@ export const moons = new Map([
             "name": "Art Enthusiast",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 0.375,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10444,7 +10696,7 @@ export const moons = new Map([
             "subarea": "Toadette's ***",
             "type": "moon",
             "x": 0,
-            "y": 0,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10456,8 +10708,8 @@ export const moons = new Map([
             "name": "Slots Machine",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.125,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10469,8 +10721,8 @@ export const moons = new Map([
             "name": "Koopa Freerunning MVP",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.25,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10482,8 +10734,8 @@ export const moons = new Map([
             "name": "Koopa Freerunning Hall of Famer",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.375,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10495,8 +10747,8 @@ export const moons = new Map([
             "name": "Supernaturally Sure-Footed",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10508,8 +10760,8 @@ export const moons = new Map([
             "name": "Quizmaster",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.625,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10521,8 +10773,8 @@ export const moons = new Map([
             "name": "Souvenir Sampler",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.75,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10534,8 +10786,8 @@ export const moons = new Map([
             "name": "Souvenir Sleuth",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.875,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10547,8 +10799,8 @@ export const moons = new Map([
             "name": "Souvenir Savant",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 0.5,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10561,7 +10813,7 @@ export const moons = new Map([
             "subarea": "Toadette's ***",
             "type": "moon",
             "x": 0,
-            "y": 0,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10573,8 +10825,8 @@ export const moons = new Map([
             "name": "Capturing Apprentice",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.125,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10586,8 +10838,8 @@ export const moons = new Map([
             "name": "Capturing Master",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.25,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10599,8 +10851,8 @@ export const moons = new Map([
             "name": "Hat Maven",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.375,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10612,8 +10864,8 @@ export const moons = new Map([
             "name": "Hat Icon",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10625,8 +10877,8 @@ export const moons = new Map([
             "name": "Fashion Maven",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.625,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10638,8 +10890,8 @@ export const moons = new Map([
             "name": "Fashion Icon",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.75,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10651,8 +10903,8 @@ export const moons = new Map([
             "name": "Moon Rock Liberator",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.875,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10664,8 +10916,8 @@ export const moons = new Map([
             "name": "World Warper",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 1,
+            "y": 0.625,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10678,7 +10930,7 @@ export const moons = new Map([
             "subarea": "Toadette's ***",
             "type": "moon",
             "x": 0,
-            "y": 0,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10690,8 +10942,8 @@ export const moons = new Map([
             "name": "Checkpoint Flag Enthusiast",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.125,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10703,8 +10955,8 @@ export const moons = new Map([
             "name": "Loaded with Coins",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.25,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10716,8 +10968,8 @@ export const moons = new Map([
             "name": "Rolling in Coins",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.375,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10729,8 +10981,8 @@ export const moons = new Map([
             "name": "Swimming in Coins",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.5,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10742,8 +10994,8 @@ export const moons = new Map([
             "name": "Jump! Jump! Jump!",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.625,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10755,8 +11007,8 @@ export const moons = new Map([
             "name": "Fly, Cappy, Fly!",
             "subarea": "Toadette's ***",
             "type": "moon",
-            "x": 0,
-            "y": 0,
+            "x": 0.75,
+            "y": 0.75,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10773,8 +11025,10 @@ export const moons = new Map([
             "x": 0.6719436666437734,
             "y": 0.07715151432515846,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3518"
+                ]
             }
         },
         {
@@ -10783,11 +11037,15 @@ export const moons = new Map([
             "name": "Captain Toad on the Dark Side!",
             "subarea": "",
             "type": "moon",
-            "x": 0.7235453505596559,
-            "y": 0.11781587730856534,
+            "x": 0.6474609375,
+            "y": 0.04459760377509628,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3516",
+                    "l3517",
+                    "wDark"
+                ]
             }
         },
         {
@@ -10799,8 +11057,10 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3520"
+                ]
             }
         },
         {
@@ -10809,11 +11069,13 @@ export const moons = new Map([
             "name": "Breakdown Road: Final Challenge!",
             "subarea": "Breakdown Road",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3520"
+                ]
             }
         },
         {
@@ -10825,8 +11087,11 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3522",
+                    "l3523"
+                ]
             }
         },
         {
@@ -10835,11 +11100,14 @@ export const moons = new Map([
             "name": "Invisible Road: Secret!",
             "subarea": "Invisible Road",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3522",
+                    "l3523"
+                ]
             }
         },
         {
@@ -10851,8 +11119,11 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3525",
+                    "l3526"
+                ]
             }
         },
         {
@@ -10861,11 +11132,13 @@ export const moons = new Map([
             "name": "Vanishing Road Challenge",
             "subarea": "Vanishing Road",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3525"
+                ]
             }
         },
         {
@@ -10877,8 +11150,11 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3528",
+                    "l3529"
+                ]
             }
         },
         {
@@ -10887,11 +11163,14 @@ export const moons = new Map([
             "name": "Fruit Feast Under Siege",
             "subarea": "Under Siege",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3528",
+                    "l3529"
+                ]
             }
         },
         {
@@ -10903,8 +11182,11 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3531",
+                    "l3532"
+                ]
             }
         },
         {
@@ -10913,11 +11195,14 @@ export const moons = new Map([
             "name": "Fruit Feast on the Sinking Island",
             "subarea": "Lava Rising",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3531",
+                    "l3532"
+                ]
             }
         },
         {
@@ -10929,8 +11214,11 @@ export const moons = new Map([
             "x": 0,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3534",
+                    "l3535"
+                ]
             }
         },
         {
@@ -10939,11 +11227,14 @@ export const moons = new Map([
             "name": "Fruit Feast in the Magma Swamp!",
             "subarea": "Magma Swamp",
             "type": "moon",
-            "x": 0,
+            "x": 1,
             "y": 0,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "l3534",
+                    "l3535"
+                ]
             }
         },
         {

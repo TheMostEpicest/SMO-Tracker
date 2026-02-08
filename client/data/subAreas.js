@@ -23,578 +23,594 @@ export const subAreas = new Map([
     ]],
     ["Cascade", [
         {
-            "id": 6,
+            "id": 101,
             "name": "Dinosaur Nest",
         },
         {
-            "id": 7,
+            "id": 102,
             "name": "2D Chasm",
         },
         {
-            "id": 8,
+            "id": 103,
             "name": "Chain Chomp Room",
         },
         {
-            "id": 9,
+            "id": 104,
             "name": "Mysterious Clouds",
         },
         {
-            "id": 10,
+            "id": 105,
             "name": "Gusty Bridges",
         },
     ]],
     ["Sand", [
         {
-            "id": 11,
+            "id": 201,
             "name": "Knucklotec Arena",
         },
         {
-            "id": 12,
+            "id": 202,
             "name": "Shop",
         },
         {
-            "id": 13,
+            "id": 203,
             "name": "Slots",
         },
         {
-            "id": 14,
+            "id": 204,
             "name": "Inverted Pyramid",
         },
         {
-            "id": 15,
+            "id": 205,
             "name": "Underground Temple",
         },
         {
-            "id": 16,
+            "id": 206,
             "name": "Ice Cave",
         },
         {
-            "id": 17,
+            "id": 207,
             "name": "Sphynx's Vault",
         },
         {
-            "id": 18,
+            "id": 208,
             "name": "Sandy Floor",
         },
         {
-            "id": 19,
+            "id": 209,
             "name": "Outfit Room",
         },
         {
-            "id": 20,
+            "id": 210,
             "name": "Invisible Maze",
         },
         {
-            "id": 21,
+            "id": 211,
             "name": "Bullet Bill Maze",
         },
         {
-            "id": 22,
+            "id": 212,
             "name": "Jaxi Ruins",
         },
         {
-            "id": 23,
+            "id": 213,
             "name": "Strange Neighborhood",
         },
         {
-            "id": 24,
+            "id": 214,
             "name": "Transparent Platforms",
         },
         {
-            "id": 25,
+            "id": 215,
             "name": "Colossal Ruins",
         },
         {
-            "id": 26,
+            "id": 216,
             "name": "Freezing Waterway",
         }
     ]],
     ["Lake", [
         {
-            "id": 27,
+            "id": 301,
             "name": "Shop",
         },
         {
-            "id": 28,
+            "id": 302,
             "name": "Puzzle Room",
         },
         {
-            "id": 29,
+            "id": 303,
             "name": "Zipper Room",
         },
         {
-            "id": 30,
+            "id": 304,
             "name": "Jump, Grab, Cling, and Climb",
         },
         {
-            "id": 31,
+            "id": 305,
             "name": "Waves of Poison",
         },
     ]],
     ["Wooded", [
         {
-            "id": 32,
+            "id": 401,
             "name": "Sky Garden Tower",
         },
         {
-            "id": 33,
+            "id": 402,
             "name": "Secret Flower Field",
         },
         {
-            "id": 34,
+            "id": 403,
             "name": "Spinning-Platforms Treasure",
         },
         {
-            "id": 35,
+            "id": 404,
             "name": "Deep Woods",
         },
         {
-            "id": 36,
+            "id": 405,
             "name": "Deep Woods Treasure Trap",
         },
         {
-            "id": 37,
+            "id": 406,
             "name": "Outfit Room",
         },
         {
-            "id": 38,
+            "id": 407,
             "name": "Flooding Pipeway",
         },
         {
-            "id": 39,
+            "id": 408,
             "name": "Foggy Subarea",
         },
         {
-            "id": 40,
+            "id": 409,
             "name": "Flower Road",
         },
         {
-            "id": 41,
+            "id": 410,
             "name": "Elevator Escalation",
         },
         {
-            "id": 42,
+            "id": 411,
             "name": "Uproot Subarea",
         },
         {
-            "id": 43,
+            "id": 412,
             "name": "Invisible Road",
         },
         {
-            "id": 44,
+            "id": 413,
             "name": "Herding Sheep",
         },
         {
-            "id": 45,
+            "id": 414,
             "name": "Breakdown Road",
         },
     ]],
     ["Cloud", [
         {
-            "id": 46,
+            "id": 501,
             "name": "Picture Match",
         },
         {
-            "id": 47,
+            "id": 502,
             "name": "Cube Room",
         },
     ]],
     ["Lost", [
         {
-            "id": 48,
+            "id": 601,
             "name": "Shop",
         },
         {
-            "id": 49,
+            "id": 602,
             "name": "Poison Platforms",
         },
         {
-            "id": 50,
+            "id": 603,
             "name": "Klepto Room",
         },
     ]],
     ["Metro", [
         {
-            "id": 51,
+            "id": 701,
             "name": "City Hall Interior",
         },
         {
-            "id": 52,
+            "id": 702,
             "name": "Sewer",
         },
         {
-            "id": 53,
+            "id": 703,
             "name": "Shop",
         },
         {
-            "id": 54,
+            "id": 704,
             "name": "Slots",
         },
         {
-            "id": 55,
+            "id": 705,
             "name": "RC Car Room",
         },
         {
-            "id": 56,
-            "name": "Private Room",
+            "id": 706,
+            "name": "Notes Room",
         },
         {
-            "id": 57,
+            "id": 707,
             "name": "Crowded Hallway",
         },
         {
-            "id": 58,
+            "id": 708,
             "name": "Outfit Room",
         },
         {
-            "id": 59,
+            "id": 709,
             "name": "Under Siege",
         },
         {
-            "id": 60,
+            "id": 710,
             "name": "Rotating Maze",
         },
         {
-            "id": 61,
+            "id": 711,
             "name": "High-Rise Athletics",
         },
         {
-            "id": 62,
+            "id": 712,
             "name": "Bullet Billding",
         },
         {
-            "id": 63,
-            "name": "Escape!",
+            "id": 713,
+            "name": "Dino Room",
         },
         {
-            "id": 64,
+            "id": 714,
             "name": "Theater",
         },
         {
-            "id": 65,
+            "id": 715,
             "name": "Pitchblack Mountain",
         },
         {
-            "id": 66,
+            "id": 716,
             "name": "Swinging Scaffolding",
         },
         {
-            "id": 67,
+            "id": 717,
             "name": "Vanishing Road",
         },
     ]],
     ["Snow", [
         {
-            "id": 68,
+            "id": 801,
             "name": "Shiveria",
         },
         {
-            "id": 69,
+            "id": 802,
             "name": "Icicle Cavern",
         },
         {
-            "id": 70,
+            "id": 803,
             "name": "Hollow Crevasse",
         },
         {
-            "id": 71,
+            "id": 804,
             "name": "Wind-Chill Cavern",
         },
         {
-            "id": 72,
+            "id": 805,
             "name": "Snowy Mountain",
         },
         {
-            "id": 73,
+            "id": 806,
             "name": "Race Room",
         },
         {
-            "id": 74,
+            "id": 807,
             "name": "Shop",
         },
         {
-            "id": 75,
+            "id": 808,
             "name": "Trace Walking",
         },
         {
-            "id": 76,
+            "id": 809,
             "name": "Rocket Flower Room",
         },
         {
-            "id": 77,
+            "id": 810,
             "name": "Freezing Water",
         },
         {
-            "id": 78,
+            "id": 811,
             "name": "Puzzle Room",
         },
         {
-            "id": 79,
+            "id": 812,
             "name": "Outfit Room",
         },
         {
-            "id": 80,
+            "id": 813,
             "name": "Spinning Nut Room",
         },
         {
-            "id": 81,
+            "id": 814,
             "name": "Iceburn Race Room",
         },
         {
-            "id": 82,
+            "id": 815,
             "name": "Flower Road Room",
         },
     ]],
     ["Seaside", [
         {
-            "id": 83,
+            "id": 901,
             "name": "Lighthouse Tunnel",
         },
         {
-            "id": 84,
+            "id": 902,
             "name": "Sandy Bottom",
         },
         {
-            "id": 85,
+            "id": 903,
             "name": "Sphynx Vault",
         },
         {
-            "id": 86,
+            "id": 904,
             "name": "Rumbling Floor",
         },
         {
-            "id": 87,
+            "id": 905,
             "name": "Outfit Room",
         },
         {
-            "id": 88,
+            "id": 906,
             "name": "Cloud Sea",
         },
         {
-            "id": 89,
+            "id": 907,
             "name": "Narrow Valley",
         },
         {
-            "id": 90,
+            "id": 908,
             "name": "Lava Rising",
         },
         {
-            "id": 91,
+            "id": 909,
             "name": "Pokio Room",
         },
         {
-            "id": 92,
+            "id": 910,
             "name": "Spinning Maze",
         },
     ]],
     ["Luncheon", [
         {
-            "id": 93,
+            "id": 1001,
             "name": "Cascading Magma",
         },
         {
-            "id": 94,
+            "id": 1002,
             "name": "Shop",
         },
         {
-            "id": 95,
+            "id": 1003,
             "name": "Slots",
         },
         {
-            "id": 96,
+            "id": 1004,
             "name": "Outfit Room",
         },
         {
-            "id": 96.5,
+            "id": 1005,
             "name": "Treasure Room",
         },
         {
-            "id": 97,
+            "id": 1006,
             "name": "Magma Swamp",
         },
         {
-            "id": 98,
+            "id": 1007,
             "name": "Magma Path",
         },
         {
-            "id": 99,
+            "id": 1008,
             "name": "Fork Room",
         },
         {
-            "id": 100,
+            "id": 1009,
             "name": "Cheese Room",
         },
         {
-            "id": 101,
+            "id": 1010,
             "name": "Spinning Athletics",
         },
         {
-            "id": 101.5,
+            "id": 1011,
             "name": "Gear Steps",
         },
         {
-            "id": 102,
+            "id": 1012,
             "name": "Volcano Cave",
         },
         {
-            "id": 103,
+            "id": 1013,
             "name": "Lava Islands",
         },
     ]],
     ["Ruined", [
         {
-            "id": 104,
+            "id": 1101,
             "name": "Roulette Tower",
         },
         {
-            "id": 105,
+            "id": 1102,
             "name": "Chargin' Chuck Room",
         },
     ]],
     ["Bowser", [
         {
-            "id": 106,
+            "id": 1201,
             "name": "Shop",
         },
         {
-            "id": 107,
+            "id": 1202,
             "name": "Treasure Vault",
         },
         {
-            "id": 108,
+            "id": 1203,
             "name": "Outfit Room",
         },
         {
-            "id": 109,
+            "id": 1204,
             "name": "Spinning Tower",
         },
         {
-            "id": 110,
+            "id": 1205,
             "name": "Jizo Room",
         },
         {
-            "id": 111,
+            "id": 1206,
             "name": "Rocket Flower Room",
         },
         {
-            "id": 112,
+            "id": 1207,
             "name": "Hexagon Tower",
         },
         {
-            "id": 113,
+            "id": 1208,
             "name": "Wooden Tower",
         },
     ]],
     ["Moon", [
         {
-            "id": 114,
+            "id": 1301,
             "name": "Moon Cave",
         },
         {
-            "id": 115,
+            "id": 1302,
             "name": "Chapel",
         },
         {
-            "id": 116,
+            "id": 1304,
             "name": "Shop",
         },
         {
-            "id": 117,
+            "id": 1305,
             "name": "Sphynx Vault",
         },
         {
-            "id": 118,
+            "id": 1306,
             "name": "Snowman Room",
         },
         {
-            "id": 119,
+            "id": 1307,
             "name": "Giant Swings",
         },
     ]],
     ["Mushroom", [
         {
-            "id": 120,
+            "id": 1401,
             "name": "Shop",
         },
         {
-            "id": 121,
+            "id": 1402,
             "name": "Picture Match",
         },
         {
-            "id": 122,
+            "id": 1403,
             "name": "Peach's Castle",
         },
         {
-            "id": 123,
+            "id": 1404,
             "name": "SM64 Room",
         },
         {
-            "id": 124,
+            "id": 1405,
             "name": "Sea of Clouds",
         },
         {
-            "id": 125,
+            "id": 1406,
             "name": "2D Room",
         },
         {
-            "id": 126,
+            "id": 1407,
             "name": "Knucklotec Refight",
         },
         {
-            "id": 127,
+            "id": 1408,
             "name": "Torkdrift Refight",
         },
         {
-            "id": 128,
+            "id": 1409,
             "name": "Mechawiggler Refight",
         },
         {
-            "id": 129,
+            "id": 1410,
             "name": "Mollusque-Lanceur Refight",
         },
         {
-            "id": 130,
+            "id": 1411,
             "name": "Cookatiel Refight",
         },
         {
-            "id": 131,
+            "id": 1412,
             "name": "Dragon Refight",
         },
         {
-            "id": 132,
+            "id": 1413,
             "name": "Toadette's ***",
         },
     ]],
     ["Dark", [
         {
-            "id": 133,
+            "id": 1501,
+            "name": "Topper Fight",
+        },
+        {
+            "id": 1502,
+            "name": "Hariet Fight",
+        },
+        {
+            "id": 1503,
+            "name": "Spewart Fight",
+        },
+        {
+            "id": 1504,
+            "name": "Rango Fight",
+        },
+        {
+            "id": 1505,
             "name": "Breakdown Road",
         },
         {
-            "id": 134,
+            "id": 1506,
             "name": "Invisible Road",
         },
         {
-            "id": 135,
+            "id": 1507,
             "name": "Vanishing Road",
         },
         {
-            "id": 136,
+            "id": 1508,
             "name": "Under Siege",
         },
         {
-            "id": 137,
+            "id": 1509,
             "name": "Lava Rising",
         },
         {
-            "id": 138,
+            "id": 1510,
             "name": "Magma Swamp",
         },
 
     ]],
     ["Darker", [
         {
-            "id": 139,
+            "id": 1601,
             "name": "Darker Side",
         },
     ]],
