@@ -273,19 +273,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 17,
-            "kingdomId": 17,
-            "name": "Found with Cap Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 18,
             "kingdomId": 18,
             "name": "Next to Glasses Bridge",
@@ -499,6 +486,19 @@ export const moons = new Map([
                 "reqs": [
                     "l1014"
                 ]
+            }
+        },
+        {
+            "id": 748,
+            "kingdomId": 998,
+            "name": "Found with Mushroom Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4403880368180866,
+            "y": 0.614393696282799,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
             }
         }
     ]],
@@ -1161,6 +1161,32 @@ export const moons = new Map([
                     "l2113",
                     "l2114"
                 ]
+            }
+        },
+        {
+            "id": 187,
+            "kingdomId": 998,
+            "name": "Found with Lake Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6304379643636071,
+            "y": 0.8577996870418033,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 826,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 1",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.42095824422852035,
+            "y": 0.10365301505058942,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
             }
         }
     ]],
@@ -1973,19 +1999,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 134,
-            "kingdomId": 63,
-            "name": "Found with Sand Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 135,
             "kingdomId": 64,
             "name": "Jammin' in the Sand Kingdom",
@@ -2323,6 +2336,32 @@ export const moons = new Map([
                 "reqs": []
             }
         },
+        {
+            "id": 652,
+            "kingdomId": 997,
+            "name": "Found with Bowser's Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.18256900124586659,
+            "y": 0.4120238408435419,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 252,
+            "kingdomId": 998,
+            "name": "Found with Wooded Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6829004167772582,
+            "y": 0.05883296762875479,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
     ]],
     ["Lake", [
         {
@@ -2664,19 +2703,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 187,
-            "kingdomId": 27,
-            "name": "Found with Lake Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 188,
             "kingdomId": 28,
             "name": "Taxi Flying Through Lake Lamode",
@@ -2866,6 +2892,32 @@ export const moons = new Map([
             "type": "moon",
             "x": 1,
             "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 375,
+            "kingdomId": 998,
+            "name": "Found with Metro Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.1398638322274412,
+            "y": 0.317705409678303,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 834,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 9",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.16849028770460706,
+            "y": 0.18586325567837803,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -3510,19 +3562,7 @@ export const moons = new Map([
                 "reqs": []
             }
         },
-        {
-            "id": 252,
-            "kingdomId": 50,
-            "name": "Found with Wooded Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
+        
         {
             "id": 253,
             "kingdomId": 51,
@@ -3861,6 +3901,19 @@ export const moons = new Map([
                 "reqs": []
             }
         },
+        {
+            "id": 696,
+            "kingdomId": 998,
+            "name": "Found with Moon Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.5327469547709193,
+            "y": 0.30120871865103066,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
     ]],
     ["Cloud", [
         {
@@ -3975,6 +4028,19 @@ export const moons = new Map([
             "type": "moon",
             "x": 1,
             "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 829,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 4",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4017635144086262,
+            "y": 0.4271206044732127,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -4432,6 +4498,32 @@ export const moons = new Map([
             "type": "moon",
             "x": 1,
             "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 437,
+            "kingdomId": 998,
+            "name": "Found with Snow Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.41038322076660905,
+            "y": 0.34389565999198124,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 832,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 7",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6408155204503087,
+            "y": 0.6307108980162915,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -5115,19 +5207,7 @@ export const moons = new Map([
                 "reqs": []
             }
         },
-        {
-            "id": 375,
-            "kingdomId": 53,
-            "name": "Found with Metro Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
+        
         {
             "id": 376,
             "kingdomId": 54,
@@ -5492,6 +5572,32 @@ export const moons = new Map([
                 "reqs": []
             }
         },
+        {
+            "id": 508,
+            "kingdomId": 998,
+            "name": "Found with Seaside Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.4936879573387353,
+            "y": 0.6110133761509963,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 827,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 2",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6024381275095038,
+            "y": 0.07528738474134913,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
     ]],
     ["Snow", [
         {
@@ -5924,19 +6030,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 437,
-            "kingdomId": 34,
-            "name": "Found with Snow Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 438,
             "kingdomId": 35,
             "name": "Snow Kingdom Regular Cup",
@@ -6209,6 +6302,19 @@ export const moons = new Map([
                 "reqs": []
             }
         },
+        {
+            "id": 830,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 5",
+            "subarea": "Shiveria",
+            "type": "moon",
+            "x": 0,
+            "y": 0.5,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        }
     ]],
     ["Seaside", [
         {
@@ -6849,19 +6955,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 508,
-            "kingdomId": 50,
-            "name": "Found with Seaside Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 509,
             "kingdomId": 51,
             "name": "Seaside Kingdom Regular Cup",
@@ -7129,6 +7222,32 @@ export const moons = new Map([
             "type": "moon",
             "x": 1,
             "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 578,
+            "kingdomId": 998,
+            "name": "Found with Luncheon Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.3955946568430454,
+            "y": 0.13975322114878014,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 831,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 6",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.733311799013174,
+            "y": 0.8028660158827114,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -7761,19 +7880,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 578,
-            "kingdomId": 49,
-            "name": "Found with Luncheon Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 579,
             "kingdomId": 50,
             "name": "The Rooftop Lantern",
@@ -8019,6 +8125,19 @@ export const moons = new Map([
                 "op": "TRUE",
                 "reqs": []
             }
+        },
+        {
+            "id": 833,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 8",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.39318239592427795,
+            "y": 0.4916507093478969,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
         }
     ]],
     ["Ruined", [
@@ -8147,6 +8266,19 @@ export const moons = new Map([
             "type": "moon",
             "x": 1,
             "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 835,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 10",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.650634765625,
+            "y": 0.9463458990505809,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -8866,19 +8998,6 @@ export const moons = new Map([
             }
         },
         {
-            "id": 652,
-            "kingdomId": 45,
-            "name": "Found with Bowser's Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
             "id": 653,
             "kingdomId": 46,
             "name": "Behind the Tall Wall: Poke, Poke!",
@@ -9162,6 +9281,19 @@ export const moons = new Map([
                         ]
                     }
                 ]
+            }
+        },
+        {
+            "id": 134,
+            "kingdomId": 998,
+            "name": "Found with Sand Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.38107840820067146,
+            "y": 0.3362141468187266,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
             }
         }
     ]],
@@ -9504,19 +9636,7 @@ export const moons = new Map([
                 "reqs": []
             }
         },
-        {
-            "id": 696,
-            "kingdomId": 27,
-            "name": "Found with Moon Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
+        
         {
             "id": 697,
             "kingdomId": 28,
@@ -9655,6 +9775,19 @@ export const moons = new Map([
             "type": "moon",
             "x": 1,
             "y": 0,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
+        },
+        {
+            "id": 17,
+            "kingdomId": 998,
+            "name": "Found with Cap Kingdom Art",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6552477590556439,
+            "y": 0.9567815410113754,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -10177,19 +10310,6 @@ export const moons = new Map([
             "type": "moon",
             "x": 0.6091892972671766,
             "y": 0.5593879758739893,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 748,
-            "kingdomId": 41,
-            "name": "Found with Mushroom Kingdom Art",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
             "logic": {
                 "op": "TRUE",
                 "reqs": []
@@ -11013,6 +11133,19 @@ export const moons = new Map([
                 "op": "TRUE",
                 "reqs": []
             }
+        },
+        {
+            "id": 828,
+            "kingdomId": 999,
+            "name": "Found with Dark Side Art 3",
+            "subarea": "",
+            "type": "moon",
+            "x": 0.6868090692000239,
+            "y": 0.23663217056203842,
+            "logic": {
+                "op": "TRUE",
+                "reqs": []
+            }
         }
     ]],
     ["Dark", [
@@ -11236,137 +11369,7 @@ export const moons = new Map([
                     "l3535"
                 ]
             }
-        },
-        {
-            "id": 826,
-            "kingdomId": 15,
-            "name": "Found with Dark Side Art 1",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 827,
-            "kingdomId": 16,
-            "name": "Found with Dark Side Art 2",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 828,
-            "kingdomId": 17,
-            "name": "Found with Dark Side Art 3",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 829,
-            "kingdomId": 18,
-            "name": "Found with Dark Side Art 4",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 830,
-            "kingdomId": 19,
-            "name": "Found with Dark Side Art 5",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 831,
-            "kingdomId": 20,
-            "name": "Found with Dark Side Art 6",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 832,
-            "kingdomId": 21,
-            "name": "Found with Dark Side Art 7",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 833,
-            "kingdomId": 22,
-            "name": "Found with Dark Side Art 8",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 834,
-            "kingdomId": 23,
-            "name": "Found with Dark Side Art 9",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
-        {
-            "id": 835,
-            "kingdomId": 24,
-            "name": "Found with Dark Side Art 10",
-            "subarea": "",
-            "type": "moon",
-            "x": 0,
-            "y": 0,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
-        },
+        }
     ]],
     ["Darker", [
         {

@@ -6,7 +6,8 @@ export const groups = new Map([
             "aDown Throw",
             "aUp Throw",
             "aSpin Throw"
-        ]
+        ],
+        "img": "/resource/abilities/Cap_Throw.png"
     }],
     ["Jump", {
         "op": "OR",
@@ -16,7 +17,8 @@ export const groups = new Map([
             "aTriple Jump",
             "aBackflip",
             "aSideflip",
-        ]
+        ],
+        "img": "/resource/abilities/Cap_Throw.png"
     }],
     ["2D Jump", {
         "op": "OR",
@@ -25,13 +27,15 @@ export const groups = new Map([
             "aDouble Jump",
             "aTriple Jump",
             "aBackflip",
-        ]
+        ],
+        "img": "/resource/abilities/Cap_Throw.png"
     }],
     ["Open Treasure Chest", {
         "op": "OR",
         "reqs": [
             "gCap Throw",
             "aGround Pound"
-        ]
+        ],
+        "img": ""
     }]
 ])

@@ -9,3 +9,4 @@ export * from "./moonKingdoms.js";
 export * from "./multimoonKingdoms.js";
 export * from "./worldPeace.js";
 export * from "./groups.js"
+export * from "./presets.js"

@@ -570,6 +570,36 @@ div.selection-menu-content-button-grid div img {
     filter: drop-shadow(0px 0px 3px black);
 }
 
+div#selection-menu-requirements {
+    margin-top: 5px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    box-sizing: border-box;
+    border: none;
+    padding: 0px;
+}
+
+div.selection-menu-requirement {
+    aspect-ratio: 1/1;
+    border-radius: 5px;
+    background-color: var(--toast-positive-background);
+    padding: 5px;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+div.selection-menu-requirement img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 div.leaflet-container {
     background-color: transparent;
 }

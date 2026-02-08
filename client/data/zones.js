@@ -1868,7 +1868,7 @@ export const zones = new Map([
             "name": "Poison Platforms Interior (End)",
             "subarea": "Poison Platforms",
             "type": "moonpipe",
-            "x": 0,
+            "x": 1,
             "y": 1,
             "logic": {
                 "op": "TRUE",

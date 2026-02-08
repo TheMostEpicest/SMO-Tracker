@@ -1,5 +1,7 @@
-import { kingdoms, captures, abilities, nomoonKingdoms, moons, moonKingdoms, multimoonKingdoms, zones, groups, worldPeace, subAreas } from "../data/index.js";
+import { kingdoms, captures, abilities, nomoonKingdoms, moons, moonKingdoms, multimoonKingdoms, zones, groups, worldPeace, subAreas, presets } from "../data/index.js";
 import { clearCache, initAbly } from "./auth.js";
+
+// TODO: Optimize data storage to O(1) when possible
 
 // SETUP
 const nodes = initNodes();
@@ -194,18 +196,18 @@ function leafletInit() {
     let minZoom = leafletMap.getBoundsZoom(mapBounds, false, [100, 100]);
     leafletMap.setMinZoom(minZoom);
     leafletMap.fitBounds(mapBounds, options);
-    let testIcon = L.icon({
-        iconUrl: `/resource/icons/moon-Cap.png`,
-        iconSize: [36, 36],
-        iconAnchor: [18, 18]
-    });
-    const testMarker = L.marker(fractionToLatLng([0.5, 0.5]), { icon: testIcon, draggable: true })
-    testMarker.on("moveend", (e) => {
-        let location = testMarker.getLatLng();
-        let [x, y] = latLngToFraction([location.lat, location.lng]);
-        console.log(`"x": ${x},\n"y": ${y},`);
-    });
-    testMarker.addTo(leafletMap);
+    // let testIcon = L.icon({
+    //     iconUrl: `/resource/icons/moon-Cap.png`,
+    //     iconSize: [36, 36],
+    //     iconAnchor: [18, 18]
+    // });
+    // const testMarker = L.marker(fractionToLatLng([0.5, 0.5]), { icon: testIcon, draggable: true })
+    // testMarker.on("moveend", (e) => {
+    //     let location = testMarker.getLatLng();
+    //     let [x, y] = latLngToFraction([location.lat, location.lng]);
+    //     console.log(`"x": ${x},\n"y": ${y},`);
+    // });
+    // testMarker.addTo(leafletMap);
     window.addEventListener("resize", leafletResize(mapBounds));
     window.completedMoonsLayer = L.layerGroup([]).addTo(leafletMap);
     window.availableMoonsLayer = L.layerGroup([]).addTo(leafletMap);
@@ -467,7 +469,7 @@ function setSidebarContentMoons(force) {
 
         let el = document.createElement("div");
         el.id = `moonlist-tracker-${moon.kingdomId}`;
-        el.innerHTML = `<img src="/resource/icons/${moon.type == "multimoon" ? "moon" : "moon"}-${actualKingdom ? actualKingdom : "unknown"}${collectedSet.has(moon.id) ? "-complete" : ""}.png" alt="Moon" title="" draggable="false"><span class="selection-menu-moon-number">(${moon.kingdomId})</span>${moon.name}`;
+        el.innerHTML = `<img src="/resource/icons/${moon.type == "multimoon" ? "moon" : "moon"}-${actualKingdom ? actualKingdom : "unknown"}${collectedSet.has(moon.id) ? "-complete" : ""}.png" alt="Moon" title="" draggable="false"><span class="selection-menu-moon-number">(${moon.kingdomId < 900 ? moon.kingdomId : "H"})</span>${moon.name}`;
         el.onclick = () => { setSelection(`${moon.type}-${moon.kingdomId}`)};
         if (collectedSet.has(moon.id)) {
             el.style.backgroundColor = "var(--toast-positive-background)";
@@ -547,6 +549,18 @@ function refreshSidebar(force) {
 }
 
 // ---- SUPER MARIO ODYSSEY TRACKER ----
+// Load Preset
+function loadPreset(preset) {
+    let data = presets.get(preset);
+
+    if (!data) {
+        console.log("Preset not found");
+        return;
+    }
+
+    localStorage.setItem("moonMap", JSON.stringify(data.moons));
+    localStorage.setItem("linkMap", JSON.stringify(data.zones));
+}
 // Capture Tracker
 function clickCapture(event) {
     let target = event.target.tagName == "IMG" || event.target.tagName == "P" ? event.target.parentElement : event.target;
@@ -996,7 +1010,7 @@ function checkAvailability() {
         }
     });
 
-    let linkMap = new Set(JSON.parse(localStorage.getItem("linkMap")) ?? []);
+    let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
 
     let zoneList = zones.get(localStorage.getItem("kingdom"));
 
@@ -1009,8 +1023,7 @@ function checkAvailability() {
             mark.removeFrom(availableMoonsLayer);
             mark.removeFrom(lockedMoonsLayer);
             mark.addTo(completedMoonsLayer);
-        } else
-        if (evaluateLogic(zone.logic)) {
+        } else if (evaluateLogic(zone.logic)) {
             mark.removeFrom(linkedZonesLayer);
             mark.removeFrom(lockedZonesLayer);
             mark.addTo(availableZonesLayer);
@@ -1093,7 +1106,7 @@ function setSelection(selection) {
         case "multimoon":
             var multi = 1;
         case "moon":
-            var data = moons.get(localStorage.getItem("kingdom"))[Number(kingdomId) - 1];
+            var data = moons.get(localStorage.getItem("kingdom")).find((value) => value.kingdomId == Number(kingdomId));
             var moonMap = new Map(JSON.parse(localStorage.getItem("moonMap")) ?? []);
             var collectedSet = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
 
@@ -1101,10 +1114,8 @@ function setSelection(selection) {
 
             var actualKingdom = moonMap.get(data.id) ?? "unknown";
 
-            nodes.selectionMenuButtons.append(addMoonSelectionButtons(data.id, multi ?? 0));
-
             nodes.selectionMenuPicture.src = `/resource/moons/${actualKingdom}.png`;
-            nodes.selectionMenuDescription.innerHTML = `<span class="selection-menu-moon-number">(${data.kingdomId})</span>${data.name}`;
+            nodes.selectionMenuDescription.innerHTML = `<span class="selection-menu-moon-number">(${data.kingdomId < 900 ? data.kingdomId : "H"})</span>${data.name}`;
 
             if (collectedSet.has(data.id)) {
                 nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-positive-background)";
@@ -1117,7 +1128,9 @@ function setSelection(selection) {
                 nodes.selectionMenuIcon.src = `/resource/icons/moon-${actualKingdom}.png`;
             }
 
+            nodes.selectionMenuButtons.append(addMoonSelectionButtons(data.id, multi ?? 0));
             nodes.selectionMenuButtons.append(addMoonCollectionButton(data.id));
+            nodes.selectionMenuButtons.append(addUnlockRequirementIcons("moon", data.id));
 
             if (data.subarea && (localStorage.getItem("sidebarTab") == "moons" || localStorage.getItem("sidebarTab") == "loadingZones")) {
                 if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
@@ -1144,18 +1157,19 @@ function setSelection(selection) {
 
                 nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-positive-background)";
                 nodes.selectionMenuIcon.src = `/resource/icons/${data.type}-linked.png`;
-                nodes.selectionMenuDescription.innerHTML = `<span class="selection-menu-moon-number">This loading zone links to:</span><br />${target.split("-")[0]}: ${targetData.name}`;
+                nodes.selectionMenuDescription.innerHTML = `${data.name}<br /><span class="selection-menu-moon-number">This loading zone links to:</span><br />${target.split("-")[0]}: ${targetData.name}`;
             } else if (evaluateLogic(data.logic)) {
                 nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-incomplete-background)";
                 nodes.selectionMenuIcon.src = `/resource/icons/${data.type}.png`;
-                nodes.selectionMenuDescription.textContent = "This is a unlinked loading zone.";
+                nodes.selectionMenuDescription.innerHTML = `${data.name}<br /><span class="selection-menu-moon-number">This is a unlinked loading zone.</span>`;
             } else {
                 nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-negative-background)";
                 nodes.selectionMenuIcon.src = `/resource/icons/${data.type}.png`;
-                nodes.selectionMenuDescription.textContent = "This is a unlinked loading zone.";
+                nodes.selectionMenuDescription.innerHTML = `${data.name}<br /><span class="selection-menu-moon-number">This is a unlinked loading zone.</span>`;
             }
 
             nodes.selectionMenuButtons.append(addZoneLinkButton(data.id));
+            nodes.selectionMenuButtons.append(addUnlockRequirementIcons("zone", data.id));
 
             if (data.subarea && (localStorage.getItem("sidebarTab") == "moons" || localStorage.getItem("sidebarTab") == "loadingZones")) {
                 if (localStorage.getItem("sidebarTab") != "subAreas") setSidebarContentSubAreas();
@@ -1184,6 +1198,58 @@ function addMoonSelectionButtons(id, multi) {
     container.append(el);
 
     return container;
+}
+function addUnlockRequirementIcons(type, id) {
+    const data = type == "moon" ? moons.get(localStorage.getItem("kingdom")).find((value) => value.id == id) : zones.get(localStorage.getItem("kingdom")).find((value) => value.id == id);
+
+    const container = document.createElement("div");
+    recursiveRequirementBuild(container, data.logic);
+    container.id = "selection-menu-requirements";
+
+    return container;
+
+}
+function recursiveRequirementBuild(container, logic) {
+    if (typeof logic == "object") {
+        logic.reqs.forEach((req) => recursiveRequirementBuild(container, req));
+
+    } else if (typeof logic == "string") {
+        const element = document.createElement("div");
+        element.classList.add("selection-menu-requirement");
+
+        if (logic.charAt(0) == "c") { // Capture
+            element.innerHTML = `<img src="/resource/captures/${normalizeName(logic.substring(1))}.png" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
+            element.style.backgroundColor = (new Set(JSON.parse(localStorage.getItem("captures")) ?? [])).has(normalizeName(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+        } else if (logic.charAt(0) == "a") { // Ability
+            element.innerHTML = `<img src="/resource/abilities/${normalizeName(logic.substring(1))}.png" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
+            element.style.backgroundColor = (new Set(JSON.parse(localStorage.getItem("abilities")) ?? [])).has(normalizeName(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+        } else if (logic.charAt(0) == "m") { // Moon
+            let data = moons.get(localStorage.getItem("kingdom")).find((value) => value.id == logic.substring(1));
+            element.innerHTML = `<img src="/resource/moons/${localStorage.getItem("kingdom")}.png" draggable=false alt="(${data.kingdomId}) ${data.name}" title="(${data.kingdomId}) ${data.name}">`;
+            element.style.backgroundColor = (new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? [])).has(Number(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+        // } else if (logic.charAt(0) == "l") { // Loading Zone
+        //     return new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []).has(Number(logic.substring(1)));
+        } else if (logic.charAt(0) == "g") { // Group
+            let group = groups.get(logic.substring(1));
+            if (group.img) {
+                element.innerHTML = `<img src="${group.img}" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
+                element.style.backgroundColor = evaluateLogic(group) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+            } else {
+                group.reqs.forEach((req) => recursiveRequirementBuild(container, req));
+                return;
+            }
+        } else if (logic.charAt(0) == "w") { // World Peace
+            element.innerHTML = `<img src="/resource/moonrock.png" draggable=false alt="World Peace" title="World Peace">`;
+            element.style.backgroundColor = evaluateLogic(worldPeace.get(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+        // } else if (logic.charAt(0) == "r") { // Moon Rock - Not Currently Used
+        //     let peace = new Set(JSON.parse(localStorage.getItem("moonRock")) ?? []).has(normalizeName(logic.substring(1)));
+        //     return peace ? evaluateLogic(peace) : false;
+        // } else if (logic.charAt(0) == "o") { // Outfit
+        //     return new Set(JSON.parse(localStorage.getItem("outfits")) ?? []).has(normalizeName(logic.substring(1)));
+        }
+
+        container.appendChild(element);
+    }
 }
 function moonSetKingdom(id, kingdom, multi) {
     return (e) => {
@@ -1507,7 +1573,6 @@ function zoneLinkStart(id, container) {
         button.onclick = cancelZoneLink;
     }
 }
-// TODO: Doesn't refresh map
 function zoneLinkFinish(id, container) {
     return (e) => {
         localStorage.setItem("selectPersist", 0);
@@ -1597,9 +1662,11 @@ function zoneLinkFinish(id, container) {
         }, 300);
 
         updateMapWithDisplaySettings();
+        checkAvailability();
         refreshSidebar();
     }
 }
+// TODO
 function cancelZoneLink() {
     localStorage.setItem("selectPersist", 0);
     localStorage.setItem("linking", "");
@@ -1608,7 +1675,6 @@ function cancelZoneLink() {
 
     // If selection is loading zone, change button text
 }
-// TODO: Doesn't update selection menu header color when unlinking from subarea
 function zoneUnlink(id, container) {
     return (e) => {
         let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
@@ -1645,6 +1711,11 @@ function zoneUnlink(id, container) {
             mark.setOpacity(1);
             mark._icon.style.cursor = "pointer";
             mark.setZIndexOffset(100);
+            if (evaluateLogic(data.logic)) {
+                nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-incomplete-background)";
+            } else {
+                nodes.selectionMenuHeader.style.backgroundColor = "var(--toast-negative-background)";
+            }
         }
         
         if (localStorage.getItem("kingdom") == targetZoneId.split("-")[0]) {
@@ -1894,7 +1965,6 @@ function toggleLockedIcons() {
     updateMapWithDisplaySettings();
     if (localStorage.getItem("sidebarTab") == "subAreas") refreshSidebar();
 }
-
 // Reset Menu
 function confirmReset() {
     nodes.resetMenu.style.opacity = 1;
@@ -1932,7 +2002,7 @@ function resetProgress(forward) {
 
     updateCurrentKingdom(localStorage.getItem("kingdom"));
 
-
+    loadPreset("Full Randomizer");
 
     if (!nomoonKingdoms.has(localStorage.getItem("kingdom"))) document.getElementById('moon-menu-total-editor').textContent = "??";
 
