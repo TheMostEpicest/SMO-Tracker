@@ -39,6 +39,8 @@ export const presets = new Map([
             [2206,"Sand-2205"],
             [2207,"Sand-2208"],
             [2208,"Sand-2207"],
+            [2306,"Lake-2307"],
+            [2307,"Lake-2306"],
             [2401,"Wooded-2402"],
             [2402,"Wooded-2401"],
             [2403,"Wooded-2404"],

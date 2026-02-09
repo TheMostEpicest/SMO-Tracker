@@ -433,12 +433,15 @@ export const zones = new Map([
             "x": 0.5906149256893933,
             "y": 0.12048182656873554,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "OR",
+                "reqs": [
+                    "m73",
+                    "gRoll Cancel Clip"
+                ]
             }
         },
         {
-            "id": 2201,
+            "id": 2202,
             "kingdomId": 2,
             "name": "Inverted Pyramid Interior (Bottom)",
             "subarea": "Inverted Pyramid",
@@ -446,8 +449,11 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2203",
+                    "g2D Jump"
+                ]
             }
         },
         {
@@ -459,8 +465,31 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2202",
+                    "g2D Jump",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "cBullet Bill",
+                            {
+                                "op": "AND",
+                                "reqs": [
+                                    "aLong Jump",
+                                    {
+                                        "op": "OR",
+                                        "reqs": [
+                                            "aWall Jump",
+                                            "aCap Bounce",
+                                        ]
+                                    },
+                                    
+                                ]
+                            },
+                        ]
+                    },
+                ]
             }
         },
         {
@@ -472,7 +501,7 @@ export const zones = new Map([
             "x": 0.6185779303378509,
             "y": 0.12061231822968621,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -484,10 +513,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0.6638107925483354,
             "y": 0.12971422255599435,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "m74"
         },
         {
             "id": 2206,
@@ -497,10 +523,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2207"
         },
         {
             "id": 2207,
@@ -510,10 +533,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 1,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2206"
         },
         {
             "id": 2208,
@@ -524,7 +544,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -537,8 +557,11 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2208",
+                    "cBullet Bill"
+                ]
             }
         },
         {
@@ -549,10 +572,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0.5154559512901733,
             "y": 0.09980632253346518,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "wSand"
         },
         {
             "id": 2211,
@@ -575,10 +595,7 @@ export const zones = new Map([
             "type": "pipe",
             "x": 0,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2213"
         },
         {
             "id": 2213,
@@ -588,10 +605,7 @@ export const zones = new Map([
             "type": "pipe",
             "x": 1,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2212"
         },
         {
             "id": 2214,
@@ -602,8 +616,11 @@ export const zones = new Map([
             "x": 0.7484130859375,
             "y": 0.4627319223962692,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gHigh Jump",
+                    "aDive"
+                ]
             }
         },
         {
@@ -628,7 +645,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -640,10 +657,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0.4757080078125,
             "y": 0.8847563846194845,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "aCrouch"
         },
         {
             "id": 2218,
@@ -654,7 +668,7 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -680,7 +694,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -706,7 +720,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -718,10 +732,7 @@ export const zones = new Map([
             "type": "pipe",
             "x": 0.4814453125,
             "y": 0.8658708693282955,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "gJump"
         },
         {
             "id": 2224,
@@ -732,7 +743,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -758,7 +769,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -784,8 +795,11 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2229",
+                    "gJump"
+                ]
             }
         },
         {
@@ -797,8 +811,11 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2228",
+                    "gJump"
+                ]
             }
         },
         {
@@ -823,8 +840,17 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2232",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "cBullet Bill",
+                            "gHigh Jump"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -836,8 +862,17 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2231",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "cBullet Bill",
+                            "gHigh Jump"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -849,8 +884,11 @@ export const zones = new Map([
             "x": 0.222900390625,
             "y": 0.05694482180503021,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gHigh Jump",
+                    "aWall Jump"
+                ]
             }
         },
         {
@@ -861,10 +899,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0.76171875,
             "y": 0.4641871236141241,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "gUnlock Jaxi"
         },
         {
             "id": 2235,
@@ -875,7 +910,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -887,10 +922,7 @@ export const zones = new Map([
             "type": "pipe",
             "x": 1,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2235"
         },
         {
             "id": 2237,
@@ -901,8 +933,11 @@ export const zones = new Map([
             "x": 0.527587890625,
             "y": 0.8662697435286224,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wSand",
+                    "cRocket"
+                ]
             }
         },
         {
@@ -914,8 +949,11 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gJump",
+                    "l2239"
+                ]
             }
         },
         {
@@ -927,8 +965,11 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gJump",
+                    "l2238"
+                ]
             }
         },
         {
@@ -937,12 +978,9 @@ export const zones = new Map([
             "name": "Transparent Platforms Exterior",
             "subarea": "",
             "type": "moonpipe",
-        "x": 0.4921791047411611,
-        "y": 0.9279554645518864,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "x": 0.4921791047411611,
+            "y": 0.9279554645518864,
+            "logic": "wSand"
         },
         {
             "id": 2241,
@@ -953,8 +991,11 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2242",
+                    "gJump"
+                ]
             }
         },
         {
@@ -966,8 +1007,11 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l2241",
+                    "gJump"
+                ]
             }
         },
         {
@@ -978,10 +1022,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0.49579411860655254,
             "y": 0.6275008646595894,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "wSand"
         },
         {
             "id": 2244,
@@ -992,7 +1033,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -1004,10 +1045,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0.7708456160548235,
             "y": 0.1273414485064569,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "wSand"
         },
         {
             "id": 2246,
@@ -1018,8 +1056,11 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "cGushen",
+                    "l2247"
+                ]
             }
         },
         {
@@ -1031,8 +1072,11 @@ export const zones = new Map([
             "x": 1,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "cGushen",
+                    "l2246"
+                ]
             }
         }
     ]],
@@ -1084,10 +1128,7 @@ export const zones = new Map([
             "type": "capdoor",
             "x": 0.2726533076081097,
             "y": 0.5215176744103955,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "wLake"
         },
         {
             "id": 2305,
@@ -1201,10 +1242,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0.8232421875,
             "y": 0.7948201480132633,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "wLake"
         },
         {
             "id": 2314,
@@ -1819,8 +1857,12 @@ export const zones = new Map([
             "x": 0.374488565749151,
             "y": 0.4732577278759391,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "gJump",
+                    "aGround Pound",
+                    "aWall Jump"
+                ]
             }
         },
         {
@@ -1832,7 +1874,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         },
@@ -1844,10 +1886,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0.6564651340306263,
             "y": 0.7862668402855509,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "wLost"
         },
         {
             "id": 2604,
@@ -1857,10 +1896,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2605"
         },
         {
             "id": 2605,
@@ -1870,10 +1906,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 1,
             "y": 1,
-            "logic": {
-                "op": "TRUE",
-                "reqs": []
-            }
+            "logic": "l2604"
         },
         {
             "id": 2606,
@@ -1884,8 +1917,17 @@ export const zones = new Map([
             "x": 0.4307358602094977,
             "y": 0.46074446815071296,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wLost",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "gJump",
+                            "l2601"
+                        ]
+                    }
+                ]
             }
         },
         {
@@ -1897,7 +1939,7 @@ export const zones = new Map([
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         }
@@ -3859,46 +3901,73 @@ export const zones = new Map([
             "x": 0.35139434725176977,
             "y": 0.08774685167121853,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "wRuined",
+                    "cSpark Pylon",
+                    "cRocket"
+                ]
             }
         },
         {
             "id": 3102,
             "kingdomId": 2,
-            "name": "Roulette Tower Interior",
+            "name": "Roulette Tower Interior (Start)",
             "subarea": "Roulette Tower",
             "type": "rocket",
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3103",
+                    "gJump"
+                ]
             }
         },
         {
             "id": 3103,
             "kingdomId": 3,
-            "name": "Chargin' Chuck Room Exterior",
-            "subarea": "",
-            "type": "moonpipe",
-            "x": 0.6095607593416724,
-            "y": 0.9502302787872261,
+            "name": "Roulette Tower Interior (End)",
+            "subarea": "Roulette Tower",
+            "type": "rocket",
+            "x": 1,
+            "y": 1,
             "logic": {
-                "op": "TRUE",
-                "reqs": []
+                "op": "AND",
+                "reqs": [
+                    "l3102",
+                    "g2D Jump",
+                    {
+                        "op": "OR",
+                        "reqs": [
+                            "gCap Throw",
+                            "aRoll"
+                        ]
+                    }
+                ]
             }
         },
         {
             "id": 3104,
             "kingdomId": 4,
+            "name": "Chargin' Chuck Room Exterior",
+            "subarea": "",
+            "type": "moonpipe",
+            "x": 0.6095607593416724,
+            "y": 0.9502302787872261,
+            "logic": "wRuined"
+        },
+        {
+            "id": 3105,
+            "kingdomId": 5,
             "name": "Chargin' Chuck Room Interior",
             "subarea": "Chargin' Chuck Room",
             "type": "moonpipe",
             "x": 0,
             "y": 1,
             "logic": {
-                "op": "TRUE",
+                "op": "FALSE",
                 "reqs": []
             }
         }
@@ -3938,12 +4007,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0.7234051285924928,
             "y": 0.1638836047873627,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "wBowser"
-                ]
-            }
+            "logic": "wBowser"
         },
         {
             "id": 3204,
@@ -4020,12 +4084,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0,
             "y": 1,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l3209"
-                ]
-            }
+            "logic": "l3209"
         },
         {
             "id": 3209,
@@ -4038,7 +4097,8 @@ export const zones = new Map([
             "logic": {
                 "op": "AND",
                 "reqs": [
-                    "l3208"
+                    "l3208",
+                    "cPokio"
                 ]
             }
         },
@@ -4050,12 +4110,7 @@ export const zones = new Map([
             "type": "pipe",
             "x": 0.8467464463309958,
             "y": 0.049805662505779856,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "wBowser"
-                ]
-            }
+            "logic": "wBowser"
         },
         {
             "id": 3211,
@@ -4065,12 +4120,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 0,
             "y": 1,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l3212"
-                ]
-            }
+            "logic": "l3212"
         },
         {
             "id": 3212,
@@ -4080,12 +4130,7 @@ export const zones = new Map([
             "type": "otherzone",
             "x": 1,
             "y": 1,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l3211"
-                ]
-            }
+            "logic": "l3211"
         },
         {
             "id": 3213,
@@ -4095,12 +4140,7 @@ export const zones = new Map([
             "type": "vine",
             "x": 0.6772803334608534,
             "y": 0.1130157575521363,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "aClimb"
-                ]
-            }
+            "logic": "aClimb"
         },
         {
             "id": 3214,
@@ -4123,12 +4163,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0.5943584217226535,
             "y": 0.11029481676792269,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "wBowser"
-                ]
-            }
+            "logic": "wBowser"
         },
         {
             "id": 3216,
@@ -4151,12 +4186,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0.7624872729078999,
             "y": 0.2963202474196421,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "wBowser"
-                ]
-            }
+            "logic": "wBowser"
         },
         {
             "id": 3218,
@@ -4166,12 +4196,7 @@ export const zones = new Map([
             "type": "moonpipe",
             "x": 0,
             "y": 1,
-            "logic": {
-                "op": "AND",
-                "reqs": [
-                    "l3219"
-                ]
-            }
+            "logic": "l3219"
         },
         {
             "id": 3219,

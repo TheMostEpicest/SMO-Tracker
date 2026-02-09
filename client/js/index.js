@@ -9,6 +9,7 @@ initListeners();
 initMenus();
 window.markMap = new Map();
 window.subMapsMap = new Map();
+window.logicCache = new Map();
 initAbly().then(ablyPubSubSetup);
 initKingdomList();
 leafletInit();
@@ -117,6 +118,8 @@ function ablySubUpdateMoons(ably, clientId) {
 
         if (data.kingdom == localStorage.getItem("kingdom")) updateMoonCounter();
     });
+
+    checkAvailability();
 }
 function ablySubUpdateCaptures(ably, cliendId) {
     ably.subscribe("update:captures", (msg) => {
@@ -135,6 +138,8 @@ function ablySubUpdateCaptures(ably, cliendId) {
         }
 
         localStorage.setItem("captures", JSON.stringify([...captures]));
+
+        checkAvailability();
     });
 }
 function ablySubUpdateAbilities(ably, cliendId) {
@@ -154,6 +159,8 @@ function ablySubUpdateAbilities(ably, cliendId) {
         }
 
         localStorage.setItem("abilities", JSON.stringify([...abilities]));
+
+        checkAvailability();
     });
 }
 function ablySubPostReset(ably, clientId) {
@@ -452,6 +459,10 @@ function setSidebarContentLoadingZones(force) {
             lockedCategory.append(el);
         }
     });
+
+    if (availableCategory.childElementCount == 1) availableCategory.remove();
+    if (lockedCategory.childElementCount == 1) lockedCategory.remove();
+    if (linkedCategory.childElementCount == 1) linkedCategory.remove();
 }
 function setSidebarContentMoons(force) {
     updateSidebarTab("moons");
@@ -481,11 +492,15 @@ function setSidebarContentMoons(force) {
             lockedCategory.append(el);
         }
     });
+
+    if (availableCategory.childElementCount == 1) availableCategory.remove();
+    if (lockedCategory.childElementCount == 1) lockedCategory.remove();
+    if (collectedCategory.childElementCount == 1) collectedCategory.remove();
 }
 function setSidebarContentMiscellaneous(force) {
     updateSidebarTab("miscellaneous");
 
-    nodes.sidebarContent.textContent = "Coming Soon."
+    nodes.sidebarContent.textContent = "It's a bit empty in here..."
 }
 function sidebarDrag(event) {
     let prevX = event.screenX;
@@ -749,21 +764,97 @@ function validateTotalMoons(moonEditor) {
 }
 // Kingdom List
 function initKingdomList() {
-    kingdoms.forEach((kingdom) => {
-        let el = document.createElement("div");
-        el.id = `kingdom-list-${normalizeName(kingdom)}`;
-        el.innerHTML = `<img src="/resource/kingdoms/${normalizeName(kingdom)}.png" alt="${kingdom}" title="${kingdom}" draggable="false">`; //`<div></div><p>${normalizeName(kingdom)}</p>`
-        el.onclick = clickKingdom;
-        nodes.kingdomList.appendChild(el);
+
+    function createBlock(i) {
+        let block = document.createElement("div");
+        block.classList.add(`kingdom-list-block`);
+
+        kingdoms.forEach((kingdom) => {
+            let moonData = moons.get(kingdom);
+            let zoneData = zones.get(kingdom);
+
+            let collectedMap = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
+            let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
+
+            let availableChecks = 0;
+            let completeChecks = 0;
+            let totalChecks = 0;
+
+            moonData.forEach((moon) => {
+                totalChecks++
+                if (collectedMap.has(moon.id)) {
+                    completeChecks++;
+                } else if (evaluateLogic(moon.logic)) {
+                    availableChecks++;
+                }
+            });
+            
+            zoneData.forEach((zone) => {
+                totalChecks++;
+                if (linkMap.has(zone.id)) {
+                    completeChecks++;
+                } else if (evaluateLogic(zone.logic)) {
+                    availableChecks++;
+                }
+            });
+
+            let el = document.createElement("div");
+            el.id = `kingdom-list-${normalizeName(kingdom)}`;
+            el.classList.add("kingdom-list-element", `kingdom-list-elements-${kingdom}`);
+            el.innerHTML = `<div class="circle"></div><div><p class="kingdom-list-name">${kingdom}</p><p class="kingdom-list-completion-${kingdom}">Completion: ${Math.round(100 * completeChecks / totalChecks)}%</p><p class="kingdom-list-checks-${kingdom}">Available Checks: ${availableChecks}</p></div>`; 
+            el.onclick = clickKingdom(kingdom);
+            block.appendChild(el);
+        });
+
+        return block;
+    }
+    
+    let a = createBlock(1);
+    let b = createBlock(2);
+    let c = createBlock(3);
+
+    document.getElementById("kingdom-list-content").append(a, b, c);
+
+    requestAnimationFrame(() => {
+        const currentKingdom = localStorage.getItem("kingdom") ?? "Cap";
+        
+        const chunkHeight = a.getBoundingClientRect().height;
+        nodes.kingdomList.scrollTop = chunkHeight * (1 + (kingdoms.indexOf(currentKingdom) - 3.5) / 17);
+
+        let ticking = false;
+
+        nodes.kingdomList.addEventListener("scroll", () => {
+            if (ticking) return;
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                if (nodes.kingdomList.scrollTop < 0.25 * chunkHeight) {
+                    nodes.kingdomList.scrollTop += chunkHeight;
+                } else if (nodes.kingdomList.scrollTop > 1.75 * chunkHeight) {
+                    nodes.kingdomList.scrollTop -= chunkHeight;
+                }
+
+                ticking = false;
+            });
+        });
+
+        const ro = new ResizeObserver(() => {
+            const firstChunk = nodes.kingdomList.querySelector(".kingdom-block");
+            if (!firstChunk) return;
+            chunkHeight = firstChunk.getBoundingClientRect().height;
+        });
+
+        ro.observe(nodes.kingdomList);
     });
 }
-function clickKingdom(event) {
-    let target = event.target.tagName == "IMG" ? event.target.parentElement : event.target;
-    updateCurrentKingdom(target.id.split("-")[2]);
+function clickKingdom(kingdom) {
+    return (e) => {
+        updateCurrentKingdom(kingdom);
+    }
 }
 function updateCurrentKingdom(currentKingdom) {
-    if (localStorage.getItem("kingdom")) document.getElementById(`kingdom-list-${localStorage.getItem("kingdom")}`).classList.remove("selected");
-    document.getElementById(`kingdom-list-${currentKingdom}`).classList.add("selected");
+    if (localStorage.getItem("kingdom")) [...document.getElementsByClassName(`kingdom-list-elements-${localStorage.getItem("kingdom")}`)].forEach((el) => el.classList.remove("selected"));
+    [...document.getElementsByClassName(`kingdom-list-elements-${currentKingdom}`)].forEach((el) => el.classList.add("selected"));
 
     localStorage.setItem("kingdom", currentKingdom);
 
@@ -843,29 +934,67 @@ function updateCurrentKingdom(currentKingdom) {
 }
 // Logic
 function evaluateLogic(logic) {
-    function predicate (value) {
-        if (typeof value == "object") {
-            return evaluateLogic(value);
-        } else if (typeof value == "string") {
-            if (value.charAt(0) == "c") { // Capture
-                return new Set(JSON.parse(localStorage.getItem("captures")) ?? []).has(normalizeName(value.substring(1)));
-            } else if (value.charAt(0) == "a") { // Ability
-                return new Set(JSON.parse(localStorage.getItem("abilities")) ?? []).has(normalizeName(value.substring(1)));
-            } else if (value.charAt(0) == "m") { // Moon
-                return new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []).has(Number(value.substring(1)));
-            } else if (value.charAt(0) == "l") { // Loading Zone
-                return new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []).has(Number(value.substring(1)));
-            } else if (value.charAt(0) == "g") { // Group
-                let group = groups.get(value.substring(1));
-                return group ? evaluateLogic(group) : false;
-            } else if (value.charAt(0) == "w") { // World Peace
-                let peace = worldPeace.get(value.substring(1));
-                return peace ? evaluateLogic(peace) : false;
-            } else if (value.charAt(0) == "r") { // Moon Rock - Not Currently Used
-                let peace = new Set(JSON.parse(localStorage.getItem("moonRock")) ?? []).has(normalizeName(value.substring(1)));
-                return peace ? evaluateLogic(peace) : false;
-            } else if (value.charAt(0) == "o") { // Outfit - Not Currently Used
-                return new Set(JSON.parse(localStorage.getItem("outfits")) ?? []).has(normalizeName(value.substring(1)));
+    function predicate(logic) {
+        let logicString = JSON.stringify(logic);
+
+        if (logicCache.has(logicString)) return logicCache.get(logicString);
+
+        if (typeof logic == "object") {
+            switch (logic.op) {
+                case "TRUE":
+                    return true;
+                case "FALSE":
+                    return false;
+                case "AND":
+                    var result = logic.reqs.every(predicate);
+                    logicCache.set(logicString, result);
+                    return result;
+                case "OR":
+                    var result = logic.reqs.some(predicate);
+                    logicCache.set(logicString, result);
+                    return result;
+                default:
+                    return false;
+            }
+        } else if (typeof logic == "string") {
+            if (logic.charAt(0) == "c") { // Capture
+                let result = new Set(JSON.parse(localStorage.getItem("captures")) ?? []).has(normalizeName(logic.substring(1))) && predicate("gCap Throw");
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "a") { // Ability
+                let result = new Set(JSON.parse(localStorage.getItem("abilities")) ?? []).has(normalizeName(logic.substring(1)));
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "m") { // Moon
+                let result = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []).has(Number(logic.substring(1)));
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "l") { // Loading Zone
+                let result = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []).has(Number(logic.substring(1)));
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "g") { // Group
+                let group = groups.get(logic.substring(1));
+                let result = group ? predicate(group) : false;
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "w") { // World Peace
+                let peace = worldPeace.get(logic.substring(1));
+                let result = peace ? predicate(peace) : false;
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "r") { // Moon Rock - Not Currently Used
+                let result = new Set(JSON.parse(localStorage.getItem("moonRock")) ?? []).has(normalizeName(logic.substring(1)));
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "o") { // Outfit - Not Currently Used
+                let result = new Set(JSON.parse(localStorage.getItem("outfits")) ?? []).has(normalizeName(logic.substring(1)));
+                logicCache.set(logic, result);
+                return result;
+            } else if (logic.charAt(0) == "h") { // Hint Art - Not Currently Used
+                let result = new Set(JSON.parse(localStorage.getItem("hintArt")) ?? []).has(normalizeName(logic.substring(1)));
+                logicCache.set(logic, result);
+                return result;
             } else {
                 return false;
             }
@@ -873,19 +1002,8 @@ function evaluateLogic(logic) {
             return false;
         }
     }
-
-    switch (logic.op) {
-        case "TRUE":
-            return 1;
-        case "FALSE":
-            return 0;
-        case "AND":
-            return logic.reqs.every(predicate);
-        case "OR":
-            return logic.reqs.some(predicate);
-        default:
-            return 0;
-    }
+    
+    return predicate(logic);
 }
 // Display Settings
 function updateMapWithDisplaySettings() {
@@ -974,6 +1092,8 @@ function updateMapWithDisplaySettings() {
     });
 }
 function checkAvailability() {
+    logicCache.clear();
+
     let collectedMap = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
 
     let moonList = moons.get(localStorage.getItem("kingdom"));
@@ -1024,7 +1144,42 @@ function checkAvailability() {
 
     updateSelection();
     updateMapWithDisplaySettings();
+    updateKingdomListChecks();
     refreshSidebar();
+}
+function updateKingdomListChecks() {
+    kingdoms.forEach((kingdom) => {
+        let moonData = moons.get(kingdom);
+        let zoneData = zones.get(kingdom);
+
+        let collectedMap = new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? []);
+        let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
+
+        let availableChecks = 0;
+        let completeChecks = 0;
+        let totalChecks = 0;
+
+        moonData.forEach((moon) => {
+            totalChecks++
+            if (collectedMap.has(moon.id)) {
+                completeChecks++;
+            } else if (evaluateLogic(moon.logic)) {
+                availableChecks++;
+            }
+        });
+        
+        zoneData.forEach((zone) => {
+            totalChecks++;
+            if (linkMap.has(zone.id)) {
+                completeChecks++;
+            } else if (evaluateLogic(zone.logic)) {
+                availableChecks++;
+            }
+        });
+
+        [...document.getElementsByClassName(`kingdom-list-checks-${kingdom}`)].forEach((element) => element.innerHTML = `Available Checks: ${availableChecks}`);
+        [...document.getElementsByClassName(`kingdom-list-completion-${kingdom}`)].forEach((element) => element.innerHTML = `Completion: ${Math.round(100 * completeChecks / totalChecks)}%`);
+    })
 }
 
 // ---- TOAST ----
@@ -1045,7 +1200,7 @@ function toggleLinkReveal() {
     let link = document.getElementById("toast-link-text");
     let eye = document.getElementById("toast-reveal");
 
-    if (eye.src == `/resource/reveal.png`) {
+    if (/.*\/resource\/reveal.png/.test(eye.src)) {
         link.textContent = `${window.location.origin}/overlay?roomId=${localStorage.getItem("roomId")}`;
         eye.src = "/resource/hide.png";
         eye.title = "Hide";
@@ -1138,6 +1293,7 @@ function setSelection(selection) {
             var linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
 
             nodes.selectionMenuTitle.textContent = data.name;
+            nodes.selectionMenuPicture.src = `/resource/loadingzone.png`;
 
             if (linkMap.has(Number(data.id))) {
                 let target = linkMap.get(Number(data.id));
@@ -1251,79 +1407,91 @@ function addUnlockRequirementIcons(type, id) {
     const data = type == "moon" ? moons.get(localStorage.getItem("kingdom")).find((value) => value.id == id) : zones.get(localStorage.getItem("kingdom")).find((value) => value.id == id);
 
     const container = document.createElement("div");
-    recursiveRequirementBuild(container, data.logic);
     container.id = "selection-menu-requirements";
 
-    return container;
-}
-function recursiveRequirementBuild(container, logic) {
-    if (typeof logic == "object") {
-        logic.reqs.forEach((req) => recursiveRequirementBuild(container, req));
+    const elementCache = new Set();
 
-    } else if (typeof logic == "string") {
-        const element = document.createElement("div");
-        element.classList.add("selection-menu-requirement");
+    function recursiveRequirementBuild(container, logic) {
+        if (typeof logic == "object") {
+            logic.reqs.forEach((req) => recursiveRequirementBuild(container, req));
 
-        if (logic.charAt(0) == "c") { // Capture
-            element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${logic.substring(1)}</p>` : `<img src="/resource/captures/${normalizeName(logic.substring(1))}.png" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
-            element.style.backgroundColor = (new Set(JSON.parse(localStorage.getItem("captures")) ?? [])).has(normalizeName(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
-            setTimeout(wrapText, 1, element);
-            element.onclick = (e) => {
-                setSidebarContentCaptures();
-                requestAnimationFrame(() => {
-                    document.getElementById(`capture-tracker-${logic.substring(1)}`).scrollIntoView({ behavior: "instant", block: "center"});
-                });
-            }
-        } else if (logic.charAt(0) == "a") { // Ability
-            element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${logic.substring(1)}</p>` : `<img src="/resource/abilities/${normalizeName(logic.substring(1))}.png" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
-            element.style.backgroundColor = (new Set(JSON.parse(localStorage.getItem("abilities")) ?? [])).has(normalizeName(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
-            setTimeout(wrapText, 1, element);
-            element.onclick = (e) => {
-                setSidebarContentAbilities();
-                requestAnimationFrame(() => {
-                    document.getElementById(`ability-tracker-${logic.substring(1)}`).scrollIntoView({ behavior: "instant", block: "center"});
-                });
-            }
-        } else if (logic.charAt(0) == "m") { // Moon
-            let data = moons.get(localStorage.getItem("kingdom")).find((value) => value.id == logic.substring(1));
-            element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${data.name}</p>` : `<img src="/resource/moons/${localStorage.getItem("kingdom")}.png" draggable=false alt="(${data.kingdomId}) ${data.name}" title="(${data.kingdomId}) ${data.name}">`;
-            element.style.backgroundColor = (new Set(JSON.parse(localStorage.getItem("collectedMap")) ?? [])).has(Number(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
-            setTimeout(wrapText, 1, element);
-            element.onclick = (e) => {
-                setSelection(`${data.type}-${data.kingdomId}`);
-            }
-        } else if (logic.charAt(0) == "l") { // Loading Zone
-            let data = zones.get(localStorage.getItem("kingdom")).find((value) => value.id == logic.substring(1));
-            if (!data) console.log("AAAA")
-            element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${data.name}</p>` : `<img src="/resource/loadingzone.png" draggable=false alt="${data.name}" title="${data.name}">`;
-            element.style.backgroundColor = (new Map(JSON.parse(localStorage.getItem("linkMap")) ?? [])).has(Number(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
-            setTimeout(wrapText, 1, element);
-            element.onclick = (e) => {
-                setSelection(`${data.type}-${data.kingdomId}`);
-            }
-        } else if (logic.charAt(0) == "g") { // Group
-            let group = groups.get(logic.substring(1));
-            if (group.img) {
-                element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${group.alt}</p>` : `<img src="${group.img}" draggable=false alt="${group.alt}" title="${group.alt}">`;
-                element.style.backgroundColor = evaluateLogic(group) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+        } else if (typeof logic == "string") {
+            if (elementCache.has(logic)) return;
+            elementCache.add(logic);
+
+            const element = document.createElement("div");
+            element.classList.add("selection-menu-requirement");
+
+            if (logic.charAt(0) == "c") { // Capture
+                element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${logic.substring(1)}</p>` : `<img src="/resource/captures/${normalizeName(logic.substring(1))}.png" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
+                element.style.backgroundColor = evaluateLogic(logic) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
                 setTimeout(wrapText, 1, element);
-            } else {
-                group.reqs.forEach((req) => recursiveRequirementBuild(container, req));
-                return;
+                element.onclick = (e) => {
+                    setSidebarContentCaptures();
+                    requestAnimationFrame(() => {
+                        document.getElementById(`capture-tracker-${normalizeName(logic.substring(1))}`).scrollIntoView({ behavior: "instant", block: "center"});
+                    });
+                }
+                recursiveRequirementBuild(container, "gCap Throw");
+            } else if (logic.charAt(0) == "a") { // Ability
+                element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${logic.substring(1)}</p>` : `<img src="/resource/abilities/${normalizeName(logic.substring(1))}.png" draggable=false alt="${logic.substring(1)}" title="${logic.substring(1)}">`;
+                element.style.backgroundColor = evaluateLogic(logic) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+                setTimeout(wrapText, 1, element);
+                element.onclick = (e) => {
+                    setSidebarContentAbilities();
+                    requestAnimationFrame(() => {
+                        document.getElementById(`ability-tracker-${normalizeName(logic.substring(1))}`).scrollIntoView({ behavior: "instant", block: "center"});
+                    });
+                }
+            } else if (logic.charAt(0) == "m") { // Moon
+                let data = moons.get(localStorage.getItem("kingdom")).find((value) => value.id == logic.substring(1));
+                element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${data.name}</p>` : `<img src="/resource/moons/${localStorage.getItem("kingdom")}.png" draggable=false alt="(${data.kingdomId}) ${data.name}" title="(${data.kingdomId}) ${data.name}">`;
+                element.style.backgroundColor = evaluateLogic(logic) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+                setTimeout(wrapText, 1, element);
+                element.onclick = (e) => {
+                    setSelection(`${data.type}-${data.kingdomId}`);
+                }
+            } else if (logic.charAt(0) == "l") { // Loading Zone
+                let data = zones.get(localStorage.getItem("kingdom")).find((value) => value.id == logic.substring(1));
+                if (!data) console.log("AAAA")
+                element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${data.name}</p>` : `<img src="/resource/loadingzone.png" draggable=false alt="${data.name}" title="${data.name}">`;
+                element.style.backgroundColor = evaluateLogic(logic) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+                setTimeout(wrapText, 1, element);
+                element.onclick = (e) => {
+                    setSelection(`${data.type}-${data.kingdomId}`);
+                }
+            } else if (logic.charAt(0) == "g") { // Group
+                let group = groups.get(logic.substring(1));
+                if (group.img) {
+                    element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${group.alt}</p>` : `<img src="${group.img}" draggable=false alt="${group.alt}" title="${group.alt}">`;
+                    element.style.backgroundColor = evaluateLogic(group) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+                    setTimeout(wrapText, 1, element);
+                } else {
+                    group.reqs.forEach((req) => recursiveRequirementBuild(container, req));
+                    return;
+                }
+            } else if (logic.charAt(0) == "w") { // World Peace
+                element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>${logic.substring(1)} World Peace</p>` : `<img src="/resource/moonrock.png" draggable=false alt="${logic.substring(1)} World Peace" title="${logic.substring(1)} World Peace">`;
+                element.style.backgroundColor = evaluateLogic(worldPeace.get(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
+                setTimeout(wrapText, 1, element);
+            // } else if (logic.charAt(0) == "r") { // Moon Rock - Not Currently Used
+            //     let peace = new Set(JSON.parse(localStorage.getItem("moonRock")) ?? []).has(normalizeName(logic.substring(1)));
+            //     return peace ? evaluateLogic(peace) : false;
+            // } else if (logic.charAt(0) == "o") { // Outfit - Not Currently Used
+            //     return new Set(JSON.parse(localStorage.getItem("outfits")) ?? []).has(normalizeName(logic.substring(1)));
+            // } else if (logic.charAt(0) == "h") { // Hint Art - Not Currently Used
+            //     let result = new Set(JSON.parse(localStorage.getItem("hintArt")) ?? []).has(normalizeName(logic.substring(1)));
+            //     logicCache.set(logic, result);
+            //     return result;
             }
-        } else if (logic.charAt(0) == "w") { // World Peace
-            element.innerHTML = Number(localStorage.getItem("display:captions")) ? `<p>World Peace</p>` : `<img src="/resource/moonrock.png" draggable=false alt="World Peace" title="World Peace">`;
-            element.style.backgroundColor = evaluateLogic(worldPeace.get(logic.substring(1))) ? "var(--toast-positive-background)" : "var(--toast-negative-background)";
-            setTimeout(wrapText, 1, element);
-        // } else if (logic.charAt(0) == "r") { // Moon Rock - Not Currently Used
-        //     let peace = new Set(JSON.parse(localStorage.getItem("moonRock")) ?? []).has(normalizeName(logic.substring(1)));
-        //     return peace ? evaluateLogic(peace) : false;
-        // } else if (logic.charAt(0) == "o") { // Outfit - Not Currently Used
-        //     return new Set(JSON.parse(localStorage.getItem("outfits")) ?? []).has(normalizeName(logic.substring(1)));
+            container.appendChild(element);
         }
-
-        container.appendChild(element);
     }
+
+    recursiveRequirementBuild(container, data.logic);
+    
+
+    return container;
 }
 function moonSetKingdom(id, kingdom, multi) {
     return (e) => {
@@ -1570,7 +1738,6 @@ function moonSetCollected(id, state, container) {
     }
 }
 // Loading Zone Buttons
-// Note: pass data directly in
 function addZoneLinkButton(id) {
     let linkMap = new Map(JSON.parse(localStorage.getItem("linkMap")) ?? []);
 
@@ -1598,7 +1765,7 @@ function addZoneLinkButton(id) {
         let linkingZoneId = localStorage.getItem("linking");
         if (linkingZoneId == id) {
             button.innerText = "Cancel Linking";
-            button.onclick = cancelZoneLink;
+            button.onclick = cancelZoneLink(container);
         } else if (linkingZoneId) {
             button.innerText = "Finish Linking";
             button.onclick = zoneLinkFinish(id, container);
@@ -1630,12 +1797,12 @@ function zoneLinkStart(id, container) {
             let el = document.createElement("div");
             el.classList.add("toast");
             el.id = "toast-linking-div";
-            el.innerHTML = `<p class="toast-noborder">Linking to ${data.name}...<img id="toast-cancel" src="/resource/reveal.png" alt="Cancel" title="Cancel"></p>`;
+            el.innerHTML = `<p class="toast-noborder">Linking to ${data.name}...<img id="toast-cancel" src="/resource/cancel.png" alt="Cancel" title="Cancel"></p>`;
             nodes.toaster.appendChild(el);
             el.style.top = "-200px";
             let cancel = document.getElementById("toast-cancel");
 
-            cancel.onclick = cancelZoneLink;
+            cancel.onclick = cancelZoneLink(container);
 
             setTimeout(showToast, 1, "toast-linking-div");
         };
@@ -1643,8 +1810,8 @@ function zoneLinkStart(id, container) {
         let button = container.firstElementChild;
         let eraser = container.lastElementChild;
 
-        button.textContent = "Cancel linking";
-        button.onclick = cancelZoneLink;
+        button.textContent = "Cancel Linking";
+        button.onclick = cancelZoneLink(container);
     }
 }
 function zoneLinkFinish(id, container) {
@@ -1740,14 +1907,24 @@ function zoneLinkFinish(id, container) {
         refreshSidebar();
     }
 }
-// TODO
-function cancelZoneLink() {
-    localStorage.setItem("selectPersist", 0);
-    localStorage.setItem("linking", "");
+function cancelZoneLink(container) {
+    return (e) => {
+        localStorage.setItem("selectPersist", 0);
+        localStorage.setItem("linking", "");
 
-    hideToast('toast-linking-div');
+        hideToast('toast-linking-div');
 
-    // If selection is loading zone, change button text
+        const selection = localStorage.getItem("selection");
+
+        if (["pipe", "moonpipe", "capdoor", "door", "scarecrowdoor", "rocket", "vine", "otherzone"].includes(selection.split("-")[0])) {
+                const data = zones.get(localStorage.getItem("kingdom")).find((value) => value.kingdomId == selection.split("-")[1]);
+
+                const button = container.firstElementChild;
+                button.innerText = "Link";
+                button.onclick = zoneLinkStart(data.id, container);
+        }
+    }
+    
 }
 function zoneUnlink(id, container) {
     return (e) => {
@@ -1952,7 +2129,7 @@ function openHelp() {
     }
 }
 
-// ---- POPUP MENUS ----
+// ---- MENUS ----
 // Settings Menu
 function createSettingsToggle(name, opt1, opt2, callback) {
     let el = document.createElement("div");
@@ -2144,8 +2321,9 @@ function toggleLockedIcons() {
     updateMapWithDisplaySettings();
     if (localStorage.getItem("sidebarTab") == "subAreas") refreshSidebar();
 }
+// Preset Popup
 function confirmPreset(option) {
-    nodes.popupMenu.innerHTML = `<h1>Load Preset</h1><p>Loading a preset will overwrite all moon and loading zone mappings. Are you sure you want to continue?</p><div class="menu-button-container"><p class="menu-button" id="popup-yes">Yes</p><p class="menu-button" id="popup-no">No</p></div>`
+    nodes.popupMenu.innerHTML = `<h1>Load Preset</h1><p>Loading a preset will overwrite your progress. Are you sure you want to continue?</p><div class="menu-button-container"><p class="menu-button" id="popup-yes">Yes</p><p class="menu-button" id="popup-no">No</p></div>`
     nodes.popupMenu.style.opacity = 1;
     nodes.popupMenu.style.zIndex = 300;
 
@@ -2154,7 +2332,7 @@ function confirmPreset(option) {
         setTimeout(() => {nodes.popupMenu.style.zIndex = -1}, 200);
         document.getElementById("popup-yes").onclick = null;
         document.getElementById("popup-no").onclick = null;
-        applyPreset(option);
+        applyPreset(option, 1);
     }
     document.getElementById("popup-no").onclick = (e) => {
         nodes.popupMenu.style.opacity = 0;
@@ -2163,7 +2341,7 @@ function confirmPreset(option) {
         document.getElementById("popup-yes").onclick = null;
     }
 }
-function applyPreset(preset) {
+function applyPreset(preset, reset) {
     let data = presets.get(preset);
 
     if (!data) {
@@ -2175,8 +2353,10 @@ function applyPreset(preset) {
     localStorage.setItem("linkMap", JSON.stringify(data.zones));
 
     updateCurrentKingdom(localStorage.getItem("kingdom"));
+
+    if (reset) resetProgress(1);
 }
-// Reset Menu
+// Reset Popup
 function confirmReset() {
     nodes.popupMenu.innerHTML = `<h1>Reset</h1><p>Are you sure you want to reset your progress?</p><div class="menu-button-container"><p class="menu-button" id="reset-yes">Yes</p><p class="menu-button" id="reset-no">No</p></div>`
     nodes.popupMenu.style.opacity = 1;
@@ -2210,11 +2390,13 @@ function resetProgress(forward) {
 
     clearCache();
 
+    logicCache.clear();
+
     updateMoonCounter();
 
     updateCurrentKingdom(localStorage.getItem("kingdom"));
 
-    applyPreset("Full Randomizer");
+    applyPreset(localStorage.getItem("preset") ?? "None", 0);
 
     if (!nomoonKingdoms.has(localStorage.getItem("kingdom"))) document.getElementById('moon-menu-total-editor').textContent = "??";
 

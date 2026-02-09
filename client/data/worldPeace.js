@@ -3,26 +3,10 @@ export const worldPeace = new Map([
         "op": "TRUE",
         "reqs": []
     }],
-    ["Cascade", {
-        "op": "AND",
-        "reqs": [
-            "m33"
-        ]
-    }],
-    ["Sand", {
-        "op": "AND",
-        "reqs": [
-            "m74"
-        ]
-    }],
-    ["Lake", {
-        "op": "TRUE",
-        "reqs": []
-    }],
-    ["Wooded", {
-        "op": "TRUE",
-        "reqs": []
-    }],
+    ["Cascade", "m33"],
+    ["Sand", "m74"],
+    ["Lake", "m161"],
+    ["Wooded", "m206"],
     ["Cloud", {
         "op": "TRUE",
         "reqs": []
@@ -31,32 +15,12 @@ export const worldPeace = new Map([
         "op": "TRUE",
         "reqs": []
     }],
-    ["Metro", {
-        "op": "TRUE",
-        "reqs": []
-    }],
-    ["Snow", {
-        "op": "TRUE",
-        "reqs": []
-    }],
-    ["Seaside", {
-        "op": "TRUE",
-        "reqs": []
-    }],
-    ["Luncheon", {
-        "op": "TRUE",
-        "reqs": []
-    }],
-    ["Ruined", {
-        "op": "TRUE",
-        "reqs": []
-    }],
-    ["Bowser", {
-        "op": "AND",
-        "reqs": [
-            "m611"
-        ]
-    }],
+    ["Metro", "m329"],
+    ["Snow", "m408"],
+    ["Seaside", "m463"],
+    ["Luncheon", "m534"],
+    ["Ruined", "m598"],
+    ["Bowser", "m611"],
     ["Moon", {
         "op": "AND",
         "reqs": [
@@ -105,12 +69,7 @@ export const worldPeace = new Map([
         "op": "TRUE",
         "reqs": []
     }],
-    ["Dark", {
-        "op": "AND",
-        "reqs": [
-            "m812"
-        ]
-    }],
+    ["Dark", "m812"],
     ["Darker", {
         "op": "TRUE",
         "reqs": []

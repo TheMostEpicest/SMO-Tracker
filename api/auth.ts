@@ -11,7 +11,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         const token = await ably.auth.createTokenRequest({
             capability: { [`room:${roomId}`]: ["publish","subscribe"] },
-            ttl: 60 * 60 * 1000,
+            ttl: 24 * 60 * 60 * 1000,
             clientId: `user-${Math.random().toString(36).slice(2, 10)}`
         });
 
