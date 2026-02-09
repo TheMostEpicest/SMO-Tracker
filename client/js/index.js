@@ -2185,7 +2185,7 @@ function createSettingsDropdown(name, label, options, callback) {
     const getStoredOrDefault = () => {
         const stored = localStorage.getItem(name);
         if (stored && options.has(stored)) return stored;
-        return keys.length ? keys[0] : "";
+        return options.length ? options[0] : "";
     };
 
     const setSelected = (key, triggerCallback) => {
